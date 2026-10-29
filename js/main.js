@@ -1,12 +1,15 @@
 /**
  * The Tea House - Interactive 5D & 3D Cinematic Showcase Engine
  * Orchestrates:
- * - 3D Tilt & Specular Light physics
- * - Virtual Tea Brewing Simulator
- * - Interactive Tasting Modal & Cart Drawer
- * - Smooth Cursor Physics & Magnetic Hover
- * - Procedural 5D Sound Controls
- * - Toast Notifications & Leaf Confetti
+ * - 3D Multi-Layer Tilt & Dynamic Specular Light physics
+ * - Interactive Mouse Spotlight Tracking for all cards
+ * - Bento Grid Interactive Widgets & Micro-Interactions
+ * - 3D Testimonial Perspective Deck Stack
+ * - Interactive Journal Reader Drawer & Article Modal
+ * - Virtual Tea Brewing Simulator with animated water wave & bubbles
+ * - Interactive Tasting Modal & Cart Drawer with Leaf Confetti
+ * - Smooth Magnetic Cursor & Magnetic Button Physics
+ * - Procedural 5D Sound Controls & Hover Audio Feedback
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -82,6 +85,73 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Journal Database for Quick-Read Drawer
+    const ARTICLES = {
+        'article-1': {
+            title: 'The 7 Pillars of Traditional Gongfu Ceremony: Stillness in Every Pour',
+            category: 'Rituals',
+            date: 'Feb 14, 2026 • 5 min read',
+            image: './images/news-1.png',
+            tagColor: 'text-orange-400',
+            content: `
+                <p class="text-neutral-300 leading-relaxed mb-4 text-sm sm:text-base">
+                    In the sacred rhythm of the Gongfu tea ceremony, the brewing vessel is not merely an instrument—it is an altar of mindful attention. Originating in the Chaozhou region of Guangdong during the Song Dynasty, Gongfu translates literally to "making tea with consummate skill and patience."
+                </p>
+                <blockquote class="p-4 my-4 rounded-xl border-l-4 border-orange-500 bg-white/5 text-orange-200 italic text-sm">
+                    "Water heated to the precise sound of 'fish eyes' bubbling whispers the soul of the mountain directly to the leaves."
+                </blockquote>
+                <h4 class="font-bold text-white text-base mt-4 mb-2">The Seven Sacred Movements</h4>
+                <p class="text-neutral-300 leading-relaxed mb-3 text-sm">
+                    1. <strong>Warming the Vessel:</strong> Purifying clay with boiling glacier spring water.<br>
+                    2. <strong>Appreciating the Dry Leaf:</strong> Inhaling volatile aromatics from the heated gaiwan.<br>
+                    3. <strong>The Awakening Rinse:</strong> A flash 3-second infusion to unfurl delicate leaf veins.<br>
+                    4. <strong>High Pour for Aeration:</strong> Pouring from height to awaken dissolved oxygen.<br>
+                    5. <strong>Low Pour for Fragrance Retention:</strong> Serving close to the rim to lock in volatile esters.<br>
+                    6. <strong>Fair Cup Distribution:</strong> Ensuring every guest receives identical liquor density.<br>
+                    7. <strong>Empty Cup Contemplation:</strong> Reading the lingering honeyed resonance on cool porcelain.
+                </p>
+            `
+        },
+        'article-2': {
+            title: 'Spring High-Mountain Expedition: Foraging Wild Camellia in Alishan',
+            category: 'Harvest 2026',
+            date: 'Mar 02, 2026 • 7 min read',
+            image: './images/news-2.png',
+            tagColor: 'text-emerald-400',
+            content: `
+                <p class="text-neutral-300 leading-relaxed mb-4 text-sm sm:text-base">
+                    At 2,200 meters above the sea in the misty canopies of Taiwan’s central mountain range, dawn breaks through heavy sea-fog. Here, ancient wild Camellia sinensis varieties grow untamed amidst native bamboo forests and cedar groves.
+                </p>
+                <blockquote class="p-4 my-4 rounded-xl border-l-4 border-emerald-500 bg-white/5 text-emerald-200 italic text-sm">
+                    "The diurnal swing of twenty degrees between noon sunlight and freezing twilight forces the tea bud to synthesize rich, protective amino acids."
+                </blockquote>
+                <h4 class="font-bold text-white text-base mt-4 mb-2">Why High Altitude Matters</h4>
+                <p class="text-neutral-300 leading-relaxed mb-3 text-sm">
+                    High mountain UV radiation triggers the biosynthesis of catechins and soothing theanine. When handpicked exclusively during the two-week spring flush window, the buds contain three times the essential volatile oils of lowland agricultural harvests.
+                </p>
+            `
+        },
+        'article-3': {
+            title: 'The Neuroscience of L-Theanine: Why Green Tea Sharpens Cognitive Flow',
+            category: 'Wellness',
+            date: 'Mar 10, 2026 • 4 min read',
+            image: './images/news-3.png',
+            tagColor: 'text-amber-400',
+            content: `
+                <p class="text-neutral-300 leading-relaxed mb-4 text-sm sm:text-base">
+                    Modern neuroimaging studies confirm what Zen Buddhist monks discovered centuries ago: ceremonial green tea uniquely promotes a state of "alert calmness"—sustained cognitive focus devoid of jitteriness or anxiety.
+                </p>
+                <blockquote class="p-4 my-4 rounded-xl border-l-4 border-amber-500 bg-white/5 text-amber-200 italic text-sm">
+                    "L-Theanine crosses the blood-brain barrier to trigger synchronous Alpha brainwave activity (8–12 Hz), typical of deep meditative absorption."
+                </blockquote>
+                <h4 class="font-bold text-white text-base mt-4 mb-2">The Golden Ratio with Natural Caffeine</h4>
+                <p class="text-neutral-300 leading-relaxed mb-3 text-sm">
+                    Unlike synthetic energy drinks or coffee that cause abrupt spikes in cortisol and subsequent crashes, the 1:2 ratio of natural caffeine to L-Theanine in shaded gyokuro and matcha creates a steady, 4-to-6 hour cognitive flow state.
+                </p>
+            `
+        }
+    };
+
     // State
     const cart = [];
 
@@ -112,14 +182,16 @@ document.addEventListener('DOMContentLoaded', () => {
     animateCursor();
 
     // Hover interactive elements
-    const interactiveElements = document.querySelectorAll('button, a, input, select, .tilt-card, .tab-btn');
+    const interactiveElements = document.querySelectorAll('button, a, input, select, .tilt-card, .tab-btn, .bento-card, .journal-card');
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
         el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
 
-    // --- 3. 3D Tilt & Specular Physics ---
+    // --- 3. 3D Multi-Layer Tilt & Dynamic Specular Physics ---
     const tiltCards = document.querySelectorAll('.tilt-card');
+    let lastAudioHoverTime = 0;
+
     tiltCards.forEach(card => {
         const glare = card.querySelector('.card-glare');
 
@@ -130,7 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = ((y - centerY) / centerY) * -12; // tilt max 12 deg
+            // Update CSS variables for spotlight tracking
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+
+            // Compute 3D rotation angles with smooth clamp
+            const rotateX = ((y - centerY) / centerY) * -12;
             const rotateY = ((x - centerX) / centerX) * 12;
 
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.025, 1.025, 1.025)`;
@@ -143,9 +220,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        card.addEventListener('mouseenter', () => {
+            // Tactile subtle audio feedback on card entry (throttled)
+            const now = Date.now();
+            if (now - lastAudioHoverTime > 250 && window.teaAudio && window.teaAudio.isPlaying) {
+                window.teaAudio.playChime(659.25);
+                lastAudioHoverTime = now;
+            }
+        });
+
         card.addEventListener('mouseleave', () => {
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
             if (glare) glare.style.opacity = '0';
+        });
+    });
+
+    // Spotlight tracking for all Bento cards & Spotlight elements
+    const spotlightCards = document.querySelectorAll('.card-spotlight, .bento-card');
+    spotlightCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
         });
     });
 
@@ -196,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (backToTopBtn) {
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            if (window.teaAudio) window.teaAudio.playChime(659.25); // E5 note
+            if (window.teaAudio) window.teaAudio.playChime(659.25);
         });
     }
 
@@ -305,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 8. Product Filter Tabs ---
+    // --- 8. Product Filter Tabs with Smooth Animation ---
     const tabBtns = document.querySelectorAll('.tab-btn');
     const productCards = document.querySelectorAll('.product-item-card');
 
@@ -319,20 +417,20 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.add('bg-gradient-to-r', 'from-[#ff8938]', 'to-[#ff0000]', 'text-white', 'border-transparent');
             btn.classList.remove('bg-white/5', 'text-neutral-300', 'border-white/10');
 
-            if (window.teaAudio) window.teaAudio.playChime(523.25); // C5 note
+            if (window.teaAudio) window.teaAudio.playChime(523.25);
 
             const filter = btn.getAttribute('data-filter');
-            productCards.forEach(card => {
+            productCards.forEach((card, index) => {
                 const cat = card.getAttribute('data-category');
                 if (filter === 'all' || cat === filter) {
                     card.style.display = 'block';
                     card.style.opacity = '0';
-                    card.style.transform = 'translateY(15px)';
+                    card.style.transform = 'translateY(20px) scale(0.96)';
                     setTimeout(() => {
-                        card.style.transition = 'all 0.4s ease';
+                        card.style.transition = 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
                         card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 50);
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, index * 40 + 20);
                 } else {
                     card.style.display = 'none';
                 }
@@ -420,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Attach listeners for qty & remove
         cartItemsList.querySelectorAll('.cart-qty-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', () => {
                 const action = btn.getAttribute('data-action');
                 const idx = parseInt(btn.getAttribute('data-index'));
                 if (action === 'increase') {
@@ -464,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Audio & Confetti
         if (window.teaAudio) {
-            window.teaAudio.playChime(698.46); // F5
+            window.teaAudio.playChime(698.46);
             window.teaAudio.playPourSound(0.8);
         }
 
@@ -489,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showToast('Empty Box', 'Please add artisanal teas before checkout.', 'fa-circle-exclamation');
                 return;
             }
-            if (window.teaAudio) window.teaAudio.playChime(880); // A5
+            if (window.teaAudio) window.teaAudio.playChime(880);
             spawnTeaConfetti(e.clientX, e.clientY);
             showToast('Order Prepared!', 'Thank you! Your artisanal tea selection is ready to brew.', 'fa-box-open');
             cart.length = 0;
@@ -583,7 +681,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const brewSection = document.getElementById('brewing-ritual-section');
             if (brewSection) {
                 brewSection.scrollIntoView({ behavior: 'smooth' });
-                // Switch brew blend to match
                 selectBrewBlend(currentModalProductId);
             }
         });
@@ -637,7 +734,6 @@ document.addEventListener('DOMContentLoaded', () => {
         brewTempSlider.addEventListener('input', (e) => {
             const val = e.target.value;
             brewTempDisplay.textContent = `${val}°C`;
-            // Dynamic kettle heating glow
             if (brewKettleGlow) {
                 const intensity = (val - 60) / 40;
                 brewKettleGlow.style.opacity = `${0.2 + intensity * 0.7}`;
@@ -675,7 +771,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Liquid fills up
             if (brewCupLiquid) {
                 brewCupLiquid.style.height = '85%';
-                // Color transition to blend
                 if (selectedBrewId === 'green-tea') {
                     brewCupLiquid.style.background = 'linear-gradient(to top, #15803d, #84cc16)';
                 } else if (selectedBrewId === 'milk-tea') {
@@ -700,8 +795,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // Triumph chime
                     if (window.teaAudio) {
-                        window.teaAudio.playChime(880); // A5
-                        setTimeout(() => window.teaAudio.playChime(1046.5), 180); // C6
+                        window.teaAudio.playChime(880);
+                        setTimeout(() => window.teaAudio.playChime(1046.5), 180);
                     }
 
                     const rect = startBrewBtn.getBoundingClientRect();
@@ -717,72 +812,125 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 12. Testimonial 3D Swiper / Switcher ---
-    const testimonials = [
-        {
-            name: 'Ilham Yuda',
-            role: 'Luxury Hospitality Architect',
-            avatar: './images/client.png',
-            quote: '“The Uji Jade and Yunnan Golden tips transform our morning tea rituals into pure meditation. The aroma clarity is simply unapproachable.”',
-            rating: '5.0 / 5.0'
-        },
-        {
-            name: 'Mei-Ling Chen',
-            role: 'Certified Master Tea Sommelier',
-            avatar: './images/client.png',
-            quote: '“Having judged tea competitions across Kyoto and Taipei, I can testify that The Tea House achieves the purest single-harvest extraction on the market.”',
-            rating: '5.0 / 5.0'
-        },
-        {
-            name: 'Julian Vance',
-            role: 'Restaurateur & Connoisseur',
-            avatar: './images/client.png',
-            quote: '“From nitrogen sealing to the velvety Hokkaido cream blend, every detail breathes authentic craftsmanship. Our patrons are obsessed.”',
-            rating: '5.0 / 5.0'
-        }
-    ];
-
-    let currentTestimonialIdx = 0;
-    const testQuoteEl = document.getElementById('test-quote');
-    const testNameEl = document.getElementById('test-name');
-    const testRoleEl = document.getElementById('test-role');
+    // --- 12. 3D Perspective Testimonial Stack Carousel ---
+    const testimonialCards = document.querySelectorAll('.testimonial-card-item');
+    let activeTestimonialIdx = 0;
     const prevTestBtn = document.getElementById('prev-testimonial-btn');
     const nextTestBtn = document.getElementById('next-testimonial-btn');
 
-    function renderTestimonial(idx) {
-        if (!testQuoteEl || !testNameEl || !testRoleEl) return;
-        const item = testimonials[idx];
-        
-        testQuoteEl.style.opacity = '0';
-        testQuoteEl.style.transform = 'translateY(10px)';
+    function updateTestimonialStack(newIdx) {
+        if (!testimonialCards || testimonialCards.length === 0) return;
+        activeTestimonialIdx = (newIdx + testimonialCards.length) % testimonialCards.length;
 
-        setTimeout(() => {
-            testQuoteEl.textContent = item.quote;
-            testNameEl.textContent = item.name;
-            testRoleEl.textContent = item.role;
-            testQuoteEl.style.transition = 'all 0.4s ease';
-            testQuoteEl.style.opacity = '1';
-            testQuoteEl.style.transform = 'translateY(0)';
-        }, 150);
+        testimonialCards.forEach((card, i) => {
+            card.classList.remove('active', 'next', 'prev');
+            if (i === activeTestimonialIdx) {
+                card.classList.add('active');
+            } else if (i === (activeTestimonialIdx + 1) % testimonialCards.length) {
+                card.classList.add('next');
+            } else {
+                card.classList.add('prev');
+            }
+        });
     }
 
     if (prevTestBtn) {
         prevTestBtn.addEventListener('click', () => {
-            currentTestimonialIdx = (currentTestimonialIdx - 1 + testimonials.length) % testimonials.length;
-            renderTestimonial(currentTestimonialIdx);
+            updateTestimonialStack(activeTestimonialIdx - 1);
             if (window.teaAudio) window.teaAudio.playChime(523.25);
         });
     }
 
     if (nextTestBtn) {
         nextTestBtn.addEventListener('click', () => {
-            currentTestimonialIdx = (currentTestimonialIdx + 1) % testimonials.length;
-            renderTestimonial(currentTestimonialIdx);
+            updateTestimonialStack(activeTestimonialIdx + 1);
             if (window.teaAudio) window.teaAudio.playChime(587.33);
         });
     }
 
-    // --- 13. Newsletter Form Interactive Submission ---
+    // --- 13. Interactive Gazette / Article Quick-Read Modal ---
+    const articleModal = document.getElementById('article-modal');
+    const articleModalBackdrop = document.getElementById('article-modal-backdrop');
+    const closeArticleModalBtn = document.getElementById('close-article-modal-btn');
+    const articleModalTitle = document.getElementById('article-modal-title');
+    const articleModalCategory = document.getElementById('article-modal-category');
+    const articleModalDate = document.getElementById('article-modal-date');
+    const articleModalImage = document.getElementById('article-modal-image');
+    const articleModalContent = document.getElementById('article-modal-content');
+
+    function openArticleModal(articleId) {
+        const article = ARTICLES[articleId];
+        if (!article || !articleModal) return;
+
+        articleModalTitle.textContent = article.title;
+        articleModalCategory.textContent = article.category;
+        articleModalDate.textContent = article.date;
+        articleModalImage.src = article.image;
+        articleModalContent.innerHTML = article.content;
+
+        articleModal.classList.remove('hidden');
+        setTimeout(() => {
+            articleModal.classList.remove('opacity-0');
+            articleModal.querySelector('.modal-content').classList.remove('scale-95');
+        }, 20);
+
+        if (window.teaAudio) window.teaAudio.playChime(659.25);
+    }
+
+    function closeArticleModal() {
+        if (!articleModal) return;
+        articleModal.classList.add('opacity-0');
+        articleModal.querySelector('.modal-content').classList.add('scale-95');
+        setTimeout(() => {
+            articleModal.classList.add('hidden');
+        }, 300);
+    }
+
+    document.querySelectorAll('.open-article-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = btn.getAttribute('data-article-id');
+            openArticleModal(id);
+        });
+    });
+
+    if (closeArticleModalBtn) closeArticleModalBtn.addEventListener('click', closeArticleModal);
+    if (articleModalBackdrop) articleModalBackdrop.addEventListener('click', closeArticleModal);
+
+    // Bookmark / Favorite buttons on articles
+    document.querySelectorAll('.bookmark-article-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const icon = btn.querySelector('i');
+            const isBookmarked = icon.classList.contains('fa-solid');
+
+            if (isBookmarked) {
+                icon.className = 'fa-regular fa-bookmark text-neutral-400';
+                showToast('Removed from Reading List', 'Article removed from your saved dispatches.', 'fa-bookmark');
+            } else {
+                icon.className = 'fa-solid fa-bookmark text-orange-400';
+                if (window.teaAudio) window.teaAudio.playChime(784);
+                showToast('Saved to Reading List', 'Article bookmarked in your tea sanctuary.', 'fa-bookmark');
+            }
+        });
+    });
+
+    // --- 14. Interactive Bento Grid Micro-Interactions ---
+    const bentoAltitudeBtn = document.getElementById('bento-altitude-toggle');
+    if (bentoAltitudeBtn) {
+        bentoAltitudeBtn.addEventListener('click', () => {
+            const meter = document.getElementById('bento-altitude-val');
+            if (meter) {
+                const current = parseInt(meter.textContent);
+                const next = current === 2200 ? 2600 : 2200;
+                meter.textContent = `${next}m`;
+                showToast('Altitude Shift', `Simulating micro-climate at ${next}m peak canopy.`, 'fa-mountain');
+                if (window.teaAudio) window.teaAudio.playChime(587.33);
+            }
+        });
+    }
+
+    // --- 15. Newsletter Form Interactive Submission ---
     const newsletterForm = document.getElementById('newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
@@ -794,7 +942,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = btn.getBoundingClientRect();
                 spawnTeaConfetti(rect.left + rect.width / 2, rect.top);
                 
-                if (window.teaAudio) window.teaAudio.playChime(784); // G5
+                if (window.teaAudio) window.teaAudio.playChime(784);
                 showToast(
                     'Welcome to the Tea Guild',
                     `Exclusive single-origin reserve invitations dispatched to ${val}.`,
@@ -805,7 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 14. Live Kyoto Time & Status Ticker ---
+    // --- 16. Live Kyoto Time & Status Ticker ---
     const kyotoTimeEl = document.getElementById('kyoto-time-ticker');
     function updateKyotoClock() {
         if (!kyotoTimeEl) return;
@@ -820,4 +968,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateKyotoClock();
     setInterval(updateKyotoClock, 1000);
+
+    // --- 17. Scroll Reveal Animation Trigger ---
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+        revealElements.forEach(el => el.classList.add('revealed'));
+    }
 });

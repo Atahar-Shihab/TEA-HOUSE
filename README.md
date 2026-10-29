@@ -18,33 +18,46 @@
 - **Volumetric Steam & Golden Aroma Dust**: Hundreds of glowing amber bokeh particles and rising steam vapor simulation.
 - **Spatial Parallax Camera**: Camera depth smoothly translates and rotates in response to cursor coordinates and scroll momentum.
 
-### 🎧 2. Procedural 5D Binaural Soundscape (`Web Audio API`)
+### 🎴 2. Ultra-Modern Cards, Hover Physics & Parallax Depths
+- **Multi-Layer 3D Z-Depth**: True `preserve-3d` spatial hierarchy where the tea vessel floats forward (`translateZ(68px) scale(1.08)`), floating above glowing ambient light auras.
+- **Luminous Border Beam**: Interactive rotating conic-gradient border trail that activates on card hover.
+- **Dynamic Spotlight Tracking**: Realistic flashlight effect following the cursor coordinates across frosted glass surfaces.
+- **Blend-Specific Glowing Auras**: Tailored ambient lighting for Hokkaido Milk Tea (amber), Yunnan Black (ruby bronze), Ceremonial Uji Jade (emerald), and Sicilia Lemon (sunburst gold).
+- **Tactile Audio Feedback**: Micro-chimes triggered when gliding between cards for an auditory tactile feel.
+
+### 🍱 3. Interactive Luxury Craftsmanship Bento Grid
+- **Card 1: High-Altitude Mountain Terroir**: Interactive elevation toggle (`2,200m` to `2,600m`), animated topographic SVG contour lines, and live mist density telemetry.
+- **Card 2: Sun-Withered Leaf Anatomy (`fresh-1.png`)**: High-resolution zoom on hover with floating botanical inspection badge.
+- **Card 3: Charcoal Slow-Roast (`fresh-2.png`)**: Thermal heat map simulation with floating glowing embers and 115°C wok roasting gauge.
+- **Card 4: Glacier Spring Mineral Equilibrium**: Animated TDS mineral purity meter (48 ppm) with neutral alkaline pH 7.2 indicator.
+
+### 👥 4. 3D Perspective Testimonial Stack
+- Interactive 3D deck of stacked review cards with realistic perspective depth (`translateZ`, `scale`, and `translateY`).
+- Smooth spring-eased switching between verified connoisseurs, sommeliers, and restaurateurs.
+
+### 📰 5. Editorial Gazette & Quick-Read Modal
+- High-resolution dispatches (`news-1.png`, `news-2.png`, `news-3.png`) exploring Gongfu tea ceremonies, Alishan mountain expeditions, and the neuroscience of L-Theanine.
+- Interactive **Quick-Read Drawer Modal** with drop-caps, quotes, and reading time progress.
+- Interactive bookmark button with micro-animation and toast feedback.
+
+### 🎧 6. Procedural 5D Binaural Soundscape (`Web Audio API`)
 - **Pure Code Synthesis**: **Zero external audio file dependencies** — runs 100% offline with zero CORS or network latency issues.
 - **Mountain Sanctuary Ambiance**: Procedural pink noise filtered with low-frequency oscillators to simulate mountain gusts rustling through bamboo canopies.
 - **Harmonic Singing Bowl**: Resonant 216Hz and 432Hz sine/triangle harmonics creating deep zen tranquility.
 - **Tactile Ceramic Chimes**: Crisp harmonic teacup chimes and bubbling water-pour audio triggered on card interactions, modal openings, and brewing rituals.
 - **Live Visualizer Equalizer**: Interactive audio pill with animated equalizer bars and volume slider.
 
-### 🎴 3. 3D Tilt Physics & Dynamic Specular Lighting
-- Micro-interaction physics engine calculating cursor coordinates relative to each card.
-- Dynamic radial glare tracking the incident angle of light (`mix-blend-mode: overlay`).
-- Elevates depth along the Z-axis (`translateZ`, `rotateX`, `rotateY`) for physical tangibility.
-
-### 🫖 4. Interactive Virtual Tea Ceremony Chamber
+### 🫖 7. Interactive Virtual Tea Ceremony Chamber
 - **Step-by-Step Brewing Studio**:
   1. Choose between **Green Jade**, **Hokkaido Milk Velvet**, **Yunnan Black**, or **Sicilia Lemon**.
   2. Adjust live **Water Temperature** (60°C to 100°C) with real-time kettle glow illumination.
   3. Set **Steep Duration** (5s to 30s).
-  4. Click **Infuse & Steep** to watch the digital teacup fill with blend-specific liquid color transitions, boiling water acoustics, steeping countdown, and aroma notes reveal!
+  4. Click **Infuse & Steep** to watch the digital teacup fill with blend-specific liquid color transitions, wave surface animations, boiling water acoustics, steeping countdown, and aroma notes reveal!
 
-### 📦 5. Interactive Tasting Box (Cart) Drawer & Confetti Bursts
+### 📦 8. Interactive Tasting Box (Cart) Drawer & Confetti Bursts
 - Slide-out glassmorphic drawer with real-time subtotal calculations, quantity modifiers, and item removal.
 - Physical leaf particle confetti bursts on "Add to Box" and checkout triggers.
 - Non-intrusive luxury toast notification system for instant feedback.
-
-### 📰 6. The Tea Gazette & Editorial Journal
-- Showcases the high-resolution culture photography (`news-1.png`, `news-2.png`, `news-3.png`).
-- Explores traditional Gongfu ceremonies, Alishan mountain expeditions, and the neuroscience of L-Theanine.
 
 ---
 
@@ -54,11 +67,11 @@
 TEA-HOUSE/
 ├── index.html              # Main 5D/3D cinematic showcase interface
 ├── css/
-│   └── style.css           # Glassmorphism, 3D tilt styles, custom cursor, animations
+│   └── style.css           # Glassmorphism, 3D tilt styles, border beam, custom cursor, animations
 ├── js/
 │   ├── audio-ambience.js   # Procedural Web Audio API soundscape generator
 │   ├── three-background.js # Three.js WebGL 3D leaves & volumetric steam engine
-│   └── main.js             # UI state, 3D tilt physics, brewing simulator, cart drawer
+│   └── main.js             # UI state, 3D tilt physics, bento widgets, reader modal, cart drawer
 ├── images/                 # Optimized visual assets, icons & journal imagery
 │   ├── banner.png          # Hero tea vessel
 │   ├── tea-1.png           # Hokkaido Milk Tea

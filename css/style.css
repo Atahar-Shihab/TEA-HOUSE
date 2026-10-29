@@ -134,21 +134,141 @@ body {
     border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* 3D Tilt Card Container */
+/* 3D Tilt Card Container & Parallax Preserves */
 .tilt-card-wrapper {
     perspective: 1200px;
     transform-style: preserve-3d;
 }
 
 .tilt-card {
-    transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.25s ease;
+    transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s ease;
     transform-style: preserve-3d;
     position: relative;
     overflow: hidden;
 }
 
+/* Interactive Spotlight Tracking */
+.card-spotlight {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.09), transparent 45%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.card-spotlight:hover::before {
+    opacity: 1;
+}
+
+/* Border Beam Effect (Luminous Edge Trail) */
+@property --beam-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.border-beam-card {
+    position: relative;
+    border-radius: 1.25rem;
+}
+
+.border-beam-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+        from var(--beam-angle),
+        transparent 70%,
+        rgba(255, 122, 24, 0.8) 85%,
+        rgba(255, 215, 0, 0.95) 95%,
+        transparent 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 6;
+}
+
+.border-beam-card:hover::after {
+    opacity: 1;
+    animation: rotate-beam 3s linear infinite;
+}
+
+@keyframes rotate-beam {
+    0% { --beam-angle: 0deg; }
+    100% { --beam-angle: 360deg; }
+}
+
+/* 3D Multi-Layer Parallax Depths */
+.preserve-3d {
+    transform-style: preserve-3d;
+}
+
+.layer-depth-10 {
+    transform: translateZ(12px);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.layer-depth-20 {
+    transform: translateZ(24px);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.layer-depth-35 {
+    transform: translateZ(36px);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.layer-depth-50 {
+    transform: translateZ(52px);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.tilt-card:hover .layer-depth-50 {
+    transform: translateZ(68px) scale(1.08);
+}
+
+.tilt-card:hover .layer-depth-35 {
+    transform: translateZ(44px);
+}
+
+/* Blend-Specific Glowing Auras */
+.aura-milk-tea {
+    --card-glow: rgba(255, 140, 30, 0.32);
+    --accent-color: #ff9e42;
+}
+
+.aura-black-tea {
+    --card-glow: rgba(239, 68, 68, 0.32);
+    --accent-color: #f87171;
+}
+
+.aura-green-tea {
+    --card-glow: rgba(34, 197, 94, 0.32);
+    --accent-color: #4ade80;
+}
+
+.aura-lemon-tea {
+    --card-glow: rgba(234, 179, 8, 0.32);
+    --accent-color: #fde047;
+}
+
 .tilt-card:hover {
-    box-shadow: 0 25px 50px -12px rgba(255, 122, 24, 0.22);
+    box-shadow: 0 25px 50px -12px var(--card-glow, rgba(255, 122, 24, 0.25)),
+                0 0 30px -8px var(--card-glow, rgba(255, 122, 24, 0.15));
 }
 
 .card-glare {
@@ -255,14 +375,14 @@ body {
     }
 }
 
-/* Interactive Glowing Button */
+/* Interactive Glowing Button with Liquid Ripple */
 .btn-cinematic {
     position: relative;
     background: linear-gradient(135deg, #ff7a18 0%, #ff3e00 100%);
     color: white;
     font-weight: 600;
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 10px 25px -6px rgba(255, 62, 0, 0.45);
 }
 
@@ -279,7 +399,7 @@ body {
 
 .btn-cinematic:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 18px 35px -8px rgba(255, 62, 0, 0.6);
+    box-shadow: 0 18px 35px -8px rgba(255, 62, 0, 0.65), 0 0 20px rgba(255, 122, 24, 0.4);
 }
 
 .btn-cinematic:hover::before {
@@ -306,6 +426,99 @@ body {
     border-color: rgba(255, 255, 255, 0.35);
     transform: translateY(-2px);
     box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.4);
+}
+
+/* Magnetic Button Utility */
+.magnetic-btn {
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.25s ease;
+}
+
+/* Bento Grid Interactive Cards */
+.bento-card {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    transform-style: preserve-3d;
+}
+
+.bento-card:hover {
+    transform: translateY(-5px) scale(1.015);
+    border-color: rgba(255, 122, 24, 0.45);
+    box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.65), 0 0 35px -5px rgba(255, 122, 24, 0.22);
+}
+
+/* Topographic elevation lines pulsing */
+.topo-line {
+    stroke-dasharray: 4, 4;
+    animation: topo-dash 14s linear infinite;
+}
+
+@keyframes topo-dash {
+    to { stroke-dashoffset: -40; }
+}
+
+/* Heatmap ember particles */
+@keyframes ember-float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(-60px) scale(0.3) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.heat-ember {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ff5400;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ff7a18;
+    animation: ember-float 2.2s infinite ease-out;
+}
+
+/* 3D Testimonial Deck / Stack */
+.testimonial-stack-container {
+    perspective: 1200px;
+    min-height: 280px;
+    position: relative;
+}
+
+.testimonial-card-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+
+.testimonial-card-item.active {
+    opacity: 1;
+    transform: translateZ(0) translateY(0) scale(1);
+    z-index: 30;
+    pointer-events: auto;
+}
+
+.testimonial-card-item.next {
+    opacity: 0.55;
+    transform: translateZ(-50px) translateY(18px) scale(0.94);
+    z-index: 20;
+    pointer-events: none;
+    filter: blur(1px);
+}
+
+.testimonial-card-item.prev {
+    opacity: 0.25;
+    transform: translateZ(-100px) translateY(36px) scale(0.88);
+    z-index: 10;
+    pointer-events: none;
+    filter: blur(2px);
+}
+
+/* Article Reading Drawer & Modal */
+.reading-drawer {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 /* Toast Notification Styling */
@@ -388,9 +601,28 @@ body {
     background: #ff7a18;
 }
 
-/* Brewing Simulator Water Animation */
+/* Brewing Simulator Water Animation with Waves */
 .brewing-liquid {
     transition: height 1s cubic-bezier(0.4, 0, 0.2, 1), background 1.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.brewing-liquid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.4) 100%);
+    opacity: 0.6;
+    animation: wave-surface 2s ease-in-out infinite alternate;
+}
+
+@keyframes wave-surface {
+    0% { transform: translateY(-1px); }
+    100% { transform: translateY(2px); }
 }
 
 /* Tea leaf confetti burst keyframes */
@@ -414,4 +646,16 @@ body {
     pointer-events: none;
     z-index: 9999;
     animation: confetti-pop 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+/* Smooth reveal on scroll */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
 }
