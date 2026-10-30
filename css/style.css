@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THE TEA HOUSE - 5D / 3D CINEMATIC STYLING & DESIGN SYSTEM
+   THE TEA HOUSE - PROFESSIONAL DESIGN SYSTEM & REFINED TRANSITIONS
    ========================================================================== */
 
 :root {
@@ -9,12 +9,12 @@
     --tea-amber: #e6a623;
     --matcha-green: #48bb78;
     --bg-dark: #0b0f14;
-    --bg-card: rgba(255, 255, 255, 0.05);
-    --bg-card-hover: rgba(255, 255, 255, 0.09);
-    --border-glass: rgba(255, 255, 255, 0.12);
+    --bg-card: rgba(18, 24, 32, 0.72);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --border-glass-hover: rgba(255, 122, 24, 0.4);
     --text-primary: #ffffff;
     --text-muted: #94a3b8;
-    --glow-warm: rgba(255, 122, 24, 0.35);
+    --glow-warm: rgba(255, 122, 24, 0.25);
 }
 
 /* Base resets & smooth scrolling */
@@ -54,12 +54,12 @@ body {
     pointer-events: none;
     z-index: 1;
     background: 
-        radial-gradient(circle at 15% 20%, rgba(255, 122, 24, 0.09) 0%, transparent 45%),
-        radial-gradient(circle at 85% 30%, rgba(230, 166, 35, 0.07) 0%, transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(72, 187, 120, 0.06) 0%, transparent 60%);
+        radial-gradient(circle at 15% 20%, rgba(255, 122, 24, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(230, 166, 35, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(72, 187, 120, 0.05) 0%, transparent 60%);
 }
 
-/* Custom Scroll Progress Bar */
+/* Scroll Progress Bar */
 #scroll-progress {
     position: fixed;
     top: 0;
@@ -69,98 +69,146 @@ body {
     z-index: 9999;
     width: 0%;
     transition: width 0.1s ease-out;
-    box-shadow: 0 0 12px rgba(255, 122, 24, 0.8);
+    box-shadow: 0 0 10px rgba(255, 122, 24, 0.8);
 }
 
-/* Custom Cursor & Trail */
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background: #ff7a18;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s ease-out;
-    box-shadow: 0 0 10px #ff7a18;
-}
-
-.cursor-follower {
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid rgba(255, 122, 24, 0.5);
-    background: rgba(255, 122, 24, 0.04);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.25s, height 0.25s, background-color 0.25s, transform 0.15s ease-out;
-    backdrop-filter: blur(1px);
-}
-
-.cursor-hover .cursor-follower {
-    width: 58px;
-    height: 58px;
-    background: rgba(255, 122, 24, 0.15);
-    border-color: rgba(255, 122, 24, 0.9);
-}
-
-@media (pointer: coarse) {
-    .cursor-dot, .cursor-follower {
-        display: none !important;
-    }
-}
-
-/* Glassmorphism Classes */
+/* Glassmorphism Components */
 .glass-panel {
-    background: rgba(18, 24, 32, 0.65);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
 }
 
 .glass-pill {
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 .glass-pill:hover {
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* 3D Tilt Card Container & Parallax Preserves */
-.tilt-card-wrapper {
-    perspective: 1200px;
-    transform-style: preserve-3d;
-}
-
-.tilt-card {
-    transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s ease;
-    transform-style: preserve-3d;
+/* Professional Product Card */
+.product-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 1.25rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
-/* Interactive Spotlight Tracking */
+.product-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-glass-hover);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7),
+                0 0 25px -5px var(--card-glow, rgba(255, 122, 24, 0.15));
+}
+
+.product-card img {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Subtle Card Glow Themes */
+.aura-milk-tea {
+    --card-glow: rgba(255, 140, 30, 0.25);
+}
+
+.aura-black-tea {
+    --card-glow: rgba(239, 68, 68, 0.25);
+}
+
+.aura-green-tea {
+    --card-glow: rgba(34, 197, 94, 0.25);
+}
+
+.aura-lemon-tea {
+    --card-glow: rgba(234, 179, 8, 0.25);
+}
+
+/* Interactive Bento Grid Cards */
+.bento-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 1.25rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.bento-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-glass-hover);
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(255, 122, 24, 0.15);
+}
+
+.bento-card img {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card:hover img {
+    transform: scale(1.06);
+}
+
+/* Journal / Gazette Article Card */
+.journal-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 1.25rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.journal-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-glass-hover);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(255, 122, 24, 0.15);
+}
+
+.journal-card img {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journal-card:hover img {
+    transform: scale(1.06);
+}
+
+/* Subtle Cursor Spotlight Tracking */
 .card-spotlight {
     position: relative;
-    overflow: hidden;
 }
 
 .card-spotlight::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.09), transparent 45%);
+    background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.05), transparent 55%);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.3s ease;
     z-index: 2;
 }
 
@@ -168,124 +216,7 @@ body {
     opacity: 1;
 }
 
-/* Border Beam Effect (Luminous Edge Trail) */
-@property --beam-angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-}
-
-.border-beam-card {
-    position: relative;
-    border-radius: 1.25rem;
-}
-
-.border-beam-card::after {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1.5px;
-    background: conic-gradient(
-        from var(--beam-angle),
-        transparent 70%,
-        rgba(255, 122, 24, 0.8) 85%,
-        rgba(255, 215, 0, 0.95) 95%,
-        transparent 100%
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: 6;
-}
-
-.border-beam-card:hover::after {
-    opacity: 1;
-    animation: rotate-beam 3s linear infinite;
-}
-
-@keyframes rotate-beam {
-    0% { --beam-angle: 0deg; }
-    100% { --beam-angle: 360deg; }
-}
-
-/* 3D Multi-Layer Parallax Depths */
-.preserve-3d {
-    transform-style: preserve-3d;
-}
-
-.layer-depth-10 {
-    transform: translateZ(12px);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
-}
-
-.layer-depth-20 {
-    transform: translateZ(24px);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
-}
-
-.layer-depth-35 {
-    transform: translateZ(36px);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
-}
-
-.layer-depth-50 {
-    transform: translateZ(52px);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
-}
-
-.tilt-card:hover .layer-depth-50 {
-    transform: translateZ(68px) scale(1.08);
-}
-
-.tilt-card:hover .layer-depth-35 {
-    transform: translateZ(44px);
-}
-
-/* Blend-Specific Glowing Auras */
-.aura-milk-tea {
-    --card-glow: rgba(255, 140, 30, 0.32);
-    --accent-color: #ff9e42;
-}
-
-.aura-black-tea {
-    --card-glow: rgba(239, 68, 68, 0.32);
-    --accent-color: #f87171;
-}
-
-.aura-green-tea {
-    --card-glow: rgba(34, 197, 94, 0.32);
-    --accent-color: #4ade80;
-}
-
-.aura-lemon-tea {
-    --card-glow: rgba(234, 179, 8, 0.32);
-    --accent-color: #fde047;
-}
-
-.tilt-card:hover {
-    box-shadow: 0 25px 50px -12px var(--card-glow, rgba(255, 122, 24, 0.25)),
-                0 0 30px -8px var(--card-glow, rgba(255, 122, 24, 0.15));
-}
-
-.card-glare {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 65%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    mix-blend-mode: overlay;
-    z-index: 5;
-}
-
-/* Cinematic Gradient Text */
+/* Gradient Text Utilities */
 .text-gradient-tea {
     background: linear-gradient(135deg, #ffffff 0%, #ffe0b2 40%, #ff8938 100%);
     -webkit-background-clip: text;
@@ -298,13 +229,7 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-gold {
-    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Dynamic Equalizer for 5D Audio */
+/* Animated Equalizer for 5D Audio */
 .equalizer-bar {
     width: 3px;
     background: #ff7a18;
@@ -328,10 +253,10 @@ body {
 
 @keyframes eq-pulse {
     0% { height: 4px; }
-    100% { height: 18px; }
+    100% { height: 16px; }
 }
 
-/* Floating animation */
+/* Subtle Floating Animation */
 .float-subtle {
     animation: float-anim 5s ease-in-out infinite;
 }
@@ -341,8 +266,8 @@ body {
 }
 
 @keyframes float-anim {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(1deg); }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
 }
 
 /* Steam Vapour Animation */
@@ -351,8 +276,8 @@ body {
     bottom: 80%;
     left: 50%;
     transform: translateX(-50%);
-    width: 40px;
-    height: 60px;
+    width: 36px;
+    height: 55px;
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
     filter: blur(6px);
     opacity: 0.6;
@@ -366,24 +291,24 @@ body {
         opacity: 0.6;
     }
     50% {
-        transform: translateX(-40%) translateY(-35px) scaleX(1.3) scaleY(1.2);
+        transform: translateX(-45%) translateY(-30px) scaleX(1.3) scaleY(1.2);
         opacity: 0.35;
     }
     100% {
-        transform: translateX(-60%) translateY(-70px) scaleX(1.8) scaleY(1.6);
+        transform: translateX(-55%) translateY(-60px) scaleX(1.7) scaleY(1.5);
         opacity: 0;
     }
 }
 
-/* Interactive Glowing Button with Liquid Ripple */
+/* Cinematic Primary Button */
 .btn-cinematic {
     position: relative;
     background: linear-gradient(135deg, #ff7a18 0%, #ff3e00 100%);
     color: white;
     font-weight: 600;
     overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 10px 25px -6px rgba(255, 62, 0, 0.45);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 20px -5px rgba(255, 62, 0, 0.4);
 }
 
 .btn-cinematic::before {
@@ -393,13 +318,13 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-    transition: left 0.6s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
 }
 
 .btn-cinematic:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 18px 35px -8px rgba(255, 62, 0, 0.65), 0 0 20px rgba(255, 122, 24, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -6px rgba(255, 62, 0, 0.55), 0 0 15px rgba(255, 122, 24, 0.3);
 }
 
 .btn-cinematic:hover::before {
@@ -407,121 +332,32 @@ body {
 }
 
 .btn-cinematic:active {
-    transform: translateY(1px) scale(0.99);
+    transform: translateY(1px);
 }
 
-/* Magnetic Secondary Button */
+/* Glass Secondary Button */
 .btn-glass {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     color: #ffffff;
     font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
 }
 
-/* Magnetic Button Utility */
-.magnetic-btn {
-    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.25s ease;
+.btn-glass:active {
+    transform: translateY(1px);
 }
 
-/* Bento Grid Interactive Cards */
-.bento-card {
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
-    transform-style: preserve-3d;
-}
-
-.bento-card:hover {
-    transform: translateY(-5px) scale(1.015);
-    border-color: rgba(255, 122, 24, 0.45);
-    box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.65), 0 0 35px -5px rgba(255, 122, 24, 0.22);
-}
-
-/* Topographic elevation lines pulsing */
-.topo-line {
-    stroke-dasharray: 4, 4;
-    animation: topo-dash 14s linear infinite;
-}
-
-@keyframes topo-dash {
-    to { stroke-dashoffset: -40; }
-}
-
-/* Heatmap ember particles */
-@keyframes ember-float {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.9;
-    }
-    100% {
-        transform: translateY(-60px) scale(0.3) rotate(45deg);
-        opacity: 0;
-    }
-}
-
-.heat-ember {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #ff5400;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #ff7a18;
-    animation: ember-float 2.2s infinite ease-out;
-}
-
-/* 3D Testimonial Deck / Stack */
-.testimonial-stack-container {
-    perspective: 1200px;
-    min-height: 280px;
-    position: relative;
-}
-
-.testimonial-card-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    transform-style: preserve-3d;
-}
-
-.testimonial-card-item.active {
-    opacity: 1;
-    transform: translateZ(0) translateY(0) scale(1);
-    z-index: 30;
-    pointer-events: auto;
-}
-
-.testimonial-card-item.next {
-    opacity: 0.55;
-    transform: translateZ(-50px) translateY(18px) scale(0.94);
-    z-index: 20;
-    pointer-events: none;
-    filter: blur(1px);
-}
-
-.testimonial-card-item.prev {
-    opacity: 0.25;
-    transform: translateZ(-100px) translateY(36px) scale(0.88);
-    z-index: 10;
-    pointer-events: none;
-    filter: blur(2px);
-}
-
-/* Article Reading Drawer & Modal */
-.reading-drawer {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-}
-
-/* Toast Notification Styling */
+/* Toast Notifications */
 .toast-container {
     position: fixed;
     bottom: 24px;
@@ -529,62 +365,63 @@ body {
     z-index: 10050;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     pointer-events: none;
+    max-width: 90vw;
 }
 
 .toast {
     pointer-events: auto;
-    background: rgba(18, 24, 32, 0.92);
+    background: rgba(18, 24, 32, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 122, 24, 0.4);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 122, 24, 0.2);
+    border: 1px solid rgba(255, 122, 24, 0.35);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 122, 24, 0.15);
     border-radius: 12px;
-    padding: 14px 20px;
+    padding: 12px 18px;
     color: white;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     align-items: center;
     gap: 12px;
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(20px);
     opacity: 0;
-    animation: toast-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: toast-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes toast-in {
     to {
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
         opacity: 1;
     }
 }
 
 .toast.toast-out {
-    animation: toast-out 0.3s ease forwards;
+    animation: toast-out 0.25s ease forwards;
 }
 
 @keyframes toast-out {
     to {
-        transform: translateY(20px) scale(0.9);
+        transform: translateY(15px);
         opacity: 0;
     }
 }
 
-/* Modal Backdrop & Animation */
+/* Modal Styling */
 .modal-overlay {
-    background: rgba(7, 10, 14, 0.78);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgba(7, 10, 14, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition: opacity 0.3s ease;
 }
 
 .modal-content {
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -593,17 +430,16 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: #232d39;
-    border-radius: 4px;
-    border: 2px solid #0b0f14;
+    border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #ff7a18;
 }
 
-/* Brewing Simulator Water Animation with Waves */
+/* Brewing Simulator Water Animation */
 .brewing-liquid {
-    transition: height 1s cubic-bezier(0.4, 0, 0.2, 1), background 1.5s ease;
+    transition: height 1s cubic-bezier(0.4, 0, 0.2, 1), background 1.2s ease;
     position: relative;
     overflow: hidden;
 }
@@ -614,8 +450,8 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.4) 100%);
+    height: 5px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.3) 100%);
     opacity: 0.6;
     animation: wave-surface 2s ease-in-out infinite alternate;
 }
@@ -625,7 +461,7 @@ body {
     100% { transform: translateY(2px); }
 }
 
-/* Tea leaf confetti burst keyframes */
+/* Tea leaf confetti burst */
 @keyframes confetti-pop {
     0% {
         transform: translate(0, 0) scale(0) rotate(0deg);
@@ -639,20 +475,35 @@ body {
 
 .tea-confetti {
     position: absolute;
-    width: 14px;
-    height: 8px;
+    width: 12px;
+    height: 7px;
     background: #48bb78;
     border-radius: 50% 0 50% 0;
     pointer-events: none;
     z-index: 9999;
-    animation: confetti-pop 0.9s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+    animation: confetti-pop 0.85s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
 }
 
-/* Smooth reveal on scroll */
+/* Line Clamp Utilities */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Scroll Reveal */
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.revealed {

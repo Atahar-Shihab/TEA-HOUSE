@@ -1,15 +1,12 @@
 /**
- * The Tea House - Interactive 5D & 3D Cinematic Showcase Engine
- * Orchestrates:
- * - 3D Multi-Layer Tilt & Dynamic Specular Light physics
- * - Interactive Mouse Spotlight Tracking for all cards
- * - Bento Grid Interactive Widgets & Micro-Interactions
- * - 3D Testimonial Perspective Deck Stack
- * - Interactive Journal Reader Drawer & Article Modal
- * - Virtual Tea Brewing Simulator with animated water wave & bubbles
+ * The Tea House - Professional Frontend Engine
+ * - Clean responsive hover spotlight tracking
+ * - Virtual Tea Brewing Simulator with animated water waves
  * - Interactive Tasting Modal & Cart Drawer with Leaf Confetti
- * - Smooth Magnetic Cursor & Magnetic Button Physics
- * - Procedural 5D Sound Controls & Hover Audio Feedback
+ * - Responsive Testimonial Carousel with pagination dots
+ * - Mobile Navigation Drawer Toggle
+ * - Article Quick-Read Modal & Bookmarks
+ * - Procedural 5D Web Audio Controls
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -155,88 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // State
     const cart = [];
 
-    // --- 2. Custom Magnetic Cursor ---
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorFollower = document.querySelector('.cursor-follower');
-    let mouseX = -100, mouseY = -100;
-    let followerX = -100, followerY = -100;
-
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        if (cursorDot) {
-            cursorDot.style.left = `${mouseX}px`;
-            cursorDot.style.top = `${mouseY}px`;
-        }
-    });
-
-    function animateCursor() {
-        followerX += (mouseX - followerX) * 0.18;
-        followerY += (mouseY - followerY) * 0.18;
-        if (cursorFollower) {
-            cursorFollower.style.left = `${followerX}px`;
-            cursorFollower.style.top = `${followerY}px`;
-        }
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Hover interactive elements
-    const interactiveElements = document.querySelectorAll('button, a, input, select, .tilt-card, .tab-btn, .bento-card, .journal-card');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-    });
-
-    // --- 3. 3D Multi-Layer Tilt & Dynamic Specular Physics ---
-    const tiltCards = document.querySelectorAll('.tilt-card');
+    // --- 2. Clean Cursor Spotlight Tracking for Cards ---
+    const spotlightCards = document.querySelectorAll('.card-spotlight, .product-card, .bento-card, .journal-card');
     let lastAudioHoverTime = 0;
 
-    tiltCards.forEach(card => {
-        const glare = card.querySelector('.card-glare');
-
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            // Update CSS variables for spotlight tracking
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-
-            // Compute 3D rotation angles with smooth clamp
-            const rotateX = ((y - centerY) / centerY) * -12;
-            const rotateY = ((x - centerX) / centerX) * 12;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.025, 1.025, 1.025)`;
-
-            if (glare) {
-                const glareX = (x / rect.width) * 100;
-                const glareY = (y / rect.height) * 100;
-                glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 70%)`;
-                glare.style.opacity = '1';
-            }
-        });
-
-        card.addEventListener('mouseenter', () => {
-            // Tactile subtle audio feedback on card entry (throttled)
-            const now = Date.now();
-            if (now - lastAudioHoverTime > 250 && window.teaAudio && window.teaAudio.isPlaying) {
-                window.teaAudio.playChime(659.25);
-                lastAudioHoverTime = now;
-            }
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            if (glare) glare.style.opacity = '0';
-        });
-    });
-
-    // Spotlight tracking for all Bento cards & Spotlight elements
-    const spotlightCards = document.querySelectorAll('.card-spotlight, .bento-card');
     spotlightCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -245,7 +164,50 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
         });
+
+        card.addEventListener('mouseenter', () => {
+            const now = Date.now();
+            if (now - lastAudioHoverTime > 300 && window.teaAudio && window.teaAudio.isPlaying) {
+                window.teaAudio.playChime(659.25);
+                lastAudioHoverTime = now;
+            }
+        });
     });
+
+    // --- 3. Mobile Navigation Menu Toggle ---
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+    const mobileMenuDropdown = document.getElementById('mobile-menu-dropdown');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (mobileMenuToggle && mobileMenuDropdown) {
+        mobileMenuToggle.addEventListener('click', () => {
+            const isHidden = mobileMenuDropdown.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenuDropdown.classList.remove('hidden');
+                if (mobileMenuIcon) {
+                    mobileMenuIcon.classList.remove('fa-bars');
+                    mobileMenuIcon.classList.add('fa-xmark');
+                }
+            } else {
+                mobileMenuDropdown.classList.add('hidden');
+                if (mobileMenuIcon) {
+                    mobileMenuIcon.classList.remove('fa-xmark');
+                    mobileMenuIcon.classList.add('fa-bars');
+                }
+            }
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuDropdown.classList.add('hidden');
+                if (mobileMenuIcon) {
+                    mobileMenuIcon.classList.remove('fa-xmark');
+                    mobileMenuIcon.classList.add('fa-bars');
+                }
+            });
+        });
+    }
 
     // --- 4. Scroll Progress & Sticky Frosted Header ---
     const scrollProgress = document.getElementById('scroll-progress');
@@ -256,24 +218,24 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = (scrollTop / docHeight) * 100;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 
         if (scrollProgress) {
             scrollProgress.style.width = `${progress}%`;
         }
 
-        // Header Blur intensification
+        // Header Background Blur on scroll
         if (headerNav) {
-            if (scrollTop > 50) {
-                headerNav.classList.add('bg-black/75', 'backdrop-blur-2xl', 'border-b', 'border-white/10', 'py-3');
-                headerNav.classList.remove('bg-transparent', 'py-5');
+            if (scrollTop > 40) {
+                headerNav.classList.add('bg-black/80', 'backdrop-blur-xl', 'border-b', 'border-white/10', 'py-2');
+                headerNav.classList.remove('py-3', 'sm:py-4');
             } else {
-                headerNav.classList.remove('bg-black/75', 'backdrop-blur-2xl', 'border-b', 'border-white/10', 'py-3');
-                headerNav.classList.add('bg-transparent', 'py-5');
+                headerNav.classList.remove('bg-black/80', 'backdrop-blur-xl', 'border-b', 'border-white/10', 'py-2');
+                headerNav.classList.add('py-3', 'sm:py-4');
             }
         }
 
-        // Back to top visibility & SVG circle update
+        // Back to top visibility & SVG progress ring
         if (backToTopBtn) {
             if (scrollTop > 350) {
                 backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-6');
@@ -300,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 5. 5D Audio Ambience Controls ---
     const audioToggleBtns = document.querySelectorAll('.audio-toggle-btn');
-    const audioVolumeSlider = document.getElementById('ambience-volume');
     const audioEqualizers = document.querySelectorAll('.audio-equalizer');
 
     function updateAudioUI(isPlaying) {
@@ -313,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (icon) icon.className = 'fa-solid fa-volume-high audio-icon';
             } else {
                 btn.classList.remove('text-orange-400', 'border-orange-500/40');
-                if (label) label.textContent = '5D Zen: Off';
+                if (label) label.textContent = '5D Zen';
                 if (icon) icon.className = 'fa-solid fa-volume-xmark audio-icon';
             }
         });
@@ -341,14 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    if (audioVolumeSlider) {
-        audioVolumeSlider.addEventListener('input', (e) => {
-            if (window.teaAudio) {
-                window.teaAudio.setVolume(parseFloat(e.target.value));
-            }
-        });
-    }
-
     // --- 6. Toast Notification Engine ---
     const toastContainer = document.getElementById('toast-container');
     function showToast(title, message, iconClass = 'fa-leaf') {
@@ -368,17 +321,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         toastContainer.appendChild(toast);
 
-        // Auto remove
         setTimeout(() => {
             toast.classList.add('toast-out');
-            setTimeout(() => toast.remove(), 350);
-        }, 3600);
+            setTimeout(() => toast.remove(), 300);
+        }, 3400);
     }
     window.showToast = showToast;
 
     // --- 7. Tea Confetti Burst Generator ---
     function spawnTeaConfetti(originX, originY) {
-        const count = 18;
+        const count = 16;
         const colors = ['#4ade80', '#22c55e', '#f59e0b', '#fb923c', '#e2e8f0'];
 
         for (let i = 0; i < count; i++) {
@@ -389,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
             const angle = Math.random() * Math.PI * 2;
-            const distance = 40 + Math.random() * 90;
+            const distance = 35 + Math.random() * 80;
             const tx = Math.cos(angle) * distance;
             const ty = Math.sin(angle) * distance;
             const rot = (Math.random() - 0.5) * 540;
@@ -399,11 +351,11 @@ document.addEventListener('DOMContentLoaded', () => {
             confetti.style.setProperty('--rot', `${rot}deg`);
 
             document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 950);
+            setTimeout(() => confetti.remove(), 850);
         }
     }
 
-    // --- 8. Product Filter Tabs with Smooth Animation ---
+    // --- 8. Product Filter Tabs ---
     const tabBtns = document.querySelectorAll('.tab-btn');
     const productCards = document.querySelectorAll('.product-item-card');
 
@@ -425,12 +377,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (filter === 'all' || cat === filter) {
                     card.style.display = 'block';
                     card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px) scale(0.96)';
+                    card.style.transform = 'translateY(15px)';
                     setTimeout(() => {
-                        card.style.transition = 'all 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+                        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                         card.style.opacity = '1';
-                        card.style.transform = 'translateY(0) scale(1)';
-                    }, index * 40 + 20);
+                        card.style.transform = 'translateY(0)';
+                    }, index * 30 + 10);
                 } else {
                     card.style.display = 'none';
                 }
@@ -498,8 +450,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return `
                 <div class="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all">
                     <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-contain rounded-lg bg-black/40 p-1">
-                    <div class="flex-1">
-                        <h4 class="font-bold text-sm text-white">${item.name}</h4>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-sm text-white truncate">${item.name}</h4>
                         <p class="text-xs text-orange-400">${item.price}</p>
                         <div class="flex items-center gap-3 mt-2">
                             <button class="cart-qty-btn w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-xs flex items-center justify-center text-white" data-action="decrease" data-index="${index}">-</button>
@@ -507,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button class="cart-qty-btn w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-xs flex items-center justify-center text-white" data-action="increase" data-index="${index}">+</button>
                         </div>
                     </div>
-                    <button class="cart-remove-btn text-neutral-400 hover:text-red-400 text-sm p-2" data-index="${index}">
+                    <button class="cart-remove-btn text-neutral-400 hover:text-red-400 text-sm p-2" data-index="${index}" title="Remove Item">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </div>
@@ -686,7 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 11. 5D Interactive Tea Brewing Ritual Simulator ---
+    // --- 11. Virtual Tea Brewing Ritual Simulator ---
     const brewBlendBtns = document.querySelectorAll('.brew-blend-btn');
     const brewTempSlider = document.getElementById('brew-temp-slider');
     const brewTempDisplay = document.getElementById('brew-temp-display');
@@ -764,7 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Audio: kettle pour & boiling water
             if (window.teaAudio) {
-                window.teaAudio.playPourSound(2.5);
+                window.teaAudio.playPourSound(2.2);
                 window.teaAudio.playChime(440);
             }
 
@@ -812,43 +764,87 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 12. 3D Perspective Testimonial Stack Carousel ---
-    const testimonialCards = document.querySelectorAll('.testimonial-card-item');
-    let activeTestimonialIdx = 0;
+    // --- 12. Responsive Testimonial Carousel ---
+    const testimonials = [
+        {
+            name: 'Ilham Yuda',
+            role: 'Luxury Hospitality Architect',
+            avatar: './images/client.png',
+            quote: '“The Uji Jade and Yunnan Golden tips transform our morning tea rituals into pure meditation. The aroma clarity is simply unapproachable.”'
+        },
+        {
+            name: 'Mei-Ling Chen',
+            role: 'Certified Master Tea Sommelier',
+            avatar: './images/client.png',
+            quote: '“Having judged tea competitions across Kyoto and Taipei, I can testify that The Tea House achieves the purest single-harvest extraction on the market.”'
+        },
+        {
+            name: 'Julian Vance',
+            role: 'Restaurateur & Connoisseur',
+            avatar: './images/client.png',
+            quote: '“From nitrogen sealing to the velvety Hokkaido cream blend, every detail breathes authentic craftsmanship. Our patrons are obsessed.”'
+        }
+    ];
+
+    let currentTestimonialIdx = 0;
+    const testCard = document.getElementById('testimonial-active-card');
+    const testNameEl = document.getElementById('test-name');
+    const testRoleEl = document.getElementById('test-role');
+    const testQuoteEl = document.getElementById('test-quote');
+    const testAvatarEl = document.getElementById('test-avatar');
     const prevTestBtn = document.getElementById('prev-testimonial-btn');
     const nextTestBtn = document.getElementById('next-testimonial-btn');
+    const testDotsContainer = document.getElementById('testimonial-dots');
 
-    function updateTestimonialStack(newIdx) {
-        if (!testimonialCards || testimonialCards.length === 0) return;
-        activeTestimonialIdx = (newIdx + testimonialCards.length) % testimonialCards.length;
+    function renderTestimonialDots() {
+        if (!testDotsContainer) return;
+        testDotsContainer.innerHTML = testimonials.map((_, i) => `
+            <button class="w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentTestimonialIdx ? 'bg-white w-6' : 'bg-white/30 hover:bg-white/60'}" data-dot-idx="${i}" aria-label="Go to testimonial ${i + 1}"></button>
+        `).join('');
 
-        testimonialCards.forEach((card, i) => {
-            card.classList.remove('active', 'next', 'prev');
-            if (i === activeTestimonialIdx) {
-                card.classList.add('active');
-            } else if (i === (activeTestimonialIdx + 1) % testimonialCards.length) {
-                card.classList.add('next');
-            } else {
-                card.classList.add('prev');
-            }
+        testDotsContainer.querySelectorAll('button').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = parseInt(dot.getAttribute('data-dot-idx'));
+                setTestimonial(idx);
+            });
         });
+    }
+
+    function setTestimonial(idx) {
+        currentTestimonialIdx = (idx + testimonials.length) % testimonials.length;
+        const item = testimonials[currentTestimonialIdx];
+
+        if (testCard) {
+            testCard.style.opacity = '0';
+            testCard.style.transform = 'translateY(6px)';
+
+            setTimeout(() => {
+                if (testNameEl) testNameEl.textContent = item.name;
+                if (testRoleEl) testRoleEl.textContent = item.role;
+                if (testQuoteEl) testQuoteEl.textContent = item.quote;
+                if (testAvatarEl) testAvatarEl.src = item.avatar;
+
+                testCard.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                testCard.style.opacity = '1';
+                testCard.style.transform = 'translateY(0)';
+                renderTestimonialDots();
+            }, 180);
+        }
+
+        if (window.teaAudio) window.teaAudio.playChime(587.33);
     }
 
     if (prevTestBtn) {
-        prevTestBtn.addEventListener('click', () => {
-            updateTestimonialStack(activeTestimonialIdx - 1);
-            if (window.teaAudio) window.teaAudio.playChime(523.25);
-        });
+        prevTestBtn.addEventListener('click', () => setTestimonial(currentTestimonialIdx - 1));
     }
 
     if (nextTestBtn) {
-        nextTestBtn.addEventListener('click', () => {
-            updateTestimonialStack(activeTestimonialIdx + 1);
-            if (window.teaAudio) window.teaAudio.playChime(587.33);
-        });
+        nextTestBtn.addEventListener('click', () => setTestimonial(currentTestimonialIdx + 1));
     }
 
-    // --- 13. Interactive Gazette / Article Quick-Read Modal ---
+    renderTestimonialDots();
+
+    // --- 13. Editorial Gazette Quick-Read Modal ---
     const articleModal = document.getElementById('article-modal');
     const articleModalBackdrop = document.getElementById('article-modal-backdrop');
     const closeArticleModalBtn = document.getElementById('close-article-modal-btn');
@@ -897,7 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeArticleModalBtn) closeArticleModalBtn.addEventListener('click', closeArticleModal);
     if (articleModalBackdrop) articleModalBackdrop.addEventListener('click', closeArticleModal);
 
-    // Bookmark / Favorite buttons on articles
+    // Bookmark buttons on articles
     document.querySelectorAll('.bookmark-article-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -905,17 +901,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const isBookmarked = icon.classList.contains('fa-solid');
 
             if (isBookmarked) {
-                icon.className = 'fa-regular fa-bookmark text-neutral-400';
-                showToast('Removed from Reading List', 'Article removed from your saved dispatches.', 'fa-bookmark');
+                icon.className = 'fa-regular fa-bookmark text-neutral-400 text-xs';
+                showToast('Removed from Reading List', 'Article removed from saved dispatches.', 'fa-bookmark');
             } else {
-                icon.className = 'fa-solid fa-bookmark text-orange-400';
+                icon.className = 'fa-solid fa-bookmark text-orange-400 text-xs';
                 if (window.teaAudio) window.teaAudio.playChime(784);
                 showToast('Saved to Reading List', 'Article bookmarked in your tea sanctuary.', 'fa-bookmark');
             }
         });
     });
 
-    // --- 14. Interactive Bento Grid Micro-Interactions ---
+    // --- 14. Bento Grid Micro-Interaction ---
     const bentoAltitudeBtn = document.getElementById('bento-altitude-toggle');
     if (bentoAltitudeBtn) {
         bentoAltitudeBtn.addEventListener('click', () => {
@@ -930,7 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 15. Newsletter Form Interactive Submission ---
+    // --- 15. Newsletter Form Submission ---
     const newsletterForm = document.getElementById('newsletter-form');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
@@ -953,7 +949,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 16. Live Kyoto Time & Status Ticker ---
+    // --- 16. Live Kyoto Clock ---
     const kyotoTimeEl = document.getElementById('kyoto-time-ticker');
     function updateKyotoClock() {
         if (!kyotoTimeEl) return;
@@ -969,7 +965,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateKyotoClock();
     setInterval(updateKyotoClock, 1000);
 
-    // --- 17. Scroll Reveal Animation Trigger ---
+    // --- 17. Scroll Reveal Animation ---
     const revealElements = document.querySelectorAll('.scroll-reveal');
     if ('IntersectionObserver' in window) {
         const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -979,7 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         revealElements.forEach(el => revealObserver.observe(el));
     } else {

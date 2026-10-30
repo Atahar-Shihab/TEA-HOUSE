@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Tea House — 5D & 3D Cinematic Sensory Experience. Single-origin artisanal teas with interactive 3D WebGL visuals, procedural soundscapes, and brewing ceremonies.">
+    <meta name="description" content="The Tea House — Single-origin artisanal teas with interactive 3D WebGL visuals, procedural soundscapes, and brewing ceremonies.">
     <meta name="theme-color" content="#0b0f14">
-    <title>The Tea House — 5D & 3D Cinematic Sensory Experience</title>
+    <title>The Tea House — Single-Origin Artisanal Sanctuary</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,12 +26,11 @@
                             jade: '#3d7023',
                             dark: '#0b0f14',
                             slate: '#121820',
-                            card: 'rgba(255, 255, 255, 0.04)'
+                            card: 'rgba(18, 24, 32, 0.72)'
                         }
                     },
                     fontFamily: {
-                        sans: ['Manrope', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif']
+                        sans: ['Manrope', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
                     }
                 }
             }
@@ -41,7 +40,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
@@ -49,13 +48,13 @@
     <!-- Three.js (WebGL 3D Engine) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Custom Cinematic Stylesheet -->
+    <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body class="bg-[#0b0f14] text-white selection:bg-orange-500 selection:text-white">
 
-    <!-- WebGL Three.js Canvas Container (3D Botanical Leaves, Steam & Depth) -->
+    <!-- WebGL Three.js Canvas Container (Ambient Botanical Background) -->
     <div id="three-canvas-container"></div>
 
     <!-- Ambient Glow Mesh Layer -->
@@ -64,24 +63,20 @@
     <!-- Scroll Progress Indicator -->
     <div id="scroll-progress"></div>
 
-    <!-- Custom Magnetic Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-follower"></div>
-
     <!-- Toast Notification Container -->
     <div id="toast-container" class="toast-container"></div>
 
     <!-- ==========================================
-         TOP BAR: Live Sanctuary Status & 5D Audio
+         TOP BAR: Live Sanctuary Status
          ========================================== -->
-    <div class="relative z-50 border-b border-white/5 bg-black/40 backdrop-blur-md text-xs py-2 px-4">
+    <div class="relative z-50 border-b border-white/5 bg-black/50 backdrop-blur-md text-xs py-2 px-4">
         <div class="container mx-auto flex flex-wrap justify-between items-center gap-2 text-neutral-400">
             <div class="flex items-center gap-2">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span id="kyoto-time-ticker" class="font-medium tracking-wide text-neutral-300">KYOTO SANCTUARY: OPEN • SPRING 2026 HARVEST FIRST FLUSH</span>
+                <span id="kyoto-time-ticker" class="font-medium tracking-wide text-neutral-300">KYOTO SANCTUARY: OPEN • SPRING HARVEST</span>
             </div>
             <div class="flex items-center gap-4 text-[11px]">
                 <span class="hidden sm:inline text-neutral-500">Global Tasting Kits Dispatched Within 24h</span>
@@ -94,30 +89,31 @@
     </div>
 
     <!-- ==========================================
-         FLOATING CAPSULE NAVBAR
+         NAVIGATION HEADER
          ========================================== -->
-    <header id="main-navbar" class="fixed top-8 left-0 right-0 z-40 transition-all duration-300 py-4">
-        <div class="container mx-auto px-4 sm:px-6">
-            <nav class="glass-panel rounded-full px-5 py-3 flex items-center justify-between border border-white/10 shadow-2xl">
+    <header id="main-navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-3 sm:py-4 px-4 sm:px-6">
+        <div class="container mx-auto">
+            <nav class="glass-panel rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between border border-white/10 shadow-2xl">
+                
                 <!-- Brand Logo -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#ff8938] to-[#ff0000] p-0.5 shadow-lg shadow-orange-500/20 transition-transform group-hover:scale-105">
+                <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#ff7a18] to-[#ff3e00] p-0.5 shadow-lg shadow-orange-500/20 transition-transform group-hover:scale-105">
                         <div class="w-full h-full bg-[#0b0f14] rounded-full flex items-center justify-center">
-                            <img src="./images/cup.png" alt="Tea House" class="w-5 h-5 object-contain brightness-125">
+                            <img src="./images/cup.png" alt="Tea House" class="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-125">
                         </div>
                     </div>
                     <div>
-                        <span class="font-bold tracking-wider text-base text-white block leading-tight">THE TEA HOUSE</span>
-                        <span class="text-[10px] tracking-widest text-orange-400 uppercase font-semibold">Sanctuary 5D</span>
+                        <span class="font-bold tracking-wider text-sm sm:text-base text-white block leading-tight">THE TEA HOUSE</span>
+                        <span class="text-[9px] sm:text-[10px] tracking-widest text-orange-400 uppercase font-semibold">Artisanal Sanctuary</span>
                     </div>
                 </a>
 
-                <!-- Navigation Links -->
-                <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
+                <!-- Desktop Navigation Links -->
+                <div class="hidden lg:flex items-center gap-7 text-sm font-medium text-neutral-300">
                     <a href="#featured-blends" class="hover:text-orange-400 transition-colors">Artisanal Blends</a>
-                    <a href="#brewing-ritual-section" class="hover:text-orange-400 transition-colors flex items-center gap-1">
+                    <a href="#brewing-ritual-section" class="hover:text-orange-400 transition-colors flex items-center gap-1.5">
                         <span>5D Ritual</span>
-                        <span class="px-1.5 py-0.2 text-[9px] bg-orange-500/20 text-orange-400 rounded-full border border-orange-500/30">Interactive</span>
+                        <span class="px-1.5 py-0.5 text-[9px] bg-orange-500/20 text-orange-400 rounded-full border border-orange-500/30">Interactive</span>
                     </a>
                     <a href="#craftsmanship" class="hover:text-orange-400 transition-colors">Craftsmanship</a>
                     <a href="#connoisseurs" class="hover:text-orange-400 transition-colors">Connoisseurs</a>
@@ -125,140 +121,175 @@
                 </div>
 
                 <!-- Right Actions -->
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 sm:gap-3">
                     <!-- 5D Audio Toggle Button -->
-                    <button class="audio-toggle-btn glass-pill px-3.5 py-2 rounded-full text-xs font-semibold flex items-center gap-2 text-neutral-300 hover:text-white transition-all" title="Toggle Binaural 5D Zen Soundscape">
+                    <button class="audio-toggle-btn glass-pill px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-semibold flex items-center gap-2 text-neutral-300 hover:text-white transition-all" title="Toggle Binaural 5D Zen Soundscape">
                         <div class="audio-equalizer flex items-end gap-0.5 h-3">
                             <span class="equalizer-bar"></span>
                             <span class="equalizer-bar"></span>
                             <span class="equalizer-bar"></span>
                             <span class="equalizer-bar"></span>
                         </div>
-                        <span class="hidden lg:inline audio-label">5D Zen</span>
+                        <span class="hidden sm:inline audio-label">5D Zen</span>
                     </button>
 
                     <!-- Tasting Box (Cart) Button -->
-                    <button class="cart-toggle-btn glass-pill relative px-3.5 py-2 rounded-full text-xs font-semibold flex items-center gap-2 text-neutral-300 hover:text-white transition-all">
+                    <button class="cart-toggle-btn glass-pill relative px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-xs font-semibold flex items-center gap-2 text-neutral-300 hover:text-white transition-all">
                         <i class="fa-solid fa-box-open text-orange-400 text-sm"></i>
                         <span class="hidden sm:inline">Tasting Box</span>
                         <span id="cart-badge" class="hidden absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-lg">0</span>
                     </button>
 
-                    <!-- Primary Action -->
-                    <a href="#brewing-ritual-section" class="btn-cinematic px-4 sm:px-5 py-2 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg flex items-center gap-2">
+                    <!-- Primary Action (Desktop) -->
+                    <a href="#brewing-ritual-section" class="hidden md:flex btn-cinematic px-4 sm:px-5 py-2 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg items-center gap-1.5">
                         <span>Brew 5D</span>
                         <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
                     </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-toggle" class="lg:hidden w-9 h-9 rounded-full glass-pill flex items-center justify-center text-neutral-300 hover:text-white transition-colors" aria-label="Toggle Navigation Menu">
+                        <i class="fa-solid fa-bars text-sm" id="mobile-menu-icon"></i>
+                    </button>
                 </div>
             </nav>
+
+            <!-- Mobile Navigation Dropdown -->
+            <div id="mobile-menu-dropdown" class="lg:hidden hidden mt-2 glass-panel rounded-2xl p-5 border border-white/10 shadow-2xl space-y-4">
+                <div class="flex flex-col space-y-3 text-sm font-medium">
+                    <a href="#featured-blends" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
+                        <span>Artisanal Blends</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                    <a href="#brewing-ritual-section" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
+                        <span>5D Virtual Ceremony</span>
+                        <span class="px-2 py-0.5 text-[9px] bg-orange-500/20 text-orange-400 rounded-full border border-orange-500/30">Interactive</span>
+                    </a>
+                    <a href="#craftsmanship" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
+                        <span>Craftsmanship & Terroirs</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                    <a href="#connoisseurs" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
+                        <span>Connoisseur Reviews</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                    <a href="#journal" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
+                        <span>Gazette & Dispatches</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </a>
+                </div>
+                <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+                    <button class="audio-toggle-btn text-xs text-orange-400 flex items-center gap-2">
+                        <i class="fa-solid fa-headphones"></i>
+                        <span class="audio-label">5D Zen Soundscape</span>
+                    </button>
+                    <a href="#brewing-ritual-section" class="mobile-nav-link btn-cinematic px-4 py-1.5 rounded-full text-xs font-bold uppercase">
+                        Brew Now
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- ==========================================
-         HERO SECTION: 5D Cinematic Entrance
+         HERO SECTION: Pure Sensory Entrance
          ========================================== -->
-    <section class="relative min-h-screen pt-36 pb-20 flex items-center overflow-hidden">
+    <section class="relative min-h-screen pt-32 sm:pt-40 pb-20 flex items-center overflow-hidden">
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
                 <!-- Hero Left: Typography & Story -->
-                <div class="lg:col-span-7 space-y-8 text-center lg:text-left scroll-reveal">
+                <div class="lg:col-span-7 space-y-7 text-center lg:text-left scroll-reveal">
                     
                     <!-- Pre-headline badge -->
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill border border-orange-500/30 text-xs font-medium text-orange-300">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-orange-500/30 text-xs font-medium text-orange-300">
                         <i class="fa-solid fa-seedling text-emerald-400"></i>
                         <span>Harvest 2026 First Flush Release • Rare Mountain Reserves</span>
                     </div>
 
                     <!-- Main Headline -->
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black tracking-tight leading-[1.08]">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-black tracking-tight leading-[1.1]">
                         It's good <br>
                         tea time at <br>
                         <span class="text-gradient-orange">The Tea House</span>
                     </h1>
 
                     <!-- Editorial Description -->
-                    <p class="text-neutral-300 text-lg sm:text-xl max-w-xl font-light leading-relaxed mx-auto lg:mx-0">
+                    <p class="text-neutral-300 text-base sm:text-lg max-w-xl font-normal leading-relaxed mx-auto lg:mx-0">
                         Immerse your senses in single-origin rare harvest teas, hand-plucked in mist-veiled mountain canopies and masterfully roasted for optimum spiritual harmony.
                     </p>
 
                     <!-- Interactive CTAs -->
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#featured-blends" class="btn-cinematic px-8 py-4 rounded-xl text-sm font-bold tracking-wider uppercase flex items-center gap-3 group">
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+                        <a href="#featured-blends" class="w-full sm:w-auto btn-cinematic px-7 py-3.5 rounded-xl text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 group">
                             <span>Explore Blends</span>
                             <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">
                                 <i class="fa-solid fa-arrow-right-long"></i>
                             </span>
                         </a>
 
-                        <a href="#brewing-ritual-section" class="btn-glass px-7 py-4 rounded-xl text-sm font-semibold flex items-center gap-3 group">
-                            <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center transition-transform group-hover:scale-110">
-                                <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                        <a href="#brewing-ritual-section" class="w-full sm:w-auto btn-glass px-6 py-3.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2.5 group">
+                            <span class="w-6 h-6 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center transition-transform group-hover:scale-110">
+                                <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
                             </span>
                             <span>Begin 5D Ceremony</span>
                         </a>
                     </div>
 
                     <!-- Trust Stats & Key Metric Badges -->
-                    <div class="pt-6 border-t border-white/10 flex flex-wrap items-center justify-center lg:justify-start gap-8 text-left">
-                        <div class="flex items-center gap-3 group cursor-pointer">
-                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-base transition-transform group-hover:scale-110">
+                    <div class="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-5 text-left">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-base shrink-0">
                                 <i class="fa-solid fa-mountain-sun"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-base text-white leading-tight">2,200m</h4>
-                                <p class="text-xs text-neutral-400">High Altitude Canopy</p>
+                                <h4 class="font-bold text-sm text-white leading-tight">2,200m</h4>
+                                <p class="text-[11px] text-neutral-400">High Altitude Canopy</p>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-3 group cursor-pointer">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-base transition-transform group-hover:scale-110">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-base shrink-0">
                                 <i class="fa-solid fa-leaf"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-base text-white leading-tight">100% Organic</h4>
-                                <p class="text-xs text-neutral-400">Biodiverse Soils</p>
+                                <h4 class="font-bold text-sm text-white leading-tight">100% Organic</h4>
+                                <p class="text-[11px] text-neutral-400">Biodiverse Soils</p>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-3 group cursor-pointer">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-base transition-transform group-hover:scale-110">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-base shrink-0">
                                 <i class="fa-solid fa-award"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-base text-white leading-tight">World Gold</h4>
-                                <p class="text-xs text-neutral-400">Tea Conclave 2026</p>
+                                <h4 class="font-bold text-sm text-white leading-tight">World Gold</h4>
+                                <p class="text-[11px] text-neutral-400">Tea Conclave 2026</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                <!-- Hero Right: 3D Visual Vessel & Floating Glass Badges -->
+                <!-- Hero Right: Visual Vessel & Floating Badges -->
                 <div class="lg:col-span-5 relative flex justify-center items-center scroll-reveal">
                     
                     <!-- Ambient Glow Behind Vessel -->
-                    <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-orange-600/30 to-amber-500/20 blur-3xl pointer-events-none"></div>
+                    <div class="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-tr from-orange-600/25 to-amber-500/15 blur-3xl pointer-events-none"></div>
 
-                    <!-- Hero Image Vessel with 3D Depth -->
-                    <div class="relative tilt-card-wrapper max-w-[480px] w-full">
-                        <div class="tilt-card card-spotlight relative rounded-3xl p-4 sm:p-6 bg-gradient-to-b from-white/10 to-white/0 border border-white/10 shadow-2xl backdrop-blur-sm">
+                    <!-- Vessel Container -->
+                    <div class="relative max-w-[420px] w-full">
+                        <div class="product-card card-spotlight p-5 sm:p-6 bg-gradient-to-b from-white/10 to-white/0 border border-white/10 shadow-2xl backdrop-blur-sm relative">
                             
-                            <!-- Specular Light Glare -->
-                            <div class="card-glare"></div>
-
-                            <!-- Animated Steam Vapour Effect -->
+                            <!-- Animated Steam Vapour -->
                             <div class="steam-vapour"></div>
 
-                            <!-- Primary Vessel Image with 3D Pop -->
-                            <div class="layer-depth-50">
-                                <img src="./images/banner.png" alt="Artisanal Tea Vessel" class="w-full object-contain filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.7)] transition-transform duration-500 hover:scale-105">
-                            </div>
+                            <!-- Primary Vessel Image -->
+                            <img src="./images/banner.png" alt="Artisanal Tea Vessel" class="w-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.6)]">
 
-                            <!-- Floating 5.0 Trust Badge with Real Star Glint -->
-                            <div class="absolute -bottom-6 -left-4 sm:bottom-4 sm:-left-8 glass-panel rounded-2xl p-4 sm:p-5 border border-white/20 shadow-2xl float-subtle flex items-center gap-3.5 z-20 layer-depth-35">
-                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-orange-500/30">
-                                    <i class="fa-solid fa-star text-base"></i>
+                            <!-- Floating Trust Badge -->
+                            <div class="absolute bottom-2 left-2 sm:bottom-4 sm:-left-6 glass-panel rounded-2xl p-3 sm:p-4 border border-white/20 shadow-2xl float-subtle flex items-center gap-3 z-20">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-black font-extrabold text-base shadow-lg shadow-orange-500/30 shrink-0">
+                                    <i class="fa-solid fa-star"></i>
                                 </div>
                                 <div>
                                     <div class="flex items-center gap-1 text-amber-400 text-xs">
@@ -267,16 +298,16 @@
                                         <i class="fa-solid fa-star"></i>
                                         <i class="fa-solid fa-star"></i>
                                         <i class="fa-solid fa-star"></i>
-                                        <span class="font-extrabold text-white text-sm ml-1">5.00</span>
+                                        <span class="font-extrabold text-white text-xs ml-1">5.00</span>
                                     </div>
-                                    <p class="text-[11px] text-neutral-300 font-medium">12,850+ Verified Connoisseurs</p>
+                                    <p class="text-[10px] text-neutral-300 font-medium">12,850+ Verified Connoisseurs</p>
                                 </div>
                             </div>
 
-                            <!-- Secondary Sensory Floating Tag -->
-                            <div class="hidden sm:flex absolute -top-4 -right-4 glass-panel rounded-xl px-4 py-2.5 border border-white/20 shadow-xl float-subtle-delay items-center gap-2.5 z-20 text-xs layer-depth-35">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <span class="text-neutral-200 font-medium">Ideal Steep: 85°C • 3.5 min</span>
+                            <!-- Floating Steep Tag -->
+                            <div class="absolute -top-3 right-2 sm:-top-4 sm:-right-4 glass-panel rounded-xl px-3 py-1.5 border border-white/20 shadow-xl float-subtle-delay flex items-center gap-2 z-20 text-[11px]">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span class="text-neutral-200 font-medium">Steep: 85°C • 3.5m</span>
                             </div>
 
                         </div>
@@ -289,68 +320,67 @@
     </section>
 
     <!-- ==========================================
-         FEATURED PRODUCTS SECTION: 3D Artisanal Blends
+         FEATURED PRODUCTS SECTION: Artisanal Blends
          ========================================== -->
-    <section id="featured-blends" class="relative py-28 z-10 border-t border-white/5">
+    <section id="featured-blends" class="relative py-24 z-10 border-t border-white/5">
         <div class="container mx-auto px-4 sm:px-6">
 
             <!-- Section Header -->
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4 scroll-reveal">
-                <span class="px-4 py-1.5 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
+            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3.5 scroll-reveal">
+                <span class="px-3.5 py-1 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
                     Curated Masterpieces
                 </span>
-                <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-white">
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
                     Our Featured Products
                 </h2>
-                <p class="text-neutral-400 text-base leading-relaxed">
+                <p class="text-neutral-400 text-sm sm:text-base leading-relaxed">
                     Single-harvest leaves handpicked at dawn, naturally withered, and formulated to unlock multifaceted aromas and serene clarity.
                 </p>
 
                 <!-- Filter Tabs -->
-                <div class="flex flex-wrap items-center justify-center gap-2 pt-4">
-                    <button class="tab-btn px-5 py-2 rounded-full text-xs font-bold transition-all bg-gradient-to-r from-[#ff8938] to-[#ff0000] text-white border-transparent" data-filter="all">
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-3">
+                    <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-gradient-to-r from-[#ff8938] to-[#ff0000] text-white border-transparent" data-filter="all">
                         All Blends
                     </button>
-                    <button class="tab-btn px-5 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Milk Tea">
+                    <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Milk Tea">
                         Milk Tea
                     </button>
-                    <button class="tab-btn px-5 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Black Tea">
+                    <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Black Tea">
                         Black Tea
                     </button>
-                    <button class="tab-btn px-5 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Green Tea">
+                    <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Green Tea">
                         Green Tea
                     </button>
-                    <button class="tab-btn px-5 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Lemon Tea">
+                    <button class="tab-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-filter="Lemon Tea">
                         Lemon Tea
                     </button>
                 </div>
             </div>
 
-            <!-- Product Grid with Multi-Layer 3D Tilt, Border Beam & Specular Glare -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
+            <!-- Responsive Product Cards Grid (1 col mobile, 2 col tablet, 4 col desktop) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <!-- Card 1: Milk Tea -->
-                <div class="product-item-card tilt-card-wrapper scroll-reveal" data-category="Milk Tea">
-                    <div class="tilt-card border-beam-card card-spotlight aura-milk-tea glass-panel rounded-2xl p-6 h-full flex flex-col justify-between border border-white/10 group">
-                        <div class="card-glare"></div>
+                <div class="product-item-card scroll-reveal" data-category="Milk Tea">
+                    <div class="product-card card-spotlight aura-milk-tea p-6 h-full flex flex-col justify-between group">
                         
-                        <!-- Top Tag & Price with 3D Depth -->
-                        <div class="flex justify-between items-center mb-4 layer-depth-20">
+                        <!-- Top Tag & Price -->
+                        <div class="flex justify-between items-center mb-3">
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">
                                 Hokkaido Velvet
                             </span>
-                            <span class="font-bold text-white text-lg">$18.50</span>
+                            <span class="font-extrabold text-white text-lg">$18.50</span>
                         </div>
 
-                        <!-- Product 3D Floating Vessel -->
-                        <div class="relative py-6 flex items-center justify-center layer-depth-50">
-                            <div class="absolute w-32 h-32 rounded-full bg-orange-500/10 blur-2xl group-hover:bg-orange-500/30 transition-all duration-500"></div>
-                            <img src="./images/tea-1.png" alt="Milk Tea" class="h-44 object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-2xl">
+                        <!-- Product Image -->
+                        <div class="relative py-4 flex items-center justify-center">
+                            <div class="absolute w-28 h-28 rounded-full bg-orange-500/10 blur-xl group-hover:bg-orange-500/25 transition-colors"></div>
+                            <img src="./images/tea-1.png" alt="Milk Tea" class="h-40 object-contain drop-shadow-xl">
                         </div>
 
                         <!-- Info & Tasting notes -->
-                        <div class="space-y-3 pt-2 layer-depth-10">
-                            <h3 class="font-bold text-xl text-white group-hover:text-orange-400 transition-colors">Milk Tea</h3>
+                        <div class="space-y-2.5 pt-2">
+                            <h3 class="font-bold text-lg text-white group-hover:text-orange-400 transition-colors">Milk Tea</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">Madagascar bourbon vanilla blended with high-mountain Assam and rich fresh milk.</p>
                             
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
@@ -360,12 +390,12 @@
                             </div>
                         </div>
 
-                        <!-- Card Actions with 3D Lift -->
-                        <div class="grid grid-cols-2 gap-2 pt-5 layer-depth-20">
-                            <button class="open-tasting-modal-btn btn-glass py-2.5 px-3 rounded-xl text-xs font-semibold" data-product-id="milk-tea">
+                        <!-- Card Actions -->
+                        <div class="grid grid-cols-2 gap-2 mt-auto pt-4">
+                            <button class="open-tasting-modal-btn btn-glass py-2 px-3 rounded-xl text-xs font-semibold" data-product-id="milk-tea">
                                 Details
                             </button>
-                            <button class="add-to-cart-btn btn-cinematic py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="milk-tea">
+                            <button class="add-to-cart-btn btn-cinematic py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="milk-tea">
                                 <i class="fa-solid fa-plus text-[10px]"></i>
                                 <span>Add to Box</span>
                             </button>
@@ -374,27 +404,26 @@
                 </div>
 
                 <!-- Card 2: Black Tea -->
-                <div class="product-item-card tilt-card-wrapper scroll-reveal" data-category="Black Tea">
-                    <div class="tilt-card border-beam-card card-spotlight aura-black-tea glass-panel rounded-2xl p-6 h-full flex flex-col justify-between border border-white/10 group">
-                        <div class="card-glare"></div>
+                <div class="product-item-card scroll-reveal" data-category="Black Tea">
+                    <div class="product-card card-spotlight aura-black-tea p-6 h-full flex flex-col justify-between group">
 
-                        <!-- Top Tag & Price with 3D Depth -->
-                        <div class="flex justify-between items-center mb-4 layer-depth-20">
+                        <!-- Top Tag & Price -->
+                        <div class="flex justify-between items-center mb-3">
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
                                 Single Estate
                             </span>
-                            <span class="font-bold text-white text-lg">$24.00</span>
+                            <span class="font-extrabold text-white text-lg">$24.00</span>
                         </div>
 
-                        <!-- Product 3D Floating Vessel -->
-                        <div class="relative py-6 flex items-center justify-center layer-depth-50">
-                            <div class="absolute w-32 h-32 rounded-full bg-amber-500/10 blur-2xl group-hover:bg-amber-500/30 transition-all duration-500"></div>
-                            <img src="./images/tea-2.png" alt="Black Tea" class="h-44 object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-2xl">
+                        <!-- Product Image -->
+                        <div class="relative py-4 flex items-center justify-center">
+                            <div class="absolute w-28 h-28 rounded-full bg-amber-500/10 blur-xl group-hover:bg-amber-500/25 transition-colors"></div>
+                            <img src="./images/tea-2.png" alt="Black Tea" class="h-40 object-contain drop-shadow-xl">
                         </div>
 
                         <!-- Info & Tasting notes -->
-                        <div class="space-y-3 pt-2 layer-depth-10">
-                            <h3 class="font-bold text-xl text-white group-hover:text-amber-400 transition-colors">Black Tea</h3>
+                        <div class="space-y-2.5 pt-2">
+                            <h3 class="font-bold text-lg text-white group-hover:text-amber-400 transition-colors">Black Tea</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">Golden tipped leaves from Yunnan's ancient arbors, exuding smoked plum and wild mountain honey.</p>
                             
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
@@ -404,12 +433,12 @@
                             </div>
                         </div>
 
-                        <!-- Card Actions with 3D Lift -->
-                        <div class="grid grid-cols-2 gap-2 pt-5 layer-depth-20">
-                            <button class="open-tasting-modal-btn btn-glass py-2.5 px-3 rounded-xl text-xs font-semibold" data-product-id="black-tea">
+                        <!-- Card Actions -->
+                        <div class="grid grid-cols-2 gap-2 mt-auto pt-4">
+                            <button class="open-tasting-modal-btn btn-glass py-2 px-3 rounded-xl text-xs font-semibold" data-product-id="black-tea">
                                 Details
                             </button>
-                            <button class="add-to-cart-btn btn-cinematic py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="black-tea">
+                            <button class="add-to-cart-btn btn-cinematic py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="black-tea">
                                 <i class="fa-solid fa-plus text-[10px]"></i>
                                 <span>Add to Box</span>
                             </button>
@@ -418,27 +447,26 @@
                 </div>
 
                 <!-- Card 3: Green Tea -->
-                <div class="product-item-card tilt-card-wrapper scroll-reveal" data-category="Green Tea">
-                    <div class="tilt-card border-beam-card card-spotlight aura-green-tea glass-panel rounded-2xl p-6 h-full flex flex-col justify-between border border-white/10 group">
-                        <div class="card-glare"></div>
+                <div class="product-item-card scroll-reveal" data-category="Green Tea">
+                    <div class="product-card card-spotlight aura-green-tea p-6 h-full flex flex-col justify-between group">
 
-                        <!-- Top Tag & Price with 3D Depth -->
-                        <div class="flex justify-between items-center mb-4 layer-depth-20">
+                        <!-- Top Tag & Price -->
+                        <div class="flex justify-between items-center mb-3">
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                                 Ceremonial Uji
                             </span>
-                            <span class="font-bold text-white text-lg">$28.00</span>
+                            <span class="font-extrabold text-white text-lg">$28.00</span>
                         </div>
 
-                        <!-- Product 3D Floating Vessel -->
-                        <div class="relative py-6 flex items-center justify-center layer-depth-50">
-                            <div class="absolute w-32 h-32 rounded-full bg-emerald-500/10 blur-2xl group-hover:bg-emerald-500/30 transition-all duration-500"></div>
-                            <img src="./images/tea-3.png" alt="Green Tea" class="h-44 object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-2xl">
+                        <!-- Product Image -->
+                        <div class="relative py-4 flex items-center justify-center">
+                            <div class="absolute w-28 h-28 rounded-full bg-emerald-500/10 blur-xl group-hover:bg-emerald-500/25 transition-colors"></div>
+                            <img src="./images/tea-3.png" alt="Green Tea" class="h-40 object-contain drop-shadow-xl">
                         </div>
 
                         <!-- Info & Tasting notes -->
-                        <div class="space-y-3 pt-2 layer-depth-10">
-                            <h3 class="font-bold text-xl text-white group-hover:text-emerald-400 transition-colors">Green Tea</h3>
+                        <div class="space-y-2.5 pt-2">
+                            <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors">Green Tea</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">First flush shaded gyokuro leaves stone-ground to preserve sublime umami and antioxidant potency.</p>
                             
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
@@ -448,12 +476,12 @@
                             </div>
                         </div>
 
-                        <!-- Card Actions with 3D Lift -->
-                        <div class="grid grid-cols-2 gap-2 pt-5 layer-depth-20">
-                            <button class="open-tasting-modal-btn btn-glass py-2.5 px-3 rounded-xl text-xs font-semibold" data-product-id="green-tea">
+                        <!-- Card Actions -->
+                        <div class="grid grid-cols-2 gap-2 mt-auto pt-4">
+                            <button class="open-tasting-modal-btn btn-glass py-2 px-3 rounded-xl text-xs font-semibold" data-product-id="green-tea">
                                 Details
                             </button>
-                            <button class="add-to-cart-btn btn-cinematic py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="green-tea">
+                            <button class="add-to-cart-btn btn-cinematic py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="green-tea">
                                 <i class="fa-solid fa-plus text-[10px]"></i>
                                 <span>Add to Box</span>
                             </button>
@@ -462,27 +490,26 @@
                 </div>
 
                 <!-- Card 4: Lemon Tea -->
-                <div class="product-item-card tilt-card-wrapper scroll-reveal" data-category="Lemon Tea">
-                    <div class="tilt-card border-beam-card card-spotlight aura-lemon-tea glass-panel rounded-2xl p-6 h-full flex flex-col justify-between border border-white/10 group">
-                        <div class="card-glare"></div>
+                <div class="product-item-card scroll-reveal" data-category="Lemon Tea">
+                    <div class="product-card card-spotlight aura-lemon-tea p-6 h-full flex flex-col justify-between group">
 
-                        <!-- Top Tag & Price with 3D Depth -->
-                        <div class="flex justify-between items-center mb-4 layer-depth-20">
+                        <!-- Top Tag & Price -->
+                        <div class="flex justify-between items-center mb-3">
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
                                 Sun Infusion
                             </span>
-                            <span class="font-bold text-white text-lg">$16.50</span>
+                            <span class="font-extrabold text-white text-lg">$16.50</span>
                         </div>
 
-                        <!-- Product 3D Floating Vessel -->
-                        <div class="relative py-6 flex items-center justify-center layer-depth-50">
-                            <div class="absolute w-32 h-32 rounded-full bg-yellow-500/10 blur-2xl group-hover:bg-yellow-500/30 transition-all duration-500"></div>
-                            <img src="./images/tea-4.png" alt="Lemon Tea" class="h-44 object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-2xl">
+                        <!-- Product Image -->
+                        <div class="relative py-4 flex items-center justify-center">
+                            <div class="absolute w-28 h-28 rounded-full bg-yellow-500/10 blur-xl group-hover:bg-yellow-500/25 transition-colors"></div>
+                            <img src="./images/tea-4.png" alt="Lemon Tea" class="h-40 object-contain drop-shadow-xl">
                         </div>
 
                         <!-- Info & Tasting notes -->
-                        <div class="space-y-3 pt-2 layer-depth-10">
-                            <h3 class="font-bold text-xl text-white group-hover:text-yellow-400 transition-colors">Lemon Tea</h3>
+                        <div class="space-y-2.5 pt-2">
+                            <h3 class="font-bold text-lg text-white group-hover:text-yellow-400 transition-colors">Lemon Tea</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">Crisp Ceylon black tea infused with cold-pressed Sicilian bergamot and sun-ripened citrus zest.</p>
                             
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
@@ -492,12 +519,12 @@
                             </div>
                         </div>
 
-                        <!-- Card Actions with 3D Lift -->
-                        <div class="grid grid-cols-2 gap-2 pt-5 layer-depth-20">
-                            <button class="open-tasting-modal-btn btn-glass py-2.5 px-3 rounded-xl text-xs font-semibold" data-product-id="lemon-tea">
+                        <!-- Card Actions -->
+                        <div class="grid grid-cols-2 gap-2 mt-auto pt-4">
+                            <button class="open-tasting-modal-btn btn-glass py-2 px-3 rounded-xl text-xs font-semibold" data-product-id="lemon-tea">
                                 Details
                             </button>
-                            <button class="add-to-cart-btn btn-cinematic py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="lemon-tea">
+                            <button class="add-to-cart-btn btn-cinematic py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5" data-product-id="lemon-tea">
                                 <i class="fa-solid fa-plus text-[10px]"></i>
                                 <span>Add to Box</span>
                             </button>
@@ -511,47 +538,47 @@
     </section>
 
     <!-- ==========================================
-         INTERACTIVE 5D TEA BREWING RITUAL SIMULATOR
+         VIRTUAL TEA BREWING SIMULATOR
          ========================================== -->
-    <section id="brewing-ritual-section" class="relative py-28 z-10 border-t border-white/5 bg-gradient-to-b from-transparent via-black/40 to-transparent">
+    <section id="brewing-ritual-section" class="relative py-24 z-10 border-t border-white/5 bg-gradient-to-b from-transparent via-black/40 to-transparent">
         <div class="container mx-auto px-4 sm:px-6">
             
-            <div class="text-center max-w-2xl mx-auto mb-14 space-y-4 scroll-reveal">
-                <span class="px-4 py-1.5 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
-                    Interactive 5D Chamber
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3 scroll-reveal">
+                <span class="px-3.5 py-1 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
+                    Interactive Chamber
                 </span>
-                <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-white">
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
                     The Virtual Tea Ceremony
                 </h2>
-                <p class="text-neutral-400 text-base leading-relaxed">
+                <p class="text-neutral-400 text-sm sm:text-base leading-relaxed">
                     Tune water temperature, control steeping duration, and witness the dynamic infusion process with authentic sound and aroma cues.
                 </p>
             </div>
 
-            <!-- Ritual Studio Canvas Grid -->
-            <div class="max-w-4xl mx-auto glass-panel border-beam-card card-spotlight rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden scroll-reveal">
+            <!-- Ritual Studio Card -->
+            <div class="max-w-4xl mx-auto glass-panel card-spotlight rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden scroll-reveal">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                     
                     <!-- Controls Left -->
-                    <div class="md:col-span-7 space-y-6">
+                    <div class="md:col-span-7 space-y-5">
                         
                         <!-- Step 1: Select Blend -->
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-neutral-400 mb-3">1. Select Harvest Blend</label>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-neutral-400 mb-2.5">1. Select Harvest Blend</label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                                <button class="brew-blend-btn p-3 rounded-xl border border-orange-500 bg-orange-500/20 text-xs font-semibold text-white transition-all text-center hover:scale-105" data-blend="green-tea">
+                                <button class="brew-blend-btn p-2.5 rounded-xl border border-orange-500 bg-orange-500/20 text-xs font-semibold text-white transition-all text-center hover:scale-102" data-blend="green-tea">
                                     <i class="fa-solid fa-leaf text-emerald-400 block mb-1"></i>
                                     Green Jade
                                 </button>
-                                <button class="brew-blend-btn p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center hover:scale-105" data-blend="milk-tea">
+                                <button class="brew-blend-btn p-2.5 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center hover:scale-102" data-blend="milk-tea">
                                     <i class="fa-solid fa-mug-saucer text-orange-400 block mb-1"></i>
                                     Milk Velvet
                                 </button>
-                                <button class="brew-blend-btn p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center hover:scale-105" data-blend="black-tea">
+                                <button class="brew-blend-btn p-2.5 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center hover:scale-102" data-blend="black-tea">
                                     <i class="fa-solid fa-fire text-amber-500 block mb-1"></i>
                                     Yunnan Black
                                 </button>
-                                <button class="brew-blend-btn p-3 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center hover:scale-105" data-blend="lemon-tea">
+                                <button class="brew-blend-btn p-2.5 rounded-xl border border-white/10 bg-white/5 text-xs font-semibold text-neutral-300 hover:text-white transition-all text-center hover:scale-102" data-blend="lemon-tea">
                                     <i class="fa-solid fa-lemon text-yellow-400 block mb-1"></i>
                                     Sicilia Lemon
                                 </button>
@@ -560,13 +587,13 @@
 
                         <!-- Step 2: Water Temperature -->
                         <div>
-                            <div class="flex justify-between items-center mb-2">
+                            <div class="flex justify-between items-center mb-1.5">
                                 <label class="text-xs font-bold uppercase tracking-wider text-neutral-400">2. Water Temperature</label>
                                 <span id="brew-temp-display" class="font-extrabold text-orange-400 text-sm">80°C</span>
                             </div>
                             <input id="brew-temp-slider" type="range" min="60" max="100" value="80" class="w-full accent-orange-500 cursor-pointer bg-white/10 h-2 rounded-lg">
                             <div class="flex justify-between text-[10px] text-neutral-500 mt-1">
-                                <span>60°C (Delicate Gyokuro)</span>
+                                <span>60°C (Gyokuro)</span>
                                 <span>85°C (Oolong)</span>
                                 <span>100°C (Black/Herbal)</span>
                             </div>
@@ -574,22 +601,22 @@
 
                         <!-- Step 3: Steeping Time -->
                         <div>
-                            <div class="flex justify-between items-center mb-2">
+                            <div class="flex justify-between items-center mb-1.5">
                                 <label class="text-xs font-bold uppercase tracking-wider text-neutral-400">3. Steep Duration</label>
                                 <span id="brew-time-display" class="font-extrabold text-orange-400 text-sm">15s</span>
                             </div>
                             <input id="brew-time-slider" type="range" min="5" max="30" value="15" class="w-full accent-orange-500 cursor-pointer bg-white/10 h-2 rounded-lg">
                             <div class="flex justify-between text-[10px] text-neutral-500 mt-1">
-                                <span>5s (Flash Rinse)</span>
-                                <span>15s (Optimal 5D)</span>
-                                <span>30s (Deep Extraction)</span>
+                                <span>5s (Rinse)</span>
+                                <span>15s (Optimal)</span>
+                                <span>30s (Deep)</span>
                             </div>
                         </div>
 
                         <!-- Trigger Button -->
                         <div class="pt-2">
-                            <button id="start-brew-btn" class="btn-cinematic w-full py-4 rounded-xl text-sm font-bold tracking-wider uppercase flex items-center justify-center gap-3">
-                                <i class="fa-solid fa-mug-hot text-base"></i>
+                            <button id="start-brew-btn" class="btn-cinematic w-full py-3.5 rounded-xl text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2.5">
+                                <i class="fa-solid fa-mug-hot text-sm"></i>
                                 <span>Infuse & Steep Now</span>
                             </button>
                         </div>
@@ -599,32 +626,32 @@
                     <!-- Visual Teacup Infusion Chamber Right -->
                     <div class="md:col-span-5 flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 relative">
                         
-                        <!-- Dynamic Kettle Heating Glow -->
-                        <div id="brew-kettle-glow" class="absolute w-44 h-44 rounded-full bg-orange-600/25 blur-3xl opacity-50 transition-opacity duration-300 pointer-events-none"></div>
+                        <!-- Kettle Heating Glow -->
+                        <div id="brew-kettle-glow" class="absolute w-40 h-40 rounded-full bg-orange-600/20 blur-3xl opacity-50 transition-opacity duration-300 pointer-events-none"></div>
 
                         <!-- Teacup Graphic Container -->
-                        <div class="relative w-40 h-48 flex flex-col items-center justify-end mb-4">
+                        <div class="relative w-36 h-44 flex flex-col items-center justify-end mb-3">
                             
                             <!-- Teacup Outline / Glass Vessel -->
-                            <div class="w-32 h-36 rounded-b-[45px] border-4 border-white/30 bg-white/5 relative overflow-hidden flex items-end justify-center shadow-inner">
+                            <div class="w-28 h-32 rounded-b-[40px] border-4 border-white/25 bg-white/5 relative overflow-hidden flex items-end justify-center shadow-inner">
                                 <!-- Liquid Level with Wave Animation -->
-                                <div id="brew-cup-liquid" class="brewing-liquid w-full h-8 bg-gradient-to-t from-emerald-800 to-emerald-500/80 rounded-b-[40px] flex items-center justify-center">
+                                <div id="brew-cup-liquid" class="brewing-liquid w-full h-7 bg-gradient-to-t from-emerald-800 to-emerald-500/80 rounded-b-[36px] flex items-center justify-center">
                                     <div class="text-[10px] font-bold text-white/70">✨</div>
                                 </div>
                             </div>
 
                             <!-- Cup Handle -->
-                            <div class="absolute right-0 top-12 w-8 h-16 border-4 border-white/30 rounded-r-2xl pointer-events-none"></div>
+                            <div class="absolute right-0 top-10 w-7 h-14 border-4 border-white/25 rounded-r-2xl pointer-events-none"></div>
 
                             <!-- Saucer Base -->
-                            <div class="w-44 h-3 bg-white/20 rounded-full mt-2 shadow-lg"></div>
+                            <div class="w-40 h-2.5 bg-white/20 rounded-full mt-2 shadow-lg"></div>
                         </div>
 
                         <!-- Status & Live Timer -->
                         <div class="text-center space-y-1">
-                            <div id="brew-timer-display" class="text-3xl font-black text-white">Ready</div>
+                            <div id="brew-timer-display" class="text-2xl font-black text-white">Ready</div>
                             <div id="brew-status-text" class="text-xs text-neutral-400 font-medium">Select parameters and click Infuse</div>
-                            <div id="brew-aroma-tag" class="text-[11px] text-orange-400 font-semibold pt-1">Aroma: Sweet Grass & Toasted Umami</div>
+                            <div id="brew-aroma-tag" class="text-[11px] text-orange-400 font-semibold pt-0.5">Aroma: Sweet Grass & Toasted Umami</div>
                         </div>
 
                     </div>
@@ -636,22 +663,20 @@
     </section>
 
     <!-- ==========================================
-         GREAT TEA SECTION: Interactive Luxury Bento Grid
+         CRAFTSMANSHIP: Responsive Bento Grid
          ========================================== -->
-    <section id="craftsmanship" class="container mx-auto px-4 sm:px-6 my-28 z-10 relative">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section id="craftsmanship" class="container mx-auto px-4 sm:px-6 my-24 z-10 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             
-            <!-- Left: Dynamic Interactive Luxury Bento Grid Showcase -->
-            <div class="grid grid-cols-2 grid-rows-3 gap-4 h-[520px]">
+            <!-- Left: Responsive Bento Grid (1 col on mobile, 2 col on tablet, 2 col x 3 row on desktop) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:grid-rows-3 gap-4">
                 
                 <!-- Bento Card 1: Mountain Terroir & Altitude -->
-                <div class="bento-card card-spotlight row-span-1 rounded-2xl bg-gradient-to-br from-orange-500/20 via-black/40 to-red-500/10 border border-white/10 p-5 flex flex-col justify-between group overflow-hidden relative">
-                    <!-- Topographic decorative SVG background -->
-                    <svg class="absolute -right-6 -bottom-6 w-36 h-36 opacity-20 pointer-events-none text-orange-400" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-                        <circle cx="50" cy="50" r="45" class="topo-line" stroke-width="1.2" />
-                        <circle cx="50" cy="50" r="35" class="topo-line" stroke-width="1.2" />
-                        <circle cx="50" cy="50" r="25" class="topo-line" stroke-width="1.2" />
-                        <circle cx="50" cy="50" r="15" class="topo-line" stroke-width="1.2" />
+                <div class="bento-card card-spotlight p-5 flex flex-col justify-between group overflow-hidden relative lg:row-span-1">
+                    <svg class="absolute -right-4 -bottom-4 w-32 h-32 opacity-15 pointer-events-none text-orange-400" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                        <circle cx="50" cy="50" r="45" stroke-width="1.2" stroke-dasharray="4,4" />
+                        <circle cx="50" cy="50" r="32" stroke-width="1.2" stroke-dasharray="4,4" />
+                        <circle cx="50" cy="50" r="18" stroke-width="1.2" stroke-dasharray="4,4" />
                     </svg>
 
                     <div class="flex justify-between items-start z-10">
@@ -659,11 +684,11 @@
                             <i class="fa-solid fa-mountain"></i>
                             Single Terroir
                         </span>
-                        <button id="bento-altitude-toggle" class="px-2 py-0.5 rounded-full bg-white/10 hover:bg-orange-500/30 text-[10px] text-orange-200 border border-white/15 transition-all">
+                        <button id="bento-altitude-toggle" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-orange-500/30 text-[10px] text-orange-200 border border-white/15 transition-all">
                             Toggle Peak
                         </button>
                     </div>
-                    <div class="z-10">
+                    <div class="z-10 pt-4">
                         <div class="flex items-baseline gap-2">
                             <span id="bento-altitude-val" class="text-2xl font-black text-white">2,200m</span>
                             <span class="text-xs text-neutral-400">Peak Elevation</span>
@@ -672,44 +697,36 @@
                     </div>
                 </div>
 
-                <!-- Bento Card 2: Artisanal Sun-Withered with Zoom Inspection -->
-                <div class="bento-card card-spotlight row-span-2 rounded-2xl overflow-hidden relative group border border-white/10 bg-white/5">
-                    <img src="./images/fresh-1.png" alt="Fresh Tea Harvest" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-115">
+                <!-- Bento Card 2: Artisanal Sun-Withered -->
+                <div class="bento-card card-spotlight overflow-hidden relative group min-h-[220px] lg:row-span-2">
+                    <img src="./images/fresh-1.png" alt="Fresh Tea Harvest" class="w-full h-full object-cover">
                     
-                    <!-- Magnifying Inspect Badge -->
-                    <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold text-white border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-magnifying-glass mr-1 text-emerald-400"></i> 1st Flush
+                    <div class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold text-white border border-white/20">
+                        <i class="fa-solid fa-sun mr-1 text-amber-400"></i> 1st Flush
                     </div>
 
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-5">
-                        <span class="text-xs font-extrabold text-white">Artisanal Sun-Withered</span>
-                        <p class="text-[11px] text-neutral-400 mt-0.5">Slow outdoor drying concentrates aromatic linalool oils.</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-5">
+                        <span class="text-sm font-extrabold text-white">Artisanal Sun-Withered</span>
+                        <p class="text-xs text-neutral-400 mt-0.5">Slow outdoor drying concentrates aromatic linalool oils.</p>
                     </div>
                 </div>
 
-                <!-- Bento Card 3: Charcoal Slow-Roast with Heat Embers -->
-                <div class="bento-card card-spotlight row-span-2 rounded-2xl overflow-hidden relative group border border-white/10 bg-white/5">
-                    <img src="./images/fresh-2.png" alt="Tea Roasting" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-115">
+                <!-- Bento Card 3: Charcoal Slow-Roast -->
+                <div class="bento-card card-spotlight overflow-hidden relative group min-h-[220px] lg:row-span-2">
+                    <img src="./images/fresh-2.png" alt="Tea Roasting" class="w-full h-full object-cover">
                     
-                    <!-- Heatmap Ember Simulation -->
-                    <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span class="heat-ember" style="left: 30%; bottom: 20%;"></span>
-                        <span class="heat-ember" style="left: 60%; bottom: 35%; animation-delay: 0.6s;"></span>
-                        <span class="heat-ember" style="left: 45%; bottom: 15%; animation-delay: 1.2s;"></span>
+                    <div class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-amber-500/20 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-amber-500/30">
+                        <i class="fa-solid fa-fire mr-1"></i> 115°C Wok
                     </div>
 
-                    <div class="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-amber-500/20 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-amber-500/30">
-                        <i class="fa-solid fa-fire-burner mr-1"></i> 115°C Wok
-                    </div>
-
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-5">
-                        <span class="text-xs font-extrabold text-white">Charcoal Slow-Roast</span>
-                        <p class="text-[11px] text-neutral-400 mt-0.5">Ancient Taiwanese longan charcoal wok curing.</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-5">
+                        <span class="text-sm font-extrabold text-white">Charcoal Slow-Roast</span>
+                        <p class="text-xs text-neutral-400 mt-0.5">Ancient Taiwanese longan charcoal wok curing.</p>
                     </div>
                 </div>
 
                 <!-- Bento Card 4: Glacier Spring Mineral Equilibrium -->
-                <div class="bento-card card-spotlight row-span-1 rounded-2xl bg-gradient-to-br from-emerald-500/20 via-black/40 to-teal-500/10 border border-white/10 p-5 flex flex-col justify-between group overflow-hidden relative">
+                <div class="bento-card card-spotlight p-5 flex flex-col justify-between group overflow-hidden relative lg:row-span-1">
                     <div class="flex justify-between items-start z-10">
                         <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                             <i class="fa-solid fa-droplet"></i>
@@ -719,7 +736,7 @@
                             pH 7.2
                         </span>
                     </div>
-                    <div class="z-10">
+                    <div class="z-10 pt-4">
                         <div class="flex items-baseline gap-2">
                             <span class="text-2xl font-black text-white">48 ppm</span>
                             <span class="text-xs text-neutral-400">Total Dissolved Solids</span>
@@ -732,37 +749,37 @@
 
             <!-- Right: Storytelling & Craft Pillars -->
             <div class="space-y-6 scroll-reveal">
-                <span class="px-4 py-1.5 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
+                <span class="px-3.5 py-1 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
                     Honoring Antiquity
                 </span>
                 
-                <h2 class="text-4xl sm:text-5xl font-black tracking-tight leading-tight text-white">
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white">
                     Great Tea, <br>
                     <span class="text-gradient-tea">Freshly Presented</span>
                 </h2>
 
-                <p class="text-neutral-300 leading-relaxed font-light text-base">
+                <p class="text-neutral-300 leading-relaxed font-normal text-sm sm:text-base">
                     The essence of authentic tea culture lies in honoring every drop. From high mountain terroirs shrouded in mist to the artisanal mastery of temperature-controlled roasting, our teas embody uncompromising purity and spiritual equilibrium.
                 </p>
 
                 <!-- Craft Features -->
-                <div class="space-y-4 pt-2">
-                    <div class="flex items-start gap-4 p-4 rounded-xl glass-panel border border-white/5 hover:border-orange-500/30 transition-all hover:translate-x-1">
+                <div class="space-y-3.5 pt-2">
+                    <div class="flex items-start gap-4 p-4 rounded-xl glass-panel border border-white/5 hover:border-orange-500/30 transition-colors">
                         <div class="w-10 h-10 rounded-lg bg-orange-500/10 text-orange-400 flex items-center justify-center shrink-0 text-base">
                             <i class="fa-solid fa-mountain"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-base text-white">Unique Mountain Terroir</h4>
+                            <h4 class="font-bold text-sm sm:text-base text-white">Unique Mountain Terroir</h4>
                             <p class="text-xs text-neutral-400 mt-0.5">High altitude creates sharp diurnal temperature swings, enriching leaves with sweet amino acids and soothing polyphenols.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-4 p-4 rounded-xl glass-panel border border-white/5 hover:border-emerald-500/30 transition-all hover:translate-x-1">
+                    <div class="flex items-start gap-4 p-4 rounded-xl glass-panel border border-white/5 hover:border-emerald-500/30 transition-colors">
                         <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 text-base">
                             <i class="fa-solid fa-droplet"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-base text-white">Glacier Spring Harmony</h4>
+                            <h4 class="font-bold text-sm sm:text-base text-white">Glacier Spring Harmony</h4>
                             <p class="text-xs text-neutral-400 mt-0.5">Naturally structured water enhances aromatic extraction, delivering velvety mouthfeel without astringency.</p>
                         </div>
                     </div>
@@ -774,129 +791,71 @@
     </section>
 
     <!-- ==========================================
-         CONNOISSEURS & CLIENTS: 3D Perspective Card Stack
+         CONNOISSEURS: Clean Responsive Reviews
          ========================================== -->
-    <section id="connoisseurs" class="container mx-auto px-4 sm:px-6 mb-28 z-10 relative">
-        <div class="rounded-3xl p-8 sm:p-14 bg-gradient-to-r from-[#ff8938]/90 via-[#ff5400]/90 to-[#ff0000]/90 border border-white/20 shadow-2xl relative overflow-hidden scroll-reveal">
+    <section id="connoisseurs" class="container mx-auto px-4 sm:px-6 mb-24 z-10 relative">
+        <div class="rounded-3xl p-6 sm:p-12 bg-gradient-to-r from-[#ff8938]/90 via-[#ff5400]/90 to-[#ff0000]/90 border border-white/20 shadow-2xl relative overflow-hidden scroll-reveal">
             
-            <!-- Ambient Pattern -->
-            <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <!-- Left Story -->
-                <div class="lg:col-span-6 space-y-6 text-white">
+                <div class="lg:col-span-5 space-y-5 text-white">
                     <span class="px-3.5 py-1 rounded-full bg-white/20 text-white text-xs font-bold uppercase tracking-wider">
                         Connoisseur Circle
                     </span>
-                    <h2 class="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
-                        Meet Our Super <br> Clients
+                    <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                        Meet Our Super Clients
                     </h2>
-                    <p class="text-white/90 text-base leading-relaxed font-normal">
+                    <p class="text-white/90 text-sm sm:text-base leading-relaxed font-normal">
                         Beloved by Michelin-starred tea masters, wellness practitioners, and discerning daily drinkers across 48 nations.
                     </p>
 
-                    <div class="flex items-center gap-3 pt-2">
-                        <button id="prev-testimonial-btn" class="w-11 h-11 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all shadow-lg active:scale-95">
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </button>
-                        <button id="next-testimonial-btn" class="w-11 h-11 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-all shadow-lg active:scale-95">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
+                    <!-- Carousel Controls -->
+                    <div class="flex items-center gap-4 pt-2">
+                        <div class="flex items-center gap-2">
+                            <button id="prev-testimonial-btn" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-colors shadow-lg active:scale-95" aria-label="Previous Review">
+                                <i class="fa-solid fa-arrow-left text-xs"></i>
+                            </button>
+                            <button id="next-testimonial-btn" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-black flex items-center justify-center transition-colors shadow-lg active:scale-95" aria-label="Next Review">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- Dots Indicator -->
+                        <div id="testimonial-dots" class="flex items-center gap-1.5">
+                            <!-- Injected dynamically -->
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right: 3D Stack of Testimonial Cards -->
-                <div class="lg:col-span-6 relative">
-                    <div class="testimonial-stack-container">
-                        
-                        <!-- Testimonial Item 1 (Active) -->
-                        <div class="testimonial-card-item active">
-                            <div class="glass-panel bg-white text-neutral-900 rounded-2xl p-8 shadow-2xl border border-white/20">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-tr from-orange-500 to-red-500 shadow-md">
-                                            <img src="./images/client.png" alt="Ilham Yuda" class="w-full h-full object-cover rounded-full">
-                                        </div>
-                                        <div>
-                                            <h4 class="font-extrabold text-lg text-neutral-900">Ilham Yuda</h4>
-                                            <p class="text-xs text-neutral-500 font-semibold">Luxury Hospitality Architect</p>
-                                        </div>
-                                    </div>
-                                    <img src="./images/circles.png" alt="Quote" class="w-10 opacity-60">
+                <!-- Right: Responsive Active Review Card -->
+                <div class="lg:col-span-7">
+                    <div id="testimonial-active-card" class="glass-panel bg-white text-neutral-900 rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/20 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-tr from-orange-500 to-red-500 shadow-md shrink-0">
+                                    <img id="test-avatar" src="./images/client.png" alt="Connoisseur" class="w-full h-full object-cover rounded-full">
                                 </div>
-                                <p class="text-neutral-700 text-base leading-relaxed italic mb-6">
-                                    “The Uji Jade and Yunnan Golden tips transform our morning tea rituals into pure meditation. The aroma clarity is simply unapproachable.”
-                                </p>
-                                <div class="flex items-center gap-1 text-amber-500 text-sm">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span class="text-neutral-600 text-xs font-bold ml-2">Verified Connoisseur</span>
+                                <div>
+                                    <h4 id="test-name" class="font-extrabold text-base sm:text-lg text-neutral-900 leading-snug">Ilham Yuda</h4>
+                                    <p id="test-role" class="text-xs text-neutral-500 font-semibold">Luxury Hospitality Architect</p>
                                 </div>
                             </div>
+                            <img src="./images/circles.png" alt="Quote" class="w-8 opacity-50">
                         </div>
 
-                        <!-- Testimonial Item 2 (Next in Stack) -->
-                        <div class="testimonial-card-item next">
-                            <div class="glass-panel bg-white text-neutral-900 rounded-2xl p-8 shadow-2xl border border-white/20">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-tr from-emerald-500 to-teal-500 shadow-md">
-                                            <img src="./images/client.png" alt="Mei-Ling Chen" class="w-full h-full object-cover rounded-full">
-                                        </div>
-                                        <div>
-                                            <h4 class="font-extrabold text-lg text-neutral-900">Mei-Ling Chen</h4>
-                                            <p class="text-xs text-neutral-500 font-semibold">Certified Master Tea Sommelier</p>
-                                        </div>
-                                    </div>
-                                    <img src="./images/circles.png" alt="Quote" class="w-10 opacity-60">
-                                </div>
-                                <p class="text-neutral-700 text-base leading-relaxed italic mb-6">
-                                    “Having judged tea competitions across Kyoto and Taipei, I can testify that The Tea House achieves the purest single-harvest extraction on the market.”
-                                </p>
-                                <div class="flex items-center gap-1 text-amber-500 text-sm">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span class="text-neutral-600 text-xs font-bold ml-2">Verified Sommelier</span>
-                                </div>
-                            </div>
-                        </div>
+                        <p id="test-quote" class="text-neutral-700 text-sm sm:text-base leading-relaxed italic mb-5">
+                            “The Uji Jade and Yunnan Golden tips transform our morning tea rituals into pure meditation. The aroma clarity is simply unapproachable.”
+                        </p>
 
-                        <!-- Testimonial Item 3 (Prev in Stack) -->
-                        <div class="testimonial-card-item prev">
-                            <div class="glass-panel bg-white text-neutral-900 rounded-2xl p-8 shadow-2xl border border-white/20">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 to-orange-500 shadow-md">
-                                            <img src="./images/client.png" alt="Julian Vance" class="w-full h-full object-cover rounded-full">
-                                        </div>
-                                        <div>
-                                            <h4 class="font-extrabold text-lg text-neutral-900">Julian Vance</h4>
-                                            <p class="text-xs text-neutral-500 font-semibold">Restaurateur & Connoisseur</p>
-                                        </div>
-                                    </div>
-                                    <img src="./images/circles.png" alt="Quote" class="w-10 opacity-60">
-                                </div>
-                                <p class="text-neutral-700 text-base leading-relaxed italic mb-6">
-                                    “From nitrogen sealing to the velvety Hokkaido cream blend, every detail breathes authentic craftsmanship. Our patrons are obsessed.”
-                                </p>
-                                <div class="flex items-center gap-1 text-amber-500 text-sm">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <span class="text-neutral-600 text-xs font-bold ml-2">Verified Restaurateur</span>
-                                </div>
-                            </div>
+                        <div class="flex items-center gap-1 text-amber-500 text-xs sm:text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-neutral-600 text-xs font-bold ml-2">Verified Connoisseur</span>
                         </div>
-
                     </div>
                 </div>
 
@@ -906,42 +865,41 @@
     </section>
 
     <!-- ==========================================
-         TEA CULTURE JOURNAL & GAZETTE (Showcasing news-1, news-2, news-3)
+         TEA CULTURE JOURNAL & GAZETTE
          ========================================== -->
-    <section id="journal" class="container mx-auto px-4 sm:px-6 mb-28 z-10 relative">
-        <div class="text-center max-w-2xl mx-auto mb-16 space-y-4 scroll-reveal">
-            <span class="px-4 py-1.5 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
+    <section id="journal" class="container mx-auto px-4 sm:px-6 mb-24 z-10 relative">
+        <div class="text-center max-w-2xl mx-auto mb-14 space-y-3.5 scroll-reveal">
+            <span class="px-3.5 py-1 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
                 The Tea Gazette
             </span>
-            <h2 class="text-4xl sm:text-5xl font-black tracking-tight text-white">
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
                 Culture & Exploration
             </h2>
-            <p class="text-neutral-400 text-base">
+            <p class="text-neutral-400 text-sm sm:text-base">
                 Dispatches from our mountain expeditions, brewing sciences, and ancient ceremonial philosophy.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             
             <!-- Article 1 -->
-            <article class="tilt-card-wrapper scroll-reveal">
-                <div class="tilt-card border-beam-card card-spotlight glass-panel rounded-2xl overflow-hidden border border-white/10 group flex flex-col justify-between h-full">
-                    <div class="card-glare"></div>
+            <article class="scroll-reveal">
+                <div class="journal-card card-spotlight p-0 h-full flex flex-col justify-between group">
                     <div>
-                        <div class="relative h-52 overflow-hidden">
-                            <img src="./images/news-1.png" alt="Gongfu Tea Ceremony" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-115">
-                            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-orange-400">
+                        <div class="relative h-48 sm:h-52 overflow-hidden rounded-t-2xl">
+                            <img src="./images/news-1.png" alt="Gongfu Tea Ceremony" class="w-full h-full object-cover">
+                            <span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-orange-400">
                                 Rituals
                             </span>
-                            <button class="bookmark-article-btn absolute top-4 right-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 transition-transform" title="Bookmark Article">
+                            <button class="bookmark-article-btn absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 transition-transform" title="Bookmark Article">
                                 <i class="fa-regular fa-bookmark text-neutral-300 text-xs"></i>
                             </button>
                         </div>
-                        <div class="p-6 space-y-3">
+                        <div class="p-5 sm:p-6 space-y-2.5">
                             <span class="text-xs text-neutral-400 flex items-center gap-1.5">
                                 <i class="fa-regular fa-clock text-orange-400"></i> Feb 14, 2026 • 5 min read
                             </span>
-                            <h3 class="font-bold text-lg text-white group-hover:text-orange-400 transition-colors">
+                            <h3 class="font-bold text-base sm:text-lg text-white group-hover:text-orange-400 transition-colors">
                                 The 7 Pillars of Traditional Gongfu Ceremony: Stillness in Every Pour
                             </h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">
@@ -949,7 +907,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="p-6 pt-0">
+                    <div class="p-5 sm:p-6 pt-0 mt-auto">
                         <button class="open-article-btn inline-flex items-center gap-2 text-xs font-bold text-orange-400 hover:text-orange-300 group-hover:translate-x-1 transition-transform" data-article-id="article-1">
                             <span>Read Dispatch</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -959,24 +917,23 @@
             </article>
 
             <!-- Article 2 -->
-            <article class="tilt-card-wrapper scroll-reveal">
-                <div class="tilt-card border-beam-card card-spotlight glass-panel rounded-2xl overflow-hidden border border-white/10 group flex flex-col justify-between h-full">
-                    <div class="card-glare"></div>
+            <article class="scroll-reveal">
+                <div class="journal-card card-spotlight p-0 h-full flex flex-col justify-between group">
                     <div>
-                        <div class="relative h-52 overflow-hidden">
-                            <img src="./images/news-2.png" alt="Mountain Harvest Expedition" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-115">
-                            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+                        <div class="relative h-48 sm:h-52 overflow-hidden rounded-t-2xl">
+                            <img src="./images/news-2.png" alt="Mountain Harvest Expedition" class="w-full h-full object-cover">
+                            <span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-emerald-400">
                                 Harvest 2026
                             </span>
-                            <button class="bookmark-article-btn absolute top-4 right-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 transition-transform" title="Bookmark Article">
+                            <button class="bookmark-article-btn absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 transition-transform" title="Bookmark Article">
                                 <i class="fa-regular fa-bookmark text-neutral-300 text-xs"></i>
                             </button>
                         </div>
-                        <div class="p-6 space-y-3">
+                        <div class="p-5 sm:p-6 space-y-2.5">
                             <span class="text-xs text-neutral-400 flex items-center gap-1.5">
                                 <i class="fa-regular fa-clock text-emerald-400"></i> Mar 02, 2026 • 7 min read
                             </span>
-                            <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors">
+                            <h3 class="font-bold text-base sm:text-lg text-white group-hover:text-emerald-400 transition-colors">
                                 Spring High-Mountain Expedition: Foraging Wild Camellia in Alishan
                             </h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">
@@ -984,7 +941,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="p-6 pt-0">
+                    <div class="p-5 sm:p-6 pt-0 mt-auto">
                         <button class="open-article-btn inline-flex items-center gap-2 text-xs font-bold text-orange-400 hover:text-orange-300 group-hover:translate-x-1 transition-transform" data-article-id="article-2">
                             <span>Read Dispatch</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -994,24 +951,23 @@
             </article>
 
             <!-- Article 3 -->
-            <article class="tilt-card-wrapper scroll-reveal">
-                <div class="tilt-card border-beam-card card-spotlight glass-panel rounded-2xl overflow-hidden border border-white/10 group flex flex-col justify-between h-full">
-                    <div class="card-glare"></div>
+            <article class="scroll-reveal">
+                <div class="journal-card card-spotlight p-0 h-full flex flex-col justify-between group">
                     <div>
-                        <div class="relative h-52 overflow-hidden">
-                            <img src="./images/news-3.png" alt="Neuroscience of L-Theanine" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-115">
-                            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-amber-400">
+                        <div class="relative h-48 sm:h-52 overflow-hidden rounded-t-2xl">
+                            <img src="./images/news-3.png" alt="Neuroscience of L-Theanine" class="w-full h-full object-cover">
+                            <span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-amber-400">
                                 Wellness
                             </span>
-                            <button class="bookmark-article-btn absolute top-4 right-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 transition-transform" title="Bookmark Article">
+                            <button class="bookmark-article-btn absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center hover:scale-110 transition-transform" title="Bookmark Article">
                                 <i class="fa-regular fa-bookmark text-neutral-300 text-xs"></i>
                             </button>
                         </div>
-                        <div class="p-6 space-y-3">
+                        <div class="p-5 sm:p-6 space-y-2.5">
                             <span class="text-xs text-neutral-400 flex items-center gap-1.5">
                                 <i class="fa-regular fa-clock text-amber-400"></i> Mar 10, 2026 • 4 min read
                             </span>
-                            <h3 class="font-bold text-lg text-white group-hover:text-amber-400 transition-colors">
+                            <h3 class="font-bold text-base sm:text-lg text-white group-hover:text-amber-400 transition-colors">
                                 The Neuroscience of L-Theanine: Why Green Tea Sharpens Cognitive Flow
                             </h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">
@@ -1019,7 +975,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="p-6 pt-0">
+                    <div class="p-5 sm:p-6 pt-0 mt-auto">
                         <button class="open-article-btn inline-flex items-center gap-2 text-xs font-bold text-orange-400 hover:text-orange-300 group-hover:translate-x-1 transition-transform" data-article-id="article-3">
                             <span>Read Dispatch</span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -1032,49 +988,49 @@
     </section>
 
     <!-- ==========================================
-         CINEMATIC FOOTER & NEWSLETTER
+         FOOTER & NEWSLETTER
          ========================================== -->
-    <footer class="bg-[#0e1319] border-t border-white/10 pt-20 pb-12 relative z-10">
-        <div class="container mx-auto px-4 sm:px-6 space-y-16">
+    <footer class="bg-[#0e1319] border-t border-white/10 pt-16 pb-12 relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 space-y-12">
             
             <!-- Footer Top: CTA Strip -->
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 pb-12 border-b border-white/10">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
-                        <img src="./images/cup.png" alt="Tea House Emblem" class="w-7 h-7 object-contain">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 pb-10 border-b border-white/10 text-center md:text-left">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center shrink-0">
+                        <img src="./images/cup.png" alt="Tea House Emblem" class="w-6 h-6 object-contain">
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-white">Ready to elevate your daily tea ritual?</h3>
+                        <h3 class="text-lg sm:text-xl font-bold text-white">Ready to elevate your daily tea ritual?</h3>
                         <p class="text-xs text-neutral-400">Complimentary 4-blend tasting sampler with all maiden orders.</p>
                     </div>
                 </div>
-                <a href="#featured-blends" class="btn-cinematic px-7 py-3 rounded-xl text-xs font-bold tracking-wider uppercase">
+                <a href="#featured-blends" class="btn-cinematic px-6 py-3 rounded-xl text-xs font-bold tracking-wider uppercase shrink-0">
                     Order Tasting Kit
                 </a>
             </div>
 
             <!-- Footer Columns -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10">
                 
                 <!-- Col 1: Brand & Philosophy -->
-                <div class="lg:col-span-4 space-y-4">
+                <div class="lg:col-span-4 space-y-3.5">
                     <div class="flex items-center gap-2">
-                        <span class="font-extrabold text-xl tracking-wider text-white">THE TEA HOUSE</span>
+                        <span class="font-extrabold text-lg tracking-wider text-white">THE TEA HOUSE</span>
                     </div>
                     <p class="text-neutral-400 text-xs leading-relaxed max-w-sm">
                         Curating the planet's rarest high-mountain botanical harvests. Bridging millennial tea philosophy with contemporary sensory design.
                     </p>
-                    <div class="flex items-center gap-3 pt-2 text-neutral-400">
-                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-all">
+                    <div class="flex items-center gap-2.5 pt-2 text-neutral-400">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-colors" aria-label="Facebook">
                             <i class="fa-brands fa-facebook-f text-xs"></i>
                         </a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-all">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-colors" aria-label="X Twitter">
                             <i class="fa-brands fa-x-twitter text-xs"></i>
                         </a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-all">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-colors" aria-label="Instagram">
                             <i class="fa-brands fa-instagram text-xs"></i>
                         </a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-all">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:text-orange-400 hover:border-orange-500/40 transition-colors" aria-label="Spotify">
                             <i class="fa-brands fa-spotify text-xs"></i>
                         </a>
                     </div>
@@ -1082,7 +1038,7 @@
 
                 <!-- Col 2: Navigation -->
                 <div class="lg:col-span-2 space-y-3">
-                    <h4 class="font-bold text-sm text-white uppercase tracking-wider">Sanctuary</h4>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-white">Sanctuary</h4>
                     <ul class="space-y-2 text-xs text-neutral-400">
                         <li><a href="#" class="hover:text-orange-400 transition-colors">Home Experience</a></li>
                         <li><a href="#featured-blends" class="hover:text-orange-400 transition-colors">Artisanal Blends</a></li>
@@ -1094,7 +1050,7 @@
 
                 <!-- Col 3: Tea Reserves -->
                 <div class="lg:col-span-2 space-y-3">
-                    <h4 class="font-bold text-sm text-white uppercase tracking-wider">Curations</h4>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-white">Curations</h4>
                     <ul class="space-y-2 text-xs text-neutral-400">
                         <li><a href="#featured-blends" class="hover:text-orange-400 transition-colors">Hokkaido Milk Tea</a></li>
                         <li><a href="#featured-blends" class="hover:text-orange-400 transition-colors">Yunnan Wild Black</a></li>
@@ -1105,15 +1061,15 @@
                 </div>
 
                 <!-- Col 4: Newsletter -->
-                <div class="lg:col-span-4 space-y-4">
-                    <h4 class="font-bold text-sm text-white uppercase tracking-wider">Join the Tea Guild</h4>
+                <div class="lg:col-span-4 space-y-3.5">
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-white">Join the Tea Guild</h4>
                     <p class="text-xs text-neutral-400">
                         Receive seasonal rare harvest allocations, private cupping invitations, and 5D audio rituals.
                     </p>
                     <form id="newsletter-form" class="space-y-2">
                         <div class="flex gap-2">
-                            <input type="email" required placeholder="Enter connoisseur email" class="bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500 w-full transition-all">
-                            <button type="submit" class="btn-cinematic px-4 py-2.5 rounded-xl text-xs font-bold shrink-0">
+                            <input type="email" required placeholder="Enter connoisseur email" class="bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500 w-full transition-colors">
+                            <button type="submit" class="btn-cinematic px-4 py-2.5 rounded-xl text-xs font-bold shrink-0" aria-label="Subscribe">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </div>
@@ -1124,9 +1080,9 @@
             </div>
 
             <!-- Footer Bottom -->
-            <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-500">
-                <p>© 2026 The Tea House Sanctuary. Designed with 5D & 3D WebGL craft.</p>
-                <div class="flex items-center gap-6">
+            <div class="pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-neutral-500">
+                <p>© 2026 The Tea House Sanctuary. Designed with modern frontend craft.</p>
+                <div class="flex items-center gap-5">
                     <a href="#" class="hover:text-neutral-400 transition-colors">Privacy Protocol</a>
                     <a href="#" class="hover:text-neutral-400 transition-colors">Origin Certificate</a>
                     <a href="#" class="hover:text-neutral-400 transition-colors">Sensory Labs</a>
@@ -1144,35 +1100,35 @@
     <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-[#0e1319] border-l border-white/10 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
         
         <!-- Drawer Header -->
-        <div class="p-6 border-b border-white/10 flex items-center justify-between">
+        <div class="p-5 border-b border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
-                    <i class="fa-solid fa-box-open"></i>
+                    <i class="fa-solid fa-box-open text-sm"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white text-base">Your Tasting Box</h3>
+                    <h3 class="font-bold text-white text-sm sm:text-base">Your Tasting Box</h3>
                     <p class="text-[11px] text-neutral-400">Curated single-origin selections</p>
                 </div>
             </div>
-            <button id="close-cart-btn" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark"></i>
+            <button id="close-cart-btn" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white flex items-center justify-center transition-colors" aria-label="Close Cart">
+                <i class="fa-solid fa-xmark text-sm"></i>
             </button>
         </div>
 
         <!-- Drawer Items List -->
-        <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <div id="cart-items-list" class="flex-1 overflow-y-auto p-5 space-y-3.5">
             <!-- Dynamically populated -->
         </div>
 
         <!-- Drawer Footer -->
-        <div class="p-6 border-t border-white/10 space-y-4 bg-black/40">
+        <div class="p-5 border-t border-white/10 space-y-3.5 bg-black/40">
             <div class="flex justify-between items-center text-sm">
                 <span class="text-neutral-400">Estimated Subtotal:</span>
                 <span id="cart-subtotal" class="font-bold text-lg text-white">$0.00</span>
             </div>
             <p class="text-[10px] text-neutral-500">Includes nitrogen-flushed protective tins & botanical origin scroll.</p>
             <button id="checkout-btn" class="btn-cinematic w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2">
-                <span>Proceed to Tasting Allocation</span>
+                <span>Proceed to Allocation</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
@@ -1187,26 +1143,26 @@
         <div id="modal-backdrop" class="modal-overlay absolute inset-0"></div>
 
         <!-- Content Card -->
-        <div class="modal-content glass-panel max-w-2xl w-full rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl relative z-10 transform scale-95 transition-transform duration-300 bg-[#0e1319]/95">
-            <button id="close-modal-btn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white flex items-center justify-center">
-                <i class="fa-solid fa-xmark"></i>
+        <div class="modal-content glass-panel max-w-2xl w-full rounded-3xl p-5 sm:p-8 border border-white/20 shadow-2xl relative z-10 transform scale-95 transition-transform duration-300 bg-[#0e1319]/95 max-h-[90vh] overflow-y-auto">
+            <button id="close-modal-btn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white flex items-center justify-center transition-colors" aria-label="Close Modal">
+                <i class="fa-solid fa-xmark text-sm"></i>
             </button>
 
             <div class="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
                 <div class="sm:col-span-5 flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 relative">
-                    <img id="modal-image" src="./images/tea-1.png" alt="Tea Modal" class="h-44 object-contain filter drop-shadow-2xl">
-                    <span id="modal-tag" class="mt-4 px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-[10px] font-bold uppercase tracking-wider">
+                    <img id="modal-image" src="./images/tea-1.png" alt="Tea Modal" class="h-40 object-contain filter drop-shadow-2xl">
+                    <span id="modal-tag" class="mt-3 px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-[10px] font-bold uppercase tracking-wider">
                         Single Origin
                     </span>
                 </div>
 
-                <div class="sm:col-span-7 space-y-4">
+                <div class="sm:col-span-7 space-y-3.5">
                     <div>
                         <div class="flex justify-between items-start">
-                            <h3 id="modal-name" class="font-bold text-2xl text-white">Tea Title</h3>
-                            <span id="modal-price" class="text-xl font-black text-orange-400">$18.50</span>
+                            <h3 id="modal-name" class="font-bold text-xl sm:text-2xl text-white">Tea Title</h3>
+                            <span id="modal-price" class="text-lg sm:text-xl font-black text-orange-400">$18.50</span>
                         </div>
-                        <p id="modal-origin" class="text-xs text-neutral-400 mt-1">Origin Details</p>
+                        <p id="modal-origin" class="text-xs text-neutral-400 mt-0.5">Origin Details</p>
                     </div>
 
                     <p id="modal-desc" class="text-xs text-neutral-300 leading-relaxed">
@@ -1214,7 +1170,7 @@
                     </p>
 
                     <!-- Technical Brewing Specs -->
-                    <div class="grid grid-cols-2 gap-3 p-3 rounded-xl bg-white/5 border border-white/5 text-xs">
+                    <div class="grid grid-cols-2 gap-2.5 p-3 rounded-xl bg-white/5 border border-white/5 text-xs">
                         <div>
                             <span class="text-neutral-400 block text-[10px] uppercase">Water Temp</span>
                             <span id="modal-temp" class="font-bold text-white">85°C</span>
@@ -1238,18 +1194,18 @@
 
                     <!-- Tasting Notes Pills -->
                     <div>
-                        <span class="text-[10px] uppercase font-bold text-neutral-400 block mb-2">Tasting Aromatics</span>
+                        <span class="text-[10px] uppercase font-bold text-neutral-400 block mb-1.5">Tasting Aromatics</span>
                         <div id="modal-notes-list" class="flex flex-wrap gap-1.5">
                             <!-- Injected dynamically -->
                         </div>
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="flex gap-3 pt-3">
-                        <button id="modal-add-btn" class="btn-cinematic flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider">
+                    <div class="flex gap-2.5 pt-2">
+                        <button id="modal-add-btn" class="btn-cinematic flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider">
                             Add to Tasting Box
                         </button>
-                        <button id="modal-brew-btn" class="btn-glass px-4 py-3 rounded-xl text-xs font-semibold flex items-center gap-1.5">
+                        <button id="modal-brew-btn" class="btn-glass px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5">
                             <i class="fa-solid fa-mug-hot text-orange-400"></i>
                             <span>Simulate Brew</span>
                         </button>
@@ -1267,27 +1223,27 @@
         <div id="article-modal-backdrop" class="modal-overlay absolute inset-0"></div>
 
         <!-- Content Card -->
-        <div class="modal-content glass-panel max-w-2xl w-full rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl relative z-10 transform scale-95 transition-transform duration-300 bg-[#0e1319]/95 max-h-[90vh] flex flex-col">
-            <button id="close-article-modal-btn" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white flex items-center justify-center">
-                <i class="fa-solid fa-xmark"></i>
+        <div class="modal-content glass-panel max-w-2xl w-full rounded-3xl p-5 sm:p-8 border border-white/20 shadow-2xl relative z-10 transform scale-95 transition-transform duration-300 bg-[#0e1319]/95 max-h-[90vh] flex flex-col">
+            <button id="close-article-modal-btn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-neutral-300 hover:text-white flex items-center justify-center transition-colors" aria-label="Close Article">
+                <i class="fa-solid fa-xmark text-sm"></i>
             </button>
 
             <!-- Modal Header -->
-            <div class="space-y-3 pb-4 border-b border-white/10">
+            <div class="space-y-2 pb-3.5 border-b border-white/10 pr-8">
                 <div class="flex items-center gap-3">
-                    <span id="article-modal-category" class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-wider">
+                    <span id="article-modal-category" class="px-2.5 py-0.5 rounded-full bg-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-wider">
                         Rituals
                     </span>
                     <span id="article-modal-date" class="text-xs text-neutral-400">Feb 14, 2026 • 5 min read</span>
                 </div>
-                <h3 id="article-modal-title" class="font-extrabold text-2xl text-white leading-snug">
+                <h3 id="article-modal-title" class="font-extrabold text-lg sm:text-2xl text-white leading-snug">
                     Article Title
                 </h3>
             </div>
 
             <!-- Modal Body Scrollable -->
-            <div class="flex-1 overflow-y-auto py-5 space-y-4">
-                <div class="relative h-60 rounded-2xl overflow-hidden mb-4 border border-white/10">
+            <div class="flex-1 overflow-y-auto py-4 space-y-4">
+                <div class="relative h-48 sm:h-56 rounded-2xl overflow-hidden mb-3 border border-white/10">
                     <img id="article-modal-image" src="./images/news-1.png" alt="Article Feature" class="w-full h-full object-cover">
                 </div>
                 <div id="article-modal-content">
@@ -1296,9 +1252,9 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+            <div class="pt-3.5 border-t border-white/10 flex items-center justify-between">
                 <div class="text-xs text-neutral-400">The Tea House Journal • Vol. IV</div>
-                <a href="#brewing-ritual-section" class="btn-cinematic px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2" onclick="document.getElementById('close-article-modal-btn').click();">
+                <a href="#brewing-ritual-section" class="btn-cinematic px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2" onclick="document.getElementById('close-article-modal-btn').click();">
                     <i class="fa-solid fa-mug-hot"></i>
                     <span>Brew This Harvest</span>
                 </a>
@@ -1307,9 +1263,9 @@
     </div>
 
     <!-- ==========================================
-         BACK TO TOP FLOATING BUTTON WITH SVG PROGRESS
+         BACK TO TOP BUTTON WITH SVG PROGRESS
          ========================================== -->
-    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full glass-panel border border-white/20 flex items-center justify-center text-white opacity-0 pointer-events-none translate-y-6 transition-all duration-300 shadow-2xl hover:scale-110 group">
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full glass-panel border border-white/20 flex items-center justify-center text-white opacity-0 pointer-events-none translate-y-6 transition-all duration-300 shadow-2xl hover:scale-110 group" aria-label="Scroll back to top">
         <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 40 40">
             <circle cx="20" cy="20" r="18" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2.5"></circle>
             <circle id="progress-circle" cx="20" cy="20" r="18" fill="none" stroke="#ff7a18" stroke-width="2.5" stroke-dasharray="113" stroke-dashoffset="113" stroke-linecap="round"></circle>
