@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Tea House — Single-origin artisanal teas with interactive 3D WebGL visuals, procedural soundscapes, and brewing ceremonies.">
+    <meta name="description" content="The Tea House — Single-origin artisanal teas with interactive 3D WebGL visuals, procedural soundscapes, flavor radar, and brewing ceremonies.">
     <meta name="theme-color" content="#0b0f14">
     <title>The Tea House — Single-Origin Artisanal Sanctuary</title>
 
@@ -22,15 +22,20 @@
                             500: '#ff7a18',
                             600: '#ff5400',
                             700: '#ff3e00',
-                            amber: '#e6a623',
+                            gold: '#e6a623',
+                            amber: '#d97706',
                             jade: '#3d7023',
+                            matcha: '#48bb78',
                             dark: '#0b0f14',
+                            surface: '#0e1319',
                             slate: '#121820',
-                            card: 'rgba(18, 24, 32, 0.72)'
+                            card: 'rgba(18, 24, 32, 0.76)'
                         }
                     },
                     fontFamily: {
-                        sans: ['Manrope', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                        sans: ['Manrope', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        display: ['"Cormorant Garamond"', 'Georgia', 'serif']
                     }
                 }
             }
@@ -40,7 +45,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
@@ -67,19 +72,39 @@
     <div id="toast-container" class="toast-container"></div>
 
     <!-- ==========================================
-         TOP BAR: Live Sanctuary Status
+         TOP BAR: Live Sanctuary Status & Preferences
          ========================================== -->
-    <div class="relative z-50 border-b border-white/5 bg-black/50 backdrop-blur-md text-xs py-2 px-4">
+    <div class="relative z-50 border-b border-white/5 bg-black/60 backdrop-blur-md text-xs py-2 px-4">
         <div class="container mx-auto flex flex-wrap justify-between items-center gap-2 text-neutral-400">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2.5">
                 <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span id="kyoto-time-ticker" class="font-medium tracking-wide text-neutral-300">KYOTO SANCTUARY: OPEN • SPRING HARVEST</span>
+                <span id="kyoto-time-ticker" class="font-medium tracking-wide text-neutral-300">KYOTO SANCTUARY: OPEN • FIRST FLUSH ALLOCATION</span>
             </div>
-            <div class="flex items-center gap-4 text-[11px]">
-                <span class="hidden sm:inline text-neutral-500">Global Tasting Kits Dispatched Within 24h</span>
+            
+            <div class="flex items-center gap-3 sm:gap-5 text-[11px]">
+                <!-- Currency Switcher -->
+                <div class="flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
+                    <span class="text-neutral-400 font-semibold text-[10px]">CURRENCY:</span>
+                    <button class="currency-btn text-white font-bold hover:text-orange-400 px-1 transition-colors" data-currency="USD">$ USD</button>
+                    <span class="text-white/20">|</span>
+                    <button class="currency-btn text-neutral-400 hover:text-orange-400 px-1 transition-colors" data-currency="EUR">€ EUR</button>
+                    <span class="text-white/20">|</span>
+                    <button class="currency-btn text-neutral-400 hover:text-orange-400 px-1 transition-colors" data-currency="GBP">£ GBP</button>
+                    <span class="text-white/20">|</span>
+                    <button class="currency-btn text-neutral-400 hover:text-orange-400 px-1 transition-colors" data-currency="JPY">¥ JPY</button>
+                </div>
+
+                <!-- Temperature Unit Switcher -->
+                <div class="hidden sm:flex items-center gap-1 bg-white/5 px-2 py-0.5 rounded-full border border-white/10">
+                    <button class="temp-unit-btn font-bold text-orange-400 px-1 transition-colors" data-unit="C">°C</button>
+                    <span class="text-white/20">/</span>
+                    <button class="temp-unit-btn text-neutral-400 hover:text-orange-400 px-1 transition-colors" data-unit="F">°F</button>
+                </div>
+
+                <!-- 5D Audio Sanctuary Link -->
                 <button class="audio-toggle-btn flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition-colors">
                     <i class="fa-solid fa-headphones text-[10px]"></i>
                     <span class="audio-label">5D Zen Soundscape</span>
@@ -89,7 +114,7 @@
     </div>
 
     <!-- ==========================================
-         NAVIGATION HEADER
+         NAVIGATION HEADER: Floating Glass Capsule
          ========================================== -->
     <header id="main-navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-3 sm:py-4 px-4 sm:px-6">
         <div class="container mx-auto">
@@ -97,27 +122,32 @@
                 
                 <!-- Brand Logo -->
                 <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#ff7a18] to-[#ff3e00] p-0.5 shadow-lg shadow-orange-500/20 transition-transform group-hover:scale-105">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#ff7a18] via-[#e6a623] to-[#ff3e00] p-0.5 shadow-lg shadow-orange-500/20 transition-transform group-hover:scale-105">
                         <div class="w-full h-full bg-[#0b0f14] rounded-full flex items-center justify-center">
                             <img src="./images/cup.png" alt="Tea House" class="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-125">
                         </div>
                     </div>
                     <div>
-                        <span class="font-bold tracking-wider text-sm sm:text-base text-white block leading-tight">THE TEA HOUSE</span>
+                        <span class="font-extrabold tracking-wider text-sm sm:text-base text-white block leading-tight">THE TEA HOUSE</span>
                         <span class="text-[9px] sm:text-[10px] tracking-widest text-orange-400 uppercase font-semibold">Artisanal Sanctuary</span>
                     </div>
                 </a>
 
                 <!-- Desktop Navigation Links -->
-                <div class="hidden lg:flex items-center gap-7 text-sm font-medium text-neutral-300">
+                <div class="hidden xl:flex items-center gap-6 text-sm font-medium text-neutral-300">
                     <a href="#featured-blends" class="hover:text-orange-400 transition-colors">Artisanal Blends</a>
+                    <a href="#flavor-radar-section" class="hover:text-orange-400 transition-colors flex items-center gap-1.5">
+                        <span>Flavor Radar</span>
+                        <span class="px-1.5 py-0.5 text-[9px] bg-amber-500/20 text-amber-300 rounded-full border border-amber-500/30">Matrix</span>
+                    </a>
                     <a href="#brewing-ritual-section" class="hover:text-orange-400 transition-colors flex items-center gap-1.5">
                         <span>5D Ritual</span>
                         <span class="px-1.5 py-0.5 text-[9px] bg-orange-500/20 text-orange-400 rounded-full border border-orange-500/30">Interactive</span>
                     </a>
+                    <a href="#sommelier-section" class="hover:text-orange-400 transition-colors">Sommelier Guide</a>
                     <a href="#craftsmanship" class="hover:text-orange-400 transition-colors">Craftsmanship</a>
                     <a href="#connoisseurs" class="hover:text-orange-400 transition-colors">Connoisseurs</a>
-                    <a href="#journal" class="hover:text-orange-400 transition-colors">Journal</a>
+                    <a href="#journal" class="hover:text-orange-400 transition-colors">Gazette</a>
                 </div>
 
                 <!-- Right Actions -->
@@ -147,25 +177,33 @@
                     </a>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-toggle" class="lg:hidden w-9 h-9 rounded-full glass-pill flex items-center justify-center text-neutral-300 hover:text-white transition-colors" aria-label="Toggle Navigation Menu">
+                    <button id="mobile-menu-toggle" class="xl:hidden w-9 h-9 rounded-full glass-pill flex items-center justify-center text-neutral-300 hover:text-white transition-colors" aria-label="Toggle Navigation Menu">
                         <i class="fa-solid fa-bars text-sm" id="mobile-menu-icon"></i>
                     </button>
                 </div>
             </nav>
 
             <!-- Mobile Navigation Dropdown -->
-            <div id="mobile-menu-dropdown" class="lg:hidden hidden mt-2 glass-panel rounded-2xl p-5 border border-white/10 shadow-2xl space-y-4">
+            <div id="mobile-menu-dropdown" class="xl:hidden hidden mt-2 glass-panel rounded-2xl p-5 border border-white/10 shadow-2xl space-y-4">
                 <div class="flex flex-col space-y-3 text-sm font-medium">
                     <a href="#featured-blends" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
                         <span>Artisanal Blends</span>
                         <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
                     </a>
+                    <a href="#flavor-radar-section" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
+                        <span>Sensory Flavor Radar</span>
+                        <span class="px-2 py-0.5 text-[9px] bg-amber-500/20 text-amber-300 rounded-full border border-amber-500/30">Matrix</span>
+                    </a>
                     <a href="#brewing-ritual-section" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
                         <span>5D Virtual Ceremony</span>
                         <span class="px-2 py-0.5 text-[9px] bg-orange-500/20 text-orange-400 rounded-full border border-orange-500/30">Interactive</span>
                     </a>
+                    <a href="#sommelier-section" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
+                        <span>Find Your Harvest (Sommelier)</span>
+                        <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
+                    </a>
                     <a href="#craftsmanship" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
-                        <span>Craftsmanship & Terroirs</span>
+                        <span>Craftsmanship & 5 Terroirs</span>
                         <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
                     </a>
                     <a href="#connoisseurs" class="mobile-nav-link text-neutral-300 hover:text-orange-400 py-1 transition-colors flex items-center justify-between">
@@ -177,6 +215,17 @@
                         <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
                     </a>
                 </div>
+                
+                <!-- Mobile Preferences -->
+                <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                    <span class="text-neutral-400">Temperature Unit:</span>
+                    <div class="flex items-center gap-2">
+                        <button class="temp-unit-btn font-bold text-orange-400" data-unit="C">Celsius (°C)</button>
+                        <span class="text-white/20">|</span>
+                        <button class="temp-unit-btn text-neutral-400" data-unit="F">Fahrenheit (°F)</button>
+                    </div>
+                </div>
+
                 <div class="pt-3 border-t border-white/10 flex items-center justify-between">
                     <button class="audio-toggle-btn text-xs text-orange-400 flex items-center gap-2">
                         <i class="fa-solid fa-headphones"></i>
@@ -191,7 +240,7 @@
     </header>
 
     <!-- ==========================================
-         HERO SECTION: Pure Sensory Entrance
+         HERO SECTION: High-Fashion Sensory Entrance
          ========================================== -->
     <section class="relative min-h-screen pt-32 sm:pt-40 pb-20 flex items-center overflow-hidden">
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
@@ -206,12 +255,15 @@
                         <span>Harvest 2026 First Flush Release • Rare Mountain Reserves</span>
                     </div>
 
-                    <!-- Main Headline -->
-                    <h1 class="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-black tracking-tight leading-[1.1]">
-                        It's good <br>
-                        tea time at <br>
-                        <span class="text-gradient-orange">The Tea House</span>
-                    </h1>
+                    <!-- Main Headline with Editorial Contrast -->
+                    <div class="space-y-2">
+                        <span class="font-serif italic text-2xl sm:text-3xl text-amber-200 block">The Sacred Sanctuary</span>
+                        <h1 class="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-black tracking-tight leading-[1.08]">
+                            It's good <br>
+                            tea time at <br>
+                            <span class="font-serif italic font-normal text-gradient-gold">The Tea House</span>
+                        </h1>
+                    </div>
 
                     <!-- Editorial Description -->
                     <p class="text-neutral-300 text-base sm:text-lg max-w-xl font-normal leading-relaxed mx-auto lg:mx-0">
@@ -227,23 +279,30 @@
                             </span>
                         </a>
 
+                        <a href="#sommelier-section" class="w-full sm:w-auto btn-glass px-6 py-3.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2.5 group">
+                            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center transition-transform group-hover:scale-110">
+                                <i class="fa-solid fa-compass text-[11px]"></i>
+                            </span>
+                            <span>Find Your Harvest</span>
+                        </a>
+
                         <a href="#brewing-ritual-section" class="w-full sm:w-auto btn-glass px-6 py-3.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2.5 group">
                             <span class="w-6 h-6 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center transition-transform group-hover:scale-110">
                                 <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
                             </span>
-                            <span>Begin 5D Ceremony</span>
+                            <span>5D Ceremony</span>
                         </a>
                     </div>
 
                     <!-- Trust Stats & Key Metric Badges -->
-                    <div class="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-5 text-left">
+                    <div class="pt-6 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-base shrink-0">
                                 <i class="fa-solid fa-mountain-sun"></i>
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm text-white leading-tight">2,200m</h4>
-                                <p class="text-[11px] text-neutral-400">High Altitude Canopy</p>
+                                <p class="text-[10px] text-neutral-400">Peak Elevation</p>
                             </div>
                         </div>
 
@@ -252,8 +311,8 @@
                                 <i class="fa-solid fa-leaf"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-sm text-white leading-tight">100% Organic</h4>
-                                <p class="text-[11px] text-neutral-400">Biodiverse Soils</p>
+                                <h4 class="font-bold text-sm text-white leading-tight">100% Pure</h4>
+                                <p class="text-[10px] text-neutral-400">Organic Soils</p>
                             </div>
                         </div>
 
@@ -263,7 +322,17 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-sm text-white leading-tight">World Gold</h4>
-                                <p class="text-[11px] text-neutral-400">Tea Conclave 2026</p>
+                                <p class="text-[10px] text-neutral-400">Tea Conclave 2026</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 text-base shrink-0">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white leading-tight">Nitrogen</h4>
+                                <p class="text-[10px] text-neutral-400">Zero Oxidation</p>
                             </div>
                         </div>
                     </div>
@@ -274,7 +343,7 @@
                 <div class="lg:col-span-5 relative flex justify-center items-center scroll-reveal">
                     
                     <!-- Ambient Glow Behind Vessel -->
-                    <div class="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-tr from-orange-600/25 to-amber-500/15 blur-3xl pointer-events-none"></div>
+                    <div class="absolute w-72 h-72 sm:w-88 sm:h-88 rounded-full bg-gradient-to-tr from-orange-600/30 via-amber-500/20 to-emerald-500/10 blur-3xl pointer-events-none"></div>
 
                     <!-- Vessel Container -->
                     <div class="relative max-w-[420px] w-full">
@@ -284,7 +353,7 @@
                             <div class="steam-vapour"></div>
 
                             <!-- Primary Vessel Image -->
-                            <img src="./images/banner.png" alt="Artisanal Tea Vessel" class="w-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.6)]">
+                            <img src="./images/banner.png" alt="Artisanal Tea Vessel" class="w-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.65)]">
 
                             <!-- Floating Trust Badge -->
                             <div class="absolute bottom-2 left-2 sm:bottom-4 sm:-left-6 glass-panel rounded-2xl p-3 sm:p-4 border border-white/20 shadow-2xl float-subtle flex items-center gap-3 z-20">
@@ -307,7 +376,7 @@
                             <!-- Floating Steep Tag -->
                             <div class="absolute -top-3 right-2 sm:-top-4 sm:-right-4 glass-panel rounded-xl px-3 py-1.5 border border-white/20 shadow-xl float-subtle-delay flex items-center gap-2 z-20 text-[11px]">
                                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <span class="text-neutral-200 font-medium">Steep: 85°C • 3.5m</span>
+                                <span class="text-neutral-200 font-medium">Steep: <span class="display-temp" data-c="85">85°C</span> • 3.5m</span>
                             </div>
 
                         </div>
@@ -369,7 +438,7 @@
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">
                                 Hokkaido Velvet
                             </span>
-                            <span class="font-extrabold text-white text-lg">$18.50</span>
+                            <span class="font-extrabold text-white text-lg product-price" data-usd="18.50">$18.50</span>
                         </div>
 
                         <!-- Product Image -->
@@ -380,11 +449,18 @@
 
                         <!-- Info & Tasting notes -->
                         <div class="space-y-2.5 pt-2">
-                            <h3 class="font-bold text-lg text-white group-hover:text-orange-400 transition-colors">Milk Tea</h3>
+                            <h3 class="font-bold text-lg text-white group-hover:text-orange-400 transition-colors">Hokkaido Milk Tea</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">Madagascar bourbon vanilla blended with high-mountain Assam and rich fresh milk.</p>
                             
+                            <!-- Sensory Micro-tags -->
+                            <div class="flex flex-wrap gap-1 pt-1">
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-orange-200 border border-white/10">Vanilla</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-orange-200 border border-white/10">Malt</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-orange-200 border border-white/10">Cream</span>
+                            </div>
+
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
-                                <span><i class="fa-solid fa-temperature-half text-orange-400 mr-1"></i> 90°C</span>
+                                <span><i class="fa-solid fa-temperature-half text-orange-400 mr-1"></i> <span class="display-temp" data-c="90">90°C</span></span>
                                 <span><i class="fa-solid fa-clock text-orange-400 mr-1"></i> 4 min</span>
                                 <span><i class="fa-solid fa-leaf text-emerald-400 mr-1"></i> Organic</span>
                             </div>
@@ -412,7 +488,7 @@
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
                                 Single Estate
                             </span>
-                            <span class="font-extrabold text-white text-lg">$24.00</span>
+                            <span class="font-extrabold text-white text-lg product-price" data-usd="24.00">$24.00</span>
                         </div>
 
                         <!-- Product Image -->
@@ -423,11 +499,18 @@
 
                         <!-- Info & Tasting notes -->
                         <div class="space-y-2.5 pt-2">
-                            <h3 class="font-bold text-lg text-white group-hover:text-amber-400 transition-colors">Black Tea</h3>
+                            <h3 class="font-bold text-lg text-white group-hover:text-amber-400 transition-colors">Yunnan Wild Black</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">Golden tipped leaves from Yunnan's ancient arbors, exuding smoked plum and wild mountain honey.</p>
                             
+                            <!-- Sensory Micro-tags -->
+                            <div class="flex flex-wrap gap-1 pt-1">
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-amber-200 border border-white/10">Smoked Plum</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-amber-200 border border-white/10">Honey</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-amber-200 border border-white/10">Dark Cocoa</span>
+                            </div>
+
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
-                                <span><i class="fa-solid fa-temperature-half text-amber-400 mr-1"></i> 95°C</span>
+                                <span><i class="fa-solid fa-temperature-half text-amber-400 mr-1"></i> <span class="display-temp" data-c="95">95°C</span></span>
                                 <span><i class="fa-solid fa-clock text-amber-400 mr-1"></i> 3.5 min</span>
                                 <span><i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> High Zen</span>
                             </div>
@@ -455,7 +538,7 @@
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                                 Ceremonial Uji
                             </span>
-                            <span class="font-extrabold text-white text-lg">$28.00</span>
+                            <span class="font-extrabold text-white text-lg product-price" data-usd="28.00">$28.00</span>
                         </div>
 
                         <!-- Product Image -->
@@ -466,11 +549,18 @@
 
                         <!-- Info & Tasting notes -->
                         <div class="space-y-2.5 pt-2">
-                            <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors">Green Tea</h3>
+                            <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors">Ceremonial Uji Jade</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">First flush shaded gyokuro leaves stone-ground to preserve sublime umami and antioxidant potency.</p>
                             
+                            <!-- Sensory Micro-tags -->
+                            <div class="flex flex-wrap gap-1 pt-1">
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-emerald-200 border border-white/10">Marine Umami</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-emerald-200 border border-white/10">Spring Grass</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-emerald-200 border border-white/10">Chestnut</span>
+                            </div>
+
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
-                                <span><i class="fa-solid fa-temperature-half text-emerald-400 mr-1"></i> 75°C</span>
+                                <span><i class="fa-solid fa-temperature-half text-emerald-400 mr-1"></i> <span class="display-temp" data-c="75">75°C</span></span>
                                 <span><i class="fa-solid fa-clock text-emerald-400 mr-1"></i> 2 min</span>
                                 <span><i class="fa-solid fa-brain text-emerald-300 mr-1"></i> L-Theanine</span>
                             </div>
@@ -498,7 +588,7 @@
                             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
                                 Sun Infusion
                             </span>
-                            <span class="font-extrabold text-white text-lg">$16.50</span>
+                            <span class="font-extrabold text-white text-lg product-price" data-usd="16.50">$16.50</span>
                         </div>
 
                         <!-- Product Image -->
@@ -509,11 +599,18 @@
 
                         <!-- Info & Tasting notes -->
                         <div class="space-y-2.5 pt-2">
-                            <h3 class="font-bold text-lg text-white group-hover:text-yellow-400 transition-colors">Lemon Tea</h3>
+                            <h3 class="font-bold text-lg text-white group-hover:text-yellow-400 transition-colors">Sicilia Bergamot Sun</h3>
                             <p class="text-xs text-neutral-400 line-clamp-2">Crisp Ceylon black tea infused with cold-pressed Sicilian bergamot and sun-ripened citrus zest.</p>
                             
+                            <!-- Sensory Micro-tags -->
+                            <div class="flex flex-wrap gap-1 pt-1">
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-yellow-200 border border-white/10">Bergamot</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-yellow-200 border border-white/10">Citrus Zest</span>
+                                <span class="px-2 py-0.5 rounded-full bg-white/5 text-[10px] text-yellow-200 border border-white/10">Crisp Amber</span>
+                            </div>
+
                             <div class="flex items-center justify-between text-[11px] text-neutral-400 border-t border-white/5 pt-3">
-                                <span><i class="fa-solid fa-temperature-half text-yellow-400 mr-1"></i> 85°C</span>
+                                <span><i class="fa-solid fa-temperature-half text-yellow-400 mr-1"></i> <span class="display-temp" data-c="85">85°C</span></span>
                                 <span><i class="fa-solid fa-clock text-yellow-400 mr-1"></i> 3 min</span>
                                 <span><i class="fa-solid fa-sun text-yellow-300 mr-1"></i> Vitamin C</span>
                             </div>
@@ -532,6 +629,179 @@
                     </div>
                 </div>
 
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         NEW: THE SENSORY SPECTRUM - INTERACTIVE FLAVOR RADAR
+         ========================================== -->
+    <section id="flavor-radar-section" class="relative py-24 z-10 border-t border-white/5 bg-gradient-to-b from-transparent via-[#0e1319]/60 to-transparent">
+        <div class="container mx-auto px-4 sm:px-6">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3.5 scroll-reveal">
+                <span class="px-3.5 py-1 rounded-full glass-pill border border-amber-500/30 text-xs font-semibold text-amber-300 uppercase tracking-widest">
+                    Sensory Matrix
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
+                    Interactive Flavor Radar
+                </h2>
+                <p class="text-neutral-400 text-sm sm:text-base leading-relaxed">
+                    Explore five multidimensional flavor axes across our harvests. Select a blend below to observe its sensory fingerprint, aroma profile, and gastronomy pairing.
+                </p>
+
+                <!-- Blend Switchers -->
+                <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+                    <button class="radar-select-btn px-4 py-2 rounded-full text-xs font-bold transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 shadow-lg shadow-emerald-500/10" data-radar-id="green-tea">
+                        Ceremonial Uji Jade
+                    </button>
+                    <button class="radar-select-btn px-4 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-radar-id="milk-tea">
+                        Hokkaido Cream Velvet
+                    </button>
+                    <button class="radar-select-btn px-4 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-radar-id="black-tea">
+                        Imperial Yunnan Wild
+                    </button>
+                    <button class="radar-select-btn px-4 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25" data-radar-id="lemon-tea">
+                        Sicilia Bergamot Sun
+                    </button>
+                </div>
+            </div>
+
+            <!-- Radar Studio Panel -->
+            <div class="max-w-5xl mx-auto glass-panel card-spotlight rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden scroll-reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- SVG Radar Left (Center 180,180; Radius 120) -->
+                    <div class="lg:col-span-6 flex flex-col items-center justify-center">
+                        <div class="radar-chart-container">
+                            <svg id="radar-svg" viewBox="0 0 360 360" class="w-full max-w-[340px] h-auto drop-shadow-2xl">
+                                <!-- Background Concentric Pentagonal Web (20%, 40%, 60%, 80%, 100%) -->
+                                <polygon class="radar-grid-line" points="180,60 294,143 250,277 110,277 66,143" />
+                                <polygon class="radar-grid-line" points="180,84 271,150 236,258 124,258 89,150" />
+                                <polygon class="radar-grid-line" points="180,108 248,158 222,238 138,238 112,158" />
+                                <polygon class="radar-grid-line" points="180,132 226,165 208,219 152,219 134,165" />
+                                <polygon class="radar-grid-line" points="180,156 203,173 194,200 166,200 157,173" />
+
+                                <!-- 5 Axis Spoke Lines -->
+                                <line x1="180" y1="180" x2="180" y2="60" class="radar-axis-line" />
+                                <line x1="180" y1="180" x2="294" y2="143" class="radar-axis-line" />
+                                <line x1="180" y1="180" x2="250" y2="277" class="radar-axis-line" />
+                                <line x1="180" y1="180" x2="110" y2="277" class="radar-axis-line" />
+                                <line x1="180" y1="180" x2="66" y2="143" class="radar-axis-line" />
+
+                                <!-- Axis Labels -->
+                                <text x="180" y="44" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">Umami & Body</text>
+                                <text x="310" y="146" text-anchor="start" fill="#e2e8f0" font-size="11" font-weight="700">Floral Aroma</text>
+                                <text x="264" y="298" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">Sweetness</text>
+                                <text x="96" y="298" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">Roast Depth</text>
+                                <text x="50" y="146" text-anchor="end" fill="#e2e8f0" font-size="11" font-weight="700">Crisp Zest</text>
+
+                                <!-- Active Filled Radar Polygon (Green Jade default) -->
+                                <polygon id="radar-live-polygon" class="radar-polygon"
+                                    points="180,68 280,147 218,247 140,240 85,150"
+                                    fill="rgba(34, 197, 94, 0.35)"
+                                    stroke="#22c55e"
+                                    stroke-width="2.5" />
+
+                                <!-- 5 Vertex Dots -->
+                                <circle id="radar-dot-0" cx="180" cy="68" r="4.5" fill="#22c55e" stroke="#ffffff" stroke-width="1.5" class="radar-vertex-dot" />
+                                <circle id="radar-dot-1" cx="280" cy="147" r="4.5" fill="#22c55e" stroke="#ffffff" stroke-width="1.5" class="radar-vertex-dot" />
+                                <circle id="radar-dot-2" cx="218" cy="247" r="4.5" fill="#22c55e" stroke="#ffffff" stroke-width="1.5" class="radar-vertex-dot" />
+                                <circle id="radar-dot-3" cx="140" cy="240" r="4.5" fill="#22c55e" stroke="#ffffff" stroke-width="1.5" class="radar-vertex-dot" />
+                                <circle id="radar-dot-4" cx="85" cy="150" r="4.5" fill="#22c55e" stroke="#ffffff" stroke-width="1.5" class="radar-vertex-dot" />
+                            </svg>
+                        </div>
+
+                        <div class="flex items-center gap-2 mt-4 text-[11px] text-neutral-400">
+                            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                            <span>Live sensory vector calculated from 2026 laboratory chromatography.</span>
+                        </div>
+                    </div>
+
+                    <!-- Radar Details Right -->
+                    <div class="lg:col-span-6 space-y-5">
+                        <div>
+                            <span id="radar-blend-tag" class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 inline-block mb-2">
+                                Shaded Gyokuro Reserve
+                            </span>
+                            <h3 id="radar-blend-title" class="text-2xl sm:text-3xl font-bold text-white">
+                                Ceremonial Uji Jade
+                            </h3>
+                            <p id="radar-blend-desc" class="text-xs sm:text-sm text-neutral-300 mt-2 leading-relaxed">
+                                Stone-ground shaded gyokuro leaves that express maximal L-theanine richness, resulting in an oceanic marine umami with zero bitterness.
+                            </p>
+                        </div>
+
+                        <!-- 5 Axis Scores Metric Bars -->
+                        <div class="space-y-2.5 p-4 rounded-2xl bg-white/5 border border-white/5 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="text-neutral-400">Umami & Body</span>
+                                <span id="radar-val-0" class="font-bold text-white">95 / 100</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div id="radar-bar-0" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500" style="width: 95%;"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center pt-1">
+                                <span class="text-neutral-400">Floral Aroma</span>
+                                <span id="radar-val-1" class="font-bold text-white">82 / 100</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div id="radar-bar-1" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500" style="width: 82%;"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center pt-1">
+                                <span class="text-neutral-400">Natural Sweetness</span>
+                                <span id="radar-val-2" class="font-bold text-white">70 / 100</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div id="radar-bar-2" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500" style="width: 70%;"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center pt-1">
+                                <span class="text-neutral-400">Roast Depth</span>
+                                <span id="radar-val-3" class="font-bold text-white">40 / 100</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div id="radar-bar-3" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500" style="width: 40%;"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center pt-1">
+                                <span class="text-neutral-400">Crisp Zest</span>
+                                <span id="radar-val-4" class="font-bold text-white">35 / 100</span>
+                            </div>
+                            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                <div id="radar-bar-4" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500" style="width: 35%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Gastronomy Pairing Recommendation -->
+                        <div class="p-3.5 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0 text-sm">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-orange-300 block">Sommelier Food Pairing</span>
+                                <p id="radar-pairing-text" class="text-xs text-neutral-300 mt-0.5">Kyoto Matcha Warabi Mochi & Sea Salt Edamame</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex items-center gap-3 pt-1">
+                            <button id="radar-add-box-btn" class="btn-cinematic flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-plus text-[10px]"></i>
+                                <span>Add This Blend to Box</span>
+                            </button>
+                            <a href="#brewing-ritual-section" id="radar-brew-link" class="btn-glass px-5 py-3 rounded-xl text-xs font-semibold flex items-center gap-2 shrink-0">
+                                <i class="fa-solid fa-mug-hot text-orange-400"></i>
+                                <span>Simulate</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </div>
@@ -589,7 +859,7 @@
                         <div>
                             <div class="flex justify-between items-center mb-1.5">
                                 <label class="text-xs font-bold uppercase tracking-wider text-neutral-400">2. Water Temperature</label>
-                                <span id="brew-temp-display" class="font-extrabold text-orange-400 text-sm">80°C</span>
+                                <span id="brew-temp-display" class="font-extrabold text-orange-400 text-sm">80°C / 176°F</span>
                             </div>
                             <input id="brew-temp-slider" type="range" min="60" max="100" value="80" class="w-full accent-orange-500 cursor-pointer bg-white/10 h-2 rounded-lg">
                             <div class="flex justify-between text-[10px] text-neutral-500 mt-1">
@@ -663,9 +933,210 @@
     </section>
 
     <!-- ==========================================
-         CRAFTSMANSHIP: Responsive Bento Grid
+         NEW: BESPOKE TEA SOMMELIER ("FIND YOUR HARVEST")
+         ========================================== -->
+    <section id="sommelier-section" class="relative py-24 z-10 border-t border-white/5">
+        <div class="container mx-auto px-4 sm:px-6">
+
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-14 space-y-3.5 scroll-reveal">
+                <span class="px-3.5 py-1 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
+                    Digital Tea Master
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
+                    Find Your Bespoke Harvest
+                </h2>
+                <p class="text-neutral-400 text-sm sm:text-base leading-relaxed">
+                    Answer three intuitive questions regarding your state of mind, palate preferences, and biorhythm to discover your optimal single-origin pairing.
+                </p>
+            </div>
+
+            <!-- Sommelier Interactive Card -->
+            <div class="max-w-4xl mx-auto glass-panel card-spotlight rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative scroll-reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Quiz Questions Left -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- Question 1: Desired State of Mind -->
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider text-orange-400 block mb-1">Step 01 / 03</span>
+                            <h4 class="font-bold text-white text-sm sm:text-base mb-3">What state of mind do you seek?</h4>
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div class="sommelier-option selected" data-question="mood" data-value="clarity">
+                                    <div class="font-bold text-xs text-white">Focus & Clarity</div>
+                                    <div class="text-[10px] text-neutral-400">Clean cognitive alpha flow</div>
+                                </div>
+                                <div class="sommelier-option" data-question="mood" data-value="serenity">
+                                    <div class="font-bold text-xs text-white">Deep Serenity</div>
+                                    <div class="text-[10px] text-neutral-400">Grounding meditative peace</div>
+                                </div>
+                                <div class="sommelier-option" data-question="mood" data-value="vitality">
+                                    <div class="font-bold text-xs text-white">Uplifting Vitality</div>
+                                    <div class="text-[10px] text-neutral-400">Radiant citrus awakening</div>
+                                </div>
+                                <div class="sommelier-option" data-question="mood" data-value="comfort">
+                                    <div class="font-bold text-xs text-white">Velvet Comfort</div>
+                                    <div class="text-[10px] text-neutral-400">Warm creamy indulgence</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 2: Flavor Palate -->
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider text-orange-400 block mb-1">Step 02 / 03</span>
+                            <h4 class="font-bold text-white text-sm sm:text-base mb-3">Preferred aromatic profile?</h4>
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div class="sommelier-option selected" data-question="flavor" data-value="vegetal">
+                                    <div class="font-bold text-xs text-white">Marine & Vegetal</div>
+                                    <div class="text-[10px] text-neutral-400">Shaded umami & grass</div>
+                                </div>
+                                <div class="sommelier-option" data-question="flavor" data-value="creamy">
+                                    <div class="font-bold text-xs text-white">Creamy & Vanilla</div>
+                                    <div class="text-[10px] text-neutral-400">Malty Hokkaido silk</div>
+                                </div>
+                                <div class="sommelier-option" data-question="flavor" data-value="smoky">
+                                    <div class="font-bold text-xs text-white">Smoky & Honey</div>
+                                    <div class="text-[10px] text-neutral-400">Ancient arbor golden tips</div>
+                                </div>
+                                <div class="sommelier-option" data-question="flavor" data-value="citrus">
+                                    <div class="font-bold text-xs text-white">Zesty & Bergamot</div>
+                                    <div class="text-[10px] text-neutral-400">Sicilian sun-infused peel</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 3: Time of Day -->
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider text-orange-400 block mb-1">Step 03 / 03</span>
+                            <h4 class="font-bold text-white text-sm sm:text-base mb-3">Ritual time of day?</h4>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="sommelier-option selected text-center py-2.5" data-question="time" data-value="morning">
+                                    <i class="fa-solid fa-sun text-amber-400 block mb-1"></i>
+                                    <div class="font-bold text-xs text-white">Dawn</div>
+                                </div>
+                                <div class="sommelier-option text-center py-2.5" data-question="time" data-value="afternoon">
+                                    <i class="fa-solid fa-cloud-sun text-orange-400 block mb-1"></i>
+                                    <div class="font-bold text-xs text-white">Midday</div>
+                                </div>
+                                <div class="sommelier-option text-center py-2.5" data-question="time" data-value="evening">
+                                    <i class="fa-solid fa-moon text-indigo-400 block mb-1"></i>
+                                    <div class="font-bold text-xs text-white">Dusk</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Bespoke Match Result Card Right -->
+                    <div class="lg:col-span-5 flex flex-col items-center justify-center p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-white/10 via-black/40 to-black/60 border border-white/15 relative">
+                        
+                        <!-- Glowing aura background -->
+                        <div id="sommelier-glow" class="absolute w-44 h-44 rounded-full bg-emerald-500/25 blur-3xl pointer-events-none"></div>
+
+                        <!-- Match Score Badge -->
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-extrabold uppercase tracking-wider">
+                                <i class="fa-solid fa-circle-check mr-1"></i> <span id="sommelier-score">98% Match</span>
+                            </span>
+                        </div>
+
+                        <!-- Match Product Image -->
+                        <img id="sommelier-image" src="./images/tea-3.png" alt="Recommended Harvest" class="h-36 sm:h-40 object-contain drop-shadow-2xl mb-3">
+
+                        <div class="text-center space-y-1.5 w-full">
+                            <span id="sommelier-tag" class="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block">Uji First Flush Gyokuro</span>
+                            <h3 id="sommelier-title" class="text-xl sm:text-2xl font-black text-white">Ceremonial Uji Jade</h3>
+                            <p id="sommelier-desc" class="text-xs text-neutral-300 leading-relaxed px-2">
+                                Perfectly aligned with your focus requirement. Rich in L-theanine to awaken alert calm with zero jitter.
+                            </p>
+                            <div class="text-orange-400 font-extrabold text-lg pt-1 product-price" id="sommelier-price" data-usd="28.00">$28.00</div>
+                        </div>
+
+                        <!-- Add to Box CTA -->
+                        <button id="sommelier-add-btn" class="btn-cinematic w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider mt-4 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus text-[10px]"></i>
+                            <span>Claim This Allocation</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CRAFTSMANSHIP: 5-STAGE JOURNEY & BENTO GRID
          ========================================== -->
     <section id="craftsmanship" class="container mx-auto px-4 sm:px-6 my-24 z-10 relative">
+        
+        <!-- Craftsmanship Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-14 space-y-3.5 scroll-reveal">
+            <span class="px-3.5 py-1 rounded-full glass-pill border border-orange-500/30 text-xs font-semibold text-orange-300 uppercase tracking-widest">
+                Honoring Antiquity
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
+                The Five Stages of Craftsmanship
+            </h2>
+            <p class="text-neutral-400 text-sm sm:text-base leading-relaxed">
+                From 2,200m mist-canopied volcanic slopes to airtight nitrogen sealing: every leaf endures five unhurried ceremonial transitions.
+            </p>
+        </div>
+
+        <!-- 5-Stage Stepper Bar -->
+        <div class="max-w-4xl mx-auto mb-16 scroll-reveal">
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <div class="stage-tracker-step active glass-panel p-3.5 rounded-xl border border-white/10 text-center" data-stage="1">
+                    <div class="stage-num-badge w-7 h-7 mx-auto rounded-full bg-white/10 text-white font-extrabold text-xs flex items-center justify-center mb-1.5">1</div>
+                    <div class="stage-title text-xs font-semibold text-neutral-300">Dawn Plucking</div>
+                    <div class="text-[10px] text-neutral-500">2,200m dew buds</div>
+                </div>
+
+                <div class="stage-tracker-step glass-panel p-3.5 rounded-xl border border-white/10 text-center" data-stage="2">
+                    <div class="stage-num-badge w-7 h-7 mx-auto rounded-full bg-white/10 text-white font-extrabold text-xs flex items-center justify-center mb-1.5">2</div>
+                    <div class="stage-title text-xs font-semibold text-neutral-300">Solar Withering</div>
+                    <div class="text-[10px] text-neutral-500">Aromatic moisture loss</div>
+                </div>
+
+                <div class="stage-tracker-step glass-panel p-3.5 rounded-xl border border-white/10 text-center" data-stage="3">
+                    <div class="stage-num-badge w-7 h-7 mx-auto rounded-full bg-white/10 text-white font-extrabold text-xs flex items-center justify-center mb-1.5">3</div>
+                    <div class="stage-title text-xs font-semibold text-neutral-300">Bamboo Bruising</div>
+                    <div class="text-[10px] text-neutral-500">Cellular oxidation</div>
+                </div>
+
+                <div class="stage-tracker-step glass-panel p-3.5 rounded-xl border border-white/10 text-center" data-stage="4">
+                    <div class="stage-num-badge w-7 h-7 mx-auto rounded-full bg-white/10 text-white font-extrabold text-xs flex items-center justify-center mb-1.5">4</div>
+                    <div class="stage-title text-xs font-semibold text-neutral-300">Charcoal Roast</div>
+                    <div class="text-[10px] text-neutral-500">115°C wok fixation</div>
+                </div>
+
+                <div class="stage-tracker-step glass-panel p-3.5 rounded-xl border border-white/10 text-center" data-stage="5">
+                    <div class="stage-num-badge w-7 h-7 mx-auto rounded-full bg-white/10 text-white font-extrabold text-xs flex items-center justify-center mb-1.5">5</div>
+                    <div class="stage-title text-xs font-semibold text-neutral-300">Nitrogen Seal</div>
+                    <div class="text-[10px] text-neutral-500">0% oxygen preservation</div>
+                </div>
+            </div>
+
+            <!-- Active Stage Highlight Details Card -->
+            <div id="stage-detail-box" class="mt-4 p-5 rounded-2xl glass-panel-gold border border-amber-500/30 flex flex-col sm:flex-row justify-between items-center gap-4 transition-all">
+                <div class="flex items-center gap-3.5">
+                    <div id="stage-detail-icon" class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-lg shrink-0">
+                        <i class="fa-solid fa-mountain"></i>
+                    </div>
+                    <div>
+                        <h4 id="stage-detail-title" class="font-bold text-white text-sm sm:text-base">Stage 01: Dawn Plucking at 2,200m Peak</h4>
+                        <p id="stage-detail-desc" class="text-xs text-neutral-300 mt-0.5">Handpicked within a strictly timed 2-hour window right before direct sunlight dehydrates tender dew crystals.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 text-xs shrink-0">
+                    <span id="stage-detail-temp" class="px-2.5 py-1 rounded-full bg-white/10 text-orange-200 border border-white/10">Temp: 14°C</span>
+                    <span id="stage-detail-time" class="px-2.5 py-1 rounded-full bg-white/10 text-orange-200 border border-white/10">Window: Dawn 05:00–07:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Responsive Bento Grid Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             
             <!-- Left: Responsive Bento Grid (1 col on mobile, 2 col on tablet, 2 col x 3 row on desktop) -->
@@ -716,7 +1187,7 @@
                     <img src="./images/fresh-2.png" alt="Tea Roasting" class="w-full h-full object-cover">
                     
                     <div class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full bg-amber-500/20 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-amber-500/30">
-                        <i class="fa-solid fa-fire mr-1"></i> 115°C Wok
+                        <i class="fa-solid fa-fire mr-1"></i> <span class="display-temp" data-c="115">115°C</span> Wok
                     </div>
 
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-5">
@@ -755,7 +1226,7 @@
                 
                 <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-white">
                     Great Tea, <br>
-                    <span class="text-gradient-tea">Freshly Presented</span>
+                    <span class="font-serif italic font-normal text-gradient-gold">Freshly Presented</span>
                 </h2>
 
                 <p class="text-neutral-300 leading-relaxed font-normal text-sm sm:text-base">
@@ -988,6 +1459,42 @@
     </section>
 
     <!-- ==========================================
+         FLOATING ZEN SOUNDSCAPE MINI-PLAYER DOCK
+         ========================================== -->
+    <div id="audio-sanctuary-dock" class="scroll-reveal">
+        <div id="audio-dock-wrapper" class="audio-dock-container cursor-pointer">
+            <!-- Left Equalizer Icon -->
+            <button id="dock-play-toggle-btn" class="w-8 h-8 rounded-full bg-orange-500/20 hover:bg-orange-500 text-orange-400 hover:text-black flex items-center justify-center transition-all shrink-0" title="Play / Pause Zen Soundscape">
+                <i class="fa-solid fa-play text-xs ml-0.5" id="dock-play-icon"></i>
+            </button>
+
+            <!-- Track Info -->
+            <div id="dock-track-info" class="flex items-center gap-2.5 min-w-0 pr-1">
+                <div class="audio-equalizer flex items-end gap-0.5 h-3">
+                    <span class="equalizer-bar"></span>
+                    <span class="equalizer-bar"></span>
+                    <span class="equalizer-bar"></span>
+                    <span class="equalizer-bar"></span>
+                </div>
+                <div class="min-w-0">
+                    <span id="dock-track-name" class="font-bold text-xs text-white block truncate">Kyoto Dawn Mist</span>
+                    <span id="dock-track-sub" class="text-[9px] text-neutral-400 block truncate">5D Binaural Soundscape</span>
+                </div>
+            </div>
+
+            <!-- Mini Track Switcher Buttons -->
+            <div class="flex items-center gap-1 border-l border-white/10 pl-2">
+                <button id="dock-prev-track-btn" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white flex items-center justify-center text-[10px] transition-colors" title="Previous Soundscape">
+                    <i class="fa-solid fa-backward-step"></i>
+                </button>
+                <button id="dock-next-track-btn" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 text-neutral-400 hover:text-white flex items-center justify-center text-[10px] transition-colors" title="Next Soundscape">
+                    <i class="fa-solid fa-forward-step"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
          FOOTER & NEWSLETTER
          ========================================== -->
     <footer class="bg-[#0e1319] border-t border-white/10 pt-16 pb-12 relative z-10">
@@ -1042,7 +1549,9 @@
                     <ul class="space-y-2 text-xs text-neutral-400">
                         <li><a href="#" class="hover:text-orange-400 transition-colors">Home Experience</a></li>
                         <li><a href="#featured-blends" class="hover:text-orange-400 transition-colors">Artisanal Blends</a></li>
+                        <li><a href="#flavor-radar-section" class="hover:text-orange-400 transition-colors">Flavor Radar</a></li>
                         <li><a href="#brewing-ritual-section" class="hover:text-orange-400 transition-colors">5D Ceremony</a></li>
+                        <li><a href="#sommelier-section" class="hover:text-orange-400 transition-colors">Sommelier Guide</a></li>
                         <li><a href="#craftsmanship" class="hover:text-orange-400 transition-colors">Harvest Terroirs</a></li>
                         <li><a href="#journal" class="hover:text-orange-400 transition-colors">Gazette</a></li>
                     </ul>
