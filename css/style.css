@@ -1,7 +1,7 @@
 /* ==========================================================================
    THE TEA HOUSE - LUXURY DESIGN SYSTEM (TOP 1% CRAFTSMANSHIP EDITION)
-   High-fashion editorial typography, artisanal glassmorphism, responsive
-   spatial geometry, and tactile micro-interactions.
+   High-fashion editorial typography, cinematic video background, motion
+   graphics, artisanal glassmorphism, and tactile micro-interactions.
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap');
@@ -62,9 +62,43 @@ body::before {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
     opacity: 0.025;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   AMBIENT CINEMATIC VIDEO BACKGROUND LAYER
+   ========================================================================== */
+
+.ambient-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.42;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ambient-video-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.15) brightness(0.68) contrast(1.18);
+    transform: scale(1.04);
+}
+
+.ambient-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at center, rgba(11, 15, 20, 0.3) 0%, rgba(11, 15, 20, 0.85) 100%),
+        linear-gradient(to bottom, rgba(11, 15, 20, 0.85) 0%, transparent 22%, transparent 78%, rgba(11, 15, 20, 0.98) 100%);
+    pointer-events: none;
 }
 
 /* Three.js Canvas Container */
@@ -74,9 +108,10 @@ body::before {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
     overflow: hidden;
+    transition: opacity 0.8s ease;
 }
 
 /* Atmospheric Ambient Glow Layer */
@@ -105,6 +140,31 @@ body::before {
     width: 0%;
     transition: width 0.1s ease-out;
     box-shadow: 0 0 12px rgba(255, 122, 24, 0.85);
+}
+
+/* ==========================================================================
+   MOTION GRAPHICS: KINETIC MARQUEE TICKER
+   ========================================================================== */
+
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 38s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
 }
 
 /* ==========================================================================
@@ -172,7 +232,7 @@ body::before {
     transform: scale(1.06);
 }
 
-/* Subtle Aura Glows per tea category */
+/* Dynamic Aura Glows for All 8 Teas */
 .aura-milk-tea {
     --card-glow: rgba(255, 140, 30, 0.28);
 }
@@ -187,6 +247,22 @@ body::before {
 
 .aura-lemon-tea {
     --card-glow: rgba(234, 179, 8, 0.28);
+}
+
+.aura-matcha {
+    --card-glow: rgba(74, 222, 128, 0.35);
+}
+
+.aura-white-tea {
+    --card-glow: rgba(244, 114, 182, 0.35);
+}
+
+.aura-oolong {
+    --card-glow: rgba(217, 119, 6, 0.35);
+}
+
+.aura-chai {
+    --card-glow: rgba(245, 158, 11, 0.35);
 }
 
 /* Bento Grid Cards */
@@ -383,11 +459,6 @@ body::before {
     filter: drop-shadow(0 0 14px rgba(255, 122, 24, 0.5));
 }
 
-.radar-polygon-compare {
-    transition: all 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
-    stroke-dasharray: 4, 4;
-}
-
 .radar-grid-line {
     stroke: rgba(255, 255, 255, 0.08);
     stroke-width: 1;
@@ -492,14 +563,6 @@ body::before {
     display: flex;
     align-items: center;
     gap: 12px;
-}
-
-.audio-dock-expanded {
-    border-radius: 1.25rem;
-    padding: 14px 18px;
-    flex-direction: column;
-    align-items: stretch;
-    min-width: 280px;
 }
 
 /* Equalizer Bars */
@@ -725,6 +788,13 @@ body::before {
 .scroll-reveal.revealed {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Atmosphere Pill Selector */
+.atmosphere-btn.active {
+    background: linear-gradient(135deg, #ff7a18, #e6a623);
+    color: #0b0f14;
+    font-weight: 800;
 }
 
 /* Responsive adjustments for audio dock on small mobile */

@@ -1,5 +1,7 @@
 /**
  * The Tea House - Luxury Frontend Engine (Top 1% Craftsmanship)
+ * - 8 Artisanal Harvest Blends (including AI-generated master reserves)
+ * - Cinematic Video Background & Atmosphere Mode Controller
  * - Dynamic Currency & Temperature Unit conversion
  * - Interactive 5-Axis Flavor Radar (Sensory Matrix)
  * - Bespoke Tea Sommelier Recommendation Engine ("Find Your Harvest")
@@ -9,7 +11,6 @@
  * - Interactive Tasting Box (Cart) Drawer with Leaf Confetti
  * - Responsive Testimonial Carousel with pagination
  * - Editorial Gazette Quick-Read Modal & Reading List Bookmarks
- * - Clean responsive spotlight tracking without text blur or layout shifts
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     let currentCurrency = 'USD';
     let currentTempUnit = 'C';
+    let currentAtmosphere = 'hybrid'; // 'hybrid' | 'video' | 'webgl'
 
     const CURRENCY_RATES = {
         USD: { symbol: '$', rate: 1.0, decimals: 2 },
@@ -45,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateAllPricesAndTemps() {
-        // Update product prices
         document.querySelectorAll('.product-price').forEach(el => {
             const usd = parseFloat(el.getAttribute('data-usd') || 0);
             if (usd > 0) {
@@ -53,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update displayed temperatures
         document.querySelectorAll('.display-temp').forEach(el => {
             const c = parseInt(el.getAttribute('data-c') || 0);
             if (c > 0) {
@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update cart UI prices
         updateCartUI();
     }
 
@@ -108,7 +107,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 2. PRODUCT DATABASE
+    // 2. ATMOSPHERE MODE CONTROLLER (VIDEO / 3D WEBGL / HYBRID)
+    // ==========================================
+    const videoContainer = document.getElementById('ambient-video-container');
+    const threeContainer = document.getElementById('three-canvas-container');
+    const atmosphereBtns = document.querySelectorAll('.atmosphere-btn');
+
+    function setAtmosphereMode(mode) {
+        currentAtmosphere = mode;
+        atmosphereBtns.forEach(btn => {
+            if (btn.getAttribute('data-atmosphere') === mode) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        if (mode === 'video') {
+            if (videoContainer) videoContainer.style.opacity = '0.62';
+            if (threeContainer) threeContainer.style.opacity = '0.05';
+            showToast('Atmosphere Mode', 'Cinematic 4K Mountain Mist Video Loop active.', 'fa-film');
+        } else if (mode === 'webgl') {
+            if (videoContainer) videoContainer.style.opacity = '0';
+            if (threeContainer) threeContainer.style.opacity = '1';
+            showToast('Atmosphere Mode', '3D WebGL Botanical Leaves & Volumetric Mist active.', 'fa-cube');
+        } else { // hybrid
+            if (videoContainer) videoContainer.style.opacity = '0.38';
+            if (threeContainer) threeContainer.style.opacity = '1';
+            showToast('Atmosphere Mode', 'Hybrid Sanctuary: Video Mist + 3D Botanical Leaves.', 'fa-wand-magic-sparkles');
+        }
+
+        if (window.teaAudio) window.teaAudio.playChime(784);
+    }
+
+    atmosphereBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const mode = btn.getAttribute('data-atmosphere');
+            if (mode) setAtmosphereMode(mode);
+        });
+    });
+
+    // ==========================================
+    // 3. COMPLETE 8-DRINK PRODUCT DATABASE
     // ==========================================
     const PRODUCTS = {
         'milk-tea': {
@@ -126,12 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
             caffeinePercent: 75,
             aroma: 'Sweet Malt & Madagascar Vanilla',
             notes: ['Madagascar Vanilla', 'Caramelized Malt', 'Silky Hokkaido Cream', 'Wild Clover Honey'],
-            // Radar Scores: [Umami, Floral, Sweetness, Roast, Crisp]
             radarScores: [85, 75, 94, 60, 40],
             radarColor: 'rgba(255, 140, 30, 0.35)',
             radarStroke: '#ff8c1e',
             foodPairing: 'Vanilla Bean Canele & Salted Caramel Truffles',
-            color: 'from-amber-700/30 to-orange-950/20'
+            liquidGradient: 'linear-gradient(to top, #d97706, #fed7aa)'
         },
         'black-tea': {
             id: 'black-tea',
@@ -152,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
             radarColor: 'rgba(239, 68, 68, 0.35)',
             radarStroke: '#ef4444',
             foodPairing: 'Single-Origin 85% Dark Chocolate & Roasted Walnuts',
-            color: 'from-red-900/30 to-amber-950/20'
+            liquidGradient: 'linear-gradient(to top, #78350f, #b45309)'
         },
         'green-tea': {
             id: 'green-tea',
@@ -173,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
             radarColor: 'rgba(34, 197, 94, 0.35)',
             radarStroke: '#22c55e',
             foodPairing: 'Kyoto Matcha Warabi Mochi & Sea Salt Edamame',
-            color: 'from-emerald-900/30 to-teal-950/20'
+            liquidGradient: 'linear-gradient(to top, #15803d, #84cc16)'
         },
         'lemon-tea': {
             id: 'lemon-tea',
@@ -194,7 +233,91 @@ document.addEventListener('DOMContentLoaded', () => {
             radarColor: 'rgba(234, 179, 8, 0.35)',
             radarStroke: '#eab308',
             foodPairing: 'Sicilian Ricotta Cannoli & Meyer Lemon Shortbread',
-            color: 'from-yellow-900/30 to-orange-950/20'
+            liquidGradient: 'linear-gradient(to top, #ca8a04, #fef08a)'
+        },
+        'matcha-latte': {
+            id: 'matcha-latte',
+            name: 'Kyoto Ceremonial Matcha Cloud',
+            category: 'Matcha',
+            tag: 'AI Artisan Masterpiece',
+            priceUSD: 26.00,
+            image: './images/tea-5.png',
+            desc: 'Whisked ceremonial Uji matcha topped with whipped silky oat foam and dusting of jade powder. Velvety, lush, and antioxidant dense.',
+            origin: 'Uji & Wazuka Hills, Kyoto',
+            tempC: 70,
+            steepTime: '1.5 min',
+            caffeine: 'High',
+            caffeinePercent: 85,
+            aroma: 'Bamboo Forest & Sweet Cream Froth',
+            notes: ['Whipped Oat Foam', 'Stone-Ground Matcha', 'Green Tea Powder', 'Velvet Umami'],
+            radarScores: [98, 80, 65, 30, 30],
+            radarColor: 'rgba(74, 222, 128, 0.35)',
+            radarStroke: '#4ade80',
+            foodPairing: 'Hokkaido Adzuki Bean Dorayaki & Black Sesame Mochi',
+            liquidGradient: 'linear-gradient(to top, #166534, #4ade80)'
+        },
+        'white-tea': {
+            id: 'white-tea',
+            name: 'Sakura Silver Blossom White Tea',
+            category: 'White Tea',
+            tag: 'AI Artisan Masterpiece',
+            priceUSD: 32.00,
+            image: './images/tea-6.png',
+            desc: 'Unopened silver needle buds infused with hand-gathered Yoshino cherry blossom petals. Delivers an ethereal pale rose liquor with nectar finishes.',
+            origin: 'Fuding Mountain & Yoshino, Nara',
+            tempC: 80,
+            steepTime: '5 min',
+            caffeine: 'Low',
+            caffeinePercent: 25,
+            aroma: 'Cherry Blossom Petals & Spring Morning Dew',
+            notes: ['Wild Sakura Blossom', 'White Peach', 'Silver Needle Down', 'Alpine Nectar'],
+            radarScores: [60, 98, 88, 20, 55],
+            radarColor: 'rgba(244, 114, 182, 0.35)',
+            radarStroke: '#f472b6',
+            foodPairing: 'Lychee Rose Macarons & Shiso Leaf Sorbet',
+            liquidGradient: 'linear-gradient(to top, #be185d, #fbcfe8)'
+        },
+        'oolong-tea': {
+            id: 'oolong-tea',
+            name: 'Charcoal Roasted Alishan Oolong',
+            category: 'Oolong Tea',
+            tag: 'AI Artisan Masterpiece',
+            priceUSD: 29.50,
+            image: './images/tea-7.png',
+            desc: 'High-altitude tightly rolled pearls cured over longan charcoal woks. Imparts complex layers of mountain orchid, warm caramel, and smoke.',
+            origin: 'Alishan Mountain Canopy, 2,200m',
+            tempC: 95,
+            steepTime: '3 min',
+            caffeine: 'Medium',
+            caffeinePercent: 65,
+            aroma: 'Roasted Orchid & Longan Wood Smoke',
+            notes: ['Longan Charcoal', 'Wild Mountain Orchid', 'Toasted Pecan', 'Amber Molasses'],
+            radarScores: [85, 78, 85, 96, 45],
+            radarColor: 'rgba(217, 119, 6, 0.35)',
+            radarStroke: '#d97706',
+            foodPairing: 'Salted Duck Egg Yolk Mooncake & Smoked Almonds',
+            liquidGradient: 'linear-gradient(to top, #92400e, #f59e0b)'
+        },
+        'chai-elixir': {
+            id: 'chai-elixir',
+            name: 'Royal Saffron Spiced Chai',
+            category: 'Spiced Chai',
+            tag: 'AI Artisan Masterpiece',
+            priceUSD: 21.00,
+            image: './images/tea-8.png',
+            desc: 'Ancient Ayurvedic blend of malty Assam leaf with crushed cinnamon quills, green cardamom pods, star anise, and fragrant Kashmiri saffron.',
+            origin: 'Brahmaputra Valley & Kashmir',
+            tempC: 95,
+            steepTime: '4.5 min',
+            caffeine: 'Medium-High',
+            caffeinePercent: 80,
+            aroma: 'Cinnamon Bark, Star Anise & Kashmiri Saffron',
+            notes: ['Kashmiri Saffron Threads', 'Ceylon Cinnamon', 'Cracked Cardamom', 'Golden Foam'],
+            radarScores: [90, 75, 90, 88, 70],
+            radarColor: 'rgba(245, 158, 11, 0.35)',
+            radarStroke: '#f59e0b',
+            foodPairing: 'Cardamom Pistachio Kulfi & Spiced Shortbread',
+            liquidGradient: 'linear-gradient(to top, #b45309, #fde047)'
         }
     };
 
@@ -269,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cart = [];
 
     // ==========================================
-    // 3. CLEAN SPOTLIGHT TRACKING FOR CARDS
+    // 4. CLEAN SPOTLIGHT TRACKING FOR CARDS
     // ==========================================
     const spotlightCards = document.querySelectorAll('.card-spotlight, .product-card, .bento-card, .journal-card');
     let lastAudioHoverTime = 0;
@@ -293,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 4. MOBILE NAVIGATION TOGGLE
+    // 5. MOBILE NAVIGATION TOGGLE
     // ==========================================
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenuIcon = document.getElementById('mobile-menu-icon');
@@ -330,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 5. SCROLL PROGRESS & BACK TO TOP RING
+    // 6. SCROLL PROGRESS & BACK TO TOP RING
     // ==========================================
     const scrollProgress = document.getElementById('scroll-progress');
     const headerNav = document.getElementById('main-navbar');
@@ -346,7 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollProgress.style.width = `${progress}%`;
         }
 
-        // Header Background Blur on scroll
         if (headerNav) {
             if (scrollTop > 40) {
                 headerNav.classList.add('bg-black/80', 'backdrop-blur-xl', 'border-b', 'border-white/10', 'py-2');
@@ -357,7 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Back to top visibility & SVG progress ring
         if (backToTopBtn) {
             if (scrollTop > 350) {
                 backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-6');
@@ -369,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (progressCircle) {
-            const circumference = 2 * Math.PI * 18; // r=18
+            const circumference = 2 * Math.PI * 18;
             const offset = circumference - (progress / 100) * circumference;
             progressCircle.style.strokeDashoffset = offset;
         }
@@ -383,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 6. TOAST NOTIFICATION ENGINE
+    // 7. TOAST NOTIFICATION ENGINE
     // ==========================================
     const toastContainer = document.getElementById('toast-container');
     function showToast(title, message, iconClass = 'fa-leaf') {
@@ -411,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.showToast = showToast;
 
     // ==========================================
-    // 7. TEA CONFETTI BURST GENERATOR
+    // 8. TEA CONFETTI BURST GENERATOR
     // ==========================================
     function spawnTeaConfetti(originX, originY) {
         const count = 18;
@@ -440,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 8. PRODUCT FILTER TABS
+    // 9. PRODUCT FILTER TABS
     // ==========================================
     const tabBtns = document.querySelectorAll('.tab-btn');
     const productCards = document.querySelectorAll('.product-item-card');
@@ -468,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                         card.style.opacity = '1';
                         card.style.transform = 'translateY(0)';
-                    }, index * 30 + 10);
+                    }, index * 25 + 10);
                 } else {
                     card.style.display = 'none';
                 }
@@ -477,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 9. INTERACTIVE FLAVOR RADAR (SENSORY MATRIX)
+    // 10. INTERACTIVE FLAVOR RADAR (SENSORY MATRIX)
     // ==========================================
     const radarSelectBtns = document.querySelectorAll('.radar-select-btn');
     const radarPolygon = document.getElementById('radar-live-polygon');
@@ -497,12 +618,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentRadarId = 'green-tea';
 
-    // Radar math: Center (180, 180), max radius 120
-    // 5 angles: Axis 0 (top): -90 deg (-PI/2)
-    // Axis 1: -18 deg (-0.1*PI)
-    // Axis 2: 54 deg (0.3*PI)
-    // Axis 3: 126 deg (0.7*PI)
-    // Axis 4: 198 deg (1.1*PI)
     const RADAR_ANGLES = [
         -Math.PI / 2,
         -Math.PI / 2 + (2 * Math.PI / 5) * 1,
@@ -536,12 +651,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const points = calculateRadarPoints(prod.radarScores);
         const pointsStr = points.map(p => `${p.x},${p.y}`).join(' ');
 
-        // Morph polygon
         radarPolygon.setAttribute('points', pointsStr);
         radarPolygon.setAttribute('fill', prod.radarColor);
         radarPolygon.setAttribute('stroke', prod.radarStroke);
 
-        // Update vertex dots
         points.forEach((p, idx) => {
             if (radarDots[idx]) {
                 radarDots[idx].setAttribute('cx', p.x);
@@ -550,7 +663,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update Text Info
         if (radarTitle) radarTitle.textContent = prod.name;
         if (radarTag) {
             radarTag.textContent = prod.tag;
@@ -560,7 +672,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (radarDesc) radarDesc.textContent = prod.desc;
         if (radarPairingText) radarPairingText.textContent = prod.foodPairing;
 
-        // Update metric bars
         prod.radarScores.forEach((val, idx) => {
             const valEl = document.getElementById(`radar-val-${idx}`);
             const barEl = document.getElementById(`radar-bar-${idx}`);
@@ -571,15 +682,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Update Active Button styling
         radarSelectBtns.forEach(btn => {
             if (btn.getAttribute('data-radar-id') === teaId) {
-                btn.className = `radar-select-btn px-4 py-2 rounded-full text-xs font-bold transition-all border shadow-lg`;
+                btn.className = `radar-select-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-bold transition-all border shadow-lg`;
                 btn.style.backgroundColor = prod.radarColor;
                 btn.style.borderColor = prod.radarStroke;
                 btn.style.color = '#ffffff';
             } else {
-                btn.className = 'radar-select-btn px-4 py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25';
+                btn.className = 'radar-select-btn px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-bold transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-white/25';
                 btn.style.backgroundColor = '';
                 btn.style.borderColor = '';
                 btn.style.color = '';
@@ -609,7 +719,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 10. BESPOKE TEA SOMMELIER ("FIND YOUR HARVEST")
+    // 11. BESPOKE TEA SOMMELIER ("FIND YOUR HARVEST")
     // ==========================================
     const sommelierOptions = document.querySelectorAll('.sommelier-option');
     const sommelierTitle = document.getElementById('sommelier-title');
@@ -630,14 +740,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let recommendedBlendId = 'green-tea';
 
     function evaluateSommelierRecommendation() {
-        const { mood, flavor } = sommelierAnswers;
+        const { mood, flavor, time } = sommelierAnswers;
 
         if (mood === 'comfort' || flavor === 'creamy') {
             recommendedBlendId = 'milk-tea';
+        } else if (mood === 'serenity' && flavor === 'smoky') {
+            recommendedBlendId = 'oolong-tea';
         } else if (mood === 'serenity' || flavor === 'smoky') {
             recommendedBlendId = 'black-tea';
-        } else if (mood === 'vitality' || flavor === 'citrus') {
+        } else if (mood === 'vitality' && flavor === 'citrus') {
             recommendedBlendId = 'lemon-tea';
+        } else if (mood === 'vitality' || flavor === 'spicy') {
+            recommendedBlendId = 'chai-elixir';
+        } else if (flavor === 'floral' || time === 'evening') {
+            recommendedBlendId = 'white-tea';
+        } else if (mood === 'clarity' && time === 'morning') {
+            recommendedBlendId = 'matcha-latte';
         } else {
             recommendedBlendId = 'green-tea';
         }
@@ -645,7 +763,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const prod = PRODUCTS[recommendedBlendId];
         if (!prod) return;
 
-        // Subtle animation refresh
         if (sommelierImage) {
             sommelierImage.style.transform = 'scale(0.9) translateY(5px)';
             sommelierImage.style.opacity = '0.5';
@@ -665,7 +782,6 @@ document.addEventListener('DOMContentLoaded', () => {
             sommelierPrice.textContent = formatPrice(prod.priceUSD);
         }
 
-        // Random organic match score: 96% - 99%
         const score = 96 + Math.floor(Math.random() * 4);
         if (sommelierScore) sommelierScore.textContent = `${score}% Match`;
 
@@ -683,13 +799,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (question && val) {
                 sommelierAnswers[question] = val;
-
-                // Toggle selected class within this question group
                 document.querySelectorAll(`.sommelier-option[data-question="${question}"]`).forEach(o => {
                     o.classList.remove('selected');
                 });
                 opt.classList.add('selected');
-
                 evaluateSommelierRecommendation();
             }
         });
@@ -702,7 +815,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 11. 5-STAGE CRAFTSMANSHIP JOURNEY STEPPER
+    // 12. 5-STAGE CRAFTSMANSHIP JOURNEY STEPPER
     // ==========================================
     const stageSteps = document.querySelectorAll('.stage-tracker-step');
     const stageDetailTitle = document.getElementById('stage-detail-title');
@@ -771,7 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 12. FLOATING ZEN SOUNDSCAPE MINI-PLAYER DOCK
+    // 13. FLOATING ZEN SOUNDSCAPE MINI-PLAYER DOCK
     // ==========================================
     const dockPlayToggleBtn = document.getElementById('dock-play-toggle-btn');
     const dockPlayIcon = document.getElementById('dock-play-icon');
@@ -871,7 +984,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 13. TASTING BOX (CART) DRAWER
+    // 14. TASTING BOX (CART) DRAWER
     // ==========================================
     const cartToggleBtns = document.querySelectorAll('.cart-toggle-btn');
     const cartDrawer = document.getElementById('cart-drawer');
@@ -949,7 +1062,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cartSubtotal.textContent = formatPrice(subtotalUSD);
 
-        // Attach listeners for qty & remove
         cartItemsList.querySelectorAll('.cart-qty-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const action = btn.getAttribute('data-action');
@@ -993,7 +1105,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateCartUI();
 
-        // Audio & Confetti
         if (window.teaAudio) {
             window.teaAudio.playChime(698.46);
             window.teaAudio.playPourSound(0.8);
@@ -1008,7 +1119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Added to Tasting Box', `${prod.name} has been added.`, 'fa-circle-check');
     }
 
-    // Add to cart buttons
     document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = btn.getAttribute('data-product-id');
@@ -1032,7 +1142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 14. QUICK TASTING MODAL
+    // 15. QUICK TASTING MODAL
     // ==========================================
     const productModal = document.getElementById('product-modal');
     const modalBackdrop = document.getElementById('modal-backdrop');
@@ -1124,7 +1234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 15. VIRTUAL TEA BREWING SIMULATOR
+    // 16. VIRTUAL TEA BREWING SIMULATOR
     // ==========================================
     const brewBlendBtns = document.querySelectorAll('.brew-blend-btn');
     const brewTempSlider = document.getElementById('brew-temp-slider');
@@ -1202,24 +1312,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (brewStatusText) brewStatusText.textContent = `Infusing ${prod.name}...`;
             if (brewTimerDisplay) brewTimerDisplay.textContent = `${remaining}s`;
 
-            // Audio: kettle pour & boiling water
             if (window.teaAudio) {
                 window.teaAudio.playPourSound(2.2);
                 window.teaAudio.playChime(440);
             }
 
-            // Liquid fills up
             if (brewCupLiquid) {
                 brewCupLiquid.style.height = '85%';
-                if (selectedBrewId === 'green-tea') {
-                    brewCupLiquid.style.background = 'linear-gradient(to top, #15803d, #84cc16)';
-                } else if (selectedBrewId === 'milk-tea') {
-                    brewCupLiquid.style.background = 'linear-gradient(to top, #d97706, #fed7aa)';
-                } else if (selectedBrewId === 'black-tea') {
-                    brewCupLiquid.style.background = 'linear-gradient(to top, #78350f, #b45309)';
-                } else if (selectedBrewId === 'lemon-tea') {
-                    brewCupLiquid.style.background = 'linear-gradient(to top, #ca8a04, #fef08a)';
-                }
+                brewCupLiquid.style.background = prod.liquidGradient || 'linear-gradient(to top, #15803d, #84cc16)';
             }
 
             brewInterval = setInterval(() => {
@@ -1233,7 +1333,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     startBrewBtn.classList.remove('opacity-50');
                     if (brewStatusText) brewStatusText.textContent = `✨ Master Steep Perfected! (${prod.notes[0]} & ${prod.notes[1]})`;
                     
-                    // Triumph chime
                     if (window.teaAudio) {
                         window.teaAudio.playChime(880);
                         setTimeout(() => window.teaAudio.playChime(1046.5), 180);
@@ -1253,7 +1352,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 16. RESPONSIVE TESTIMONIAL CAROUSEL
+    // 17. RESPONSIVE TESTIMONIAL CAROUSEL
     // ==========================================
     const testimonials = [
         {
@@ -1335,7 +1434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTestimonialDots();
 
     // ==========================================
-    // 17. EDITORIAL GAZETTE QUICK-READ MODAL
+    // 18. EDITORIAL GAZETTE QUICK-READ MODAL
     // ==========================================
     const articleModal = document.getElementById('article-modal');
     const articleModalBackdrop = document.getElementById('article-modal-backdrop');
@@ -1385,7 +1484,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeArticleModalBtn) closeArticleModalBtn.addEventListener('click', closeArticleModal);
     if (articleModalBackdrop) articleModalBackdrop.addEventListener('click', closeArticleModal);
 
-    // Bookmark buttons on articles
     document.querySelectorAll('.bookmark-article-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1404,7 +1502,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 18. BENTO GRID ALTITUDE TOGGLE
+    // 19. BENTO GRID ALTITUDE TOGGLE
     // ==========================================
     const bentoAltitudeBtn = document.getElementById('bento-altitude-toggle');
     if (bentoAltitudeBtn) {
@@ -1421,7 +1519,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 19. NEWSLETTER FORM SUBMISSION
+    // 20. NEWSLETTER FORM SUBMISSION
     // ==========================================
     const newsletterForm = document.getElementById('newsletter-form');
     if (newsletterForm) {
@@ -1446,7 +1544,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================
-    // 20. LIVE KYOTO CLOCK
+    // 21. LIVE KYOTO CLOCK
     // ==========================================
     const kyotoTimeEl = document.getElementById('kyoto-time-ticker');
     function updateKyotoClock() {
@@ -1464,7 +1562,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateKyotoClock, 1000);
 
     // ==========================================
-    // 21. SCROLL REVEAL ANIMATION
+    // 22. SCROLL REVEAL ANIMATION
     // ==========================================
     const revealElements = document.querySelectorAll('.scroll-reveal');
     if ('IntersectionObserver' in window) {
@@ -1482,7 +1580,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => el.classList.add('revealed'));
     }
 
-    // Initial Radar Setup
+    // Initial Setup
     updateRadarDisplay('green-tea');
     updateAllPricesAndTemps();
 });
